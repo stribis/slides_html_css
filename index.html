@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML & CSS - WDD921</title>
+  <style>
+    /* === Small CSS Reset === */
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    *, *::after, *::before{
+      box-sizing: border-box;
+    }
+    body {
+      width: 100%;
+      min-height: 100vh;
+      background: #0288d1;
+      color: white;
+      font-family: sans-serif;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    nav { 
+      margin-top: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+    }
+
+    nav a:hover {
+      color: #0115cf;
+    }
+
+    nav ul li {
+      padding: 0.5rem 1rem;
+      list-style: none;
+    }
+    nav li:nth-child(odd) {
+      background: #ddd;
+    }
+    nav li:nth-child(odd) a {
+      
+      color: #0288d1;
+    }
+    nav li:nth-child(odd) a:hover {
+      color: #0115cf;
+    } 
+  </style>
+</head>
+<body>
+  <h1>Slides - HTML & CSS - WDD 921</h1>
+  <nav>
+    <ul>
+      <li><a href="html_css_day_1.html">Day 1: HTML Basics</a></li>
+      <li><a href="html_css_day_2.html">Day 2: CSS Basics</a></li>
+      <li><a href="#">Day 3: Comming Soon</a></li>
+    </ul>
+  </nav>
+</body>
+</html>
