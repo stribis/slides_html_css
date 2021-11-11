@@ -5,6 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTML & CSS - WDD921</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
   <style>
     /* === Small CSS Reset === */
     *{
@@ -19,12 +22,13 @@
       min-height: 100vh;
       background: #0288d1;
       color: white;
-      font-family: sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-size: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      font-weight: 500;
     }
 
     nav { 
@@ -52,19 +56,31 @@
       color: #0288d1;
     }
     nav li:nth-child(odd) a:hover {
-      color: #0115cf;
+      color: #1c33ff;
     } 
+    ul > li {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    ul li a:first-child {
+      margin-right: 2rem;
+    }
+
+    ul li a:last-child:hover {
+      transform: scale(1.2);
+    }
   </style>
 </head>
 <body>
   <h1>Slides - HTML & CSS - WDD 921</h1>
   <nav>
     <ul>
-      <li><a href="html_css_day_1.html">Day 1: HTML Basics</a> - <a href="pdf/HTML and CSS - Day 1.pdf">📄</a></li>
-      <li><a href="html_css_day_2.html">Day 2: CSS Basics</a> - <a href="pdf/HTML and CSS - Day 2.pdf">📄</a></li>
-      <li><a href="html_css_day_3.html">Day 3: Layout Basics</a> - <a href="pdf/HTML and CSS - Day 3.pdf">📄</a></li>
-      <li><a href="html_css_day_4.html">Day 4: More Layout</a> - <a href="pdf/HTML and CSS - Day 4.pdf">📄</a></li>
-      <li><a href="#">Day 5: Coming Soon</a></li>
+      <li><a href="html_css_day_1.html">Day 1: HTML Basics</a><a title="download" href="pdf/HTML and CSS - Day 1.pdf">📄</a></li>
+      <li><a href="html_css_day_2.html">Day 2: CSS Basics</a><a title="download" href="pdf/HTML and CSS - Day 2.pdf">📄</a></li>
+      <li><a href="html_css_day_3.html">Day 3: Layout Basics</a><a title="download" href="pdf/HTML and CSS - Day 3.pdf">📄</a></li>
+      <li><a href="html_css_day_4.html">Day 4: More Layout</a><a title="download" href="pdf/HTML and CSS - Day 4.pdf">📄</a></li>
+      <li><a href="#">Day 5: Coming Soon</a><a title="Not Available" href="#">🚫</a></li>
     </ul>
   </nav>
 </body>
