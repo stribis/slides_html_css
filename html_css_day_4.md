@@ -126,7 +126,7 @@ Better, Flexible Notation
 
 --- 
 
-### `position: absolute`
+### `position: fixed`
 
 * Relative to the viewport.
   * Stays still when scrolling.
