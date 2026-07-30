@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessibility Audit Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Workshop</p>
+      <h1>Accessibility Audit Lab</h1>
+      <p>
+        Audit the page below before revealing hints. The demo contains real
+        issues across structure, names, keyboard access, color, forms, motion,
+        and responsive behavior.
+      </p>
+      <button type="button" class="hint-toggle" aria-expanded="false" aria-controls="hints">
+        Reveal audit hints
+      </button>
+    </header>
+
+    <main class="lab-layout">
+      <aside class="audit-panel" aria-labelledby="checklist-title">
+        <h2 id="checklist-title">Audit Checklist</h2>
+        <form>
+          <label><input type="checkbox" /> Skip link and landmarks</label>
+          <label><input type="checkbox" /> Heading order</label>
+          <label><input type="checkbox" /> Link and button names</label>
+          <label><input type="checkbox" /> Image alt text</label>
+          <label><input type="checkbox" /> Keyboard access</label>
+          <label><input type="checkbox" /> Visible focus</label>
+          <label><input type="checkbox" /> Form labels and errors</label>
+          <label><input type="checkbox" /> Contrast and color-only state</label>
+          <label><input type="checkbox" /> Motion preferences</label>
+          <label><input type="checkbox" /> Zoom and narrow layout</label>
+        </form>
+      </aside>
+
+      <section class="sample-page" aria-label="Sample page to audit">
+        <div class="site-nav">
+          <strong>CatCare Studio</strong>
+          <a href="#plans">Plans</a>
+          <a href="#signup">Click here</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="hero">
+          <div>
+            <p class="tiny-label">New workshop</p>
+            <h2>Make your portfolio friendlier</h2>
+            <p>
+              A mini landing page with several accessibility problems. Students
+              should identify each issue, explain who it affects, and repair it.
+            </p>
+            <div class="fake-button" tabindex="0">Start audit</div>
+          </div>
+          <img src="https://placecats.com/520/340" />
+        </div>
+
+        <section id="plans" class="plans">
+          <h4>Plans</h4>
+          <article>
+            <h3>Starter</h3>
+            <p class="price">9 CHF</p>
+            <p>Good for one small profile page.</p>
+            <a href="#signup">Choose</a>
+          </article>
+          <article class="featured">
+            <h3>Studio</h3>
+            <p class="price">19 CHF</p>
+            <p>Includes audit notes and a responsive rewrite.</p>
+            <a href="#signup">Choose</a>
+          </article>
+        </section>
+
+        <section id="signup" class="signup">
+          <h3>Signup</h3>
+          <form novalidate>
+            <input name="name" placeholder="Your name" />
+            <input name="email" placeholder="Email" />
+            <select name="plan">
+              <option>Pick a plan</option>
+              <option>Starter</option>
+              <option>Studio</option>
+            </select>
+            <p class="error">Wrong. Try again.</p>
+            <button type="submit">Send</button>
+          </form>
+        </section>
+
+        <section id="contact" class="contact-card">
+          <h3>Need help?</h3>
+          <p>
+            The animated badge below should respect reduced-motion preferences.
+          </p>
+          <span class="spin-badge">Audit</span>
+        </section>
+      </section>
+    </main>
+
+    <section id="hints" class="hints" hidden>
+      <h2>Hint Sheet</h2>
+      <ol>
+        <li>Add a skip link and semantic landmarks inside the sample page.</li>
+        <li>Repair heading order. The sample jumps from <code>h2</code> to <code>h4</code>.</li>
+        <li>Replace vague link text such as "Click here" and repeated "Choose".</li>
+        <li>The hero image needs an alt decision: meaningful alt text or empty decorative alt.</li>
+        <li>The fake button is focusable but does not activate like a button.</li>
+        <li>Visible focus is suppressed in the sample CSS.</li>
+        <li>Inputs need connected labels, autocomplete values, and clearer error text.</li>
+        <li>The pale navigation links and color-only featured plan need stronger signals.</li>
+        <li>The spinning badge needs a reduced-motion override.</li>
+        <li>Test the sample at 200% zoom and a narrow viewport.</li>
+      </ol>
+    </section>
+
+    <script>
+      const button = document.querySelector(".hint-toggle");
+      const hints = document.querySelector("#hints");
+
+      button.addEventListener("click", () => {
+        const isHidden = hints.hasAttribute("hidden");
+        hints.toggleAttribute("hidden");
+        button.setAttribute("aria-expanded", String(isHidden));
+      });
+    </script>
+  </body>
+</html>

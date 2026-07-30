@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure CSS Clock Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="clock-shell">
+      <header>
+        <p class="eyebrow">Lesson 10</p>
+        <h1>Pure CSS Clock</h1>
+        <p>Style the clock face, place the markers, and animate the hands.</p>
+      </header>
+
+      <section class="clock" aria-label="Decorative CSS clock">
+        <span class="marker m12">12</span>
+        <span class="marker m3">3</span>
+        <span class="marker m6">6</span>
+        <span class="marker m9">9</span>
+        <span class="hand hour"></span>
+        <span class="hand minute"></span>
+        <span class="hand second"></span>
+        <span class="pin"></span>
+      </section>
+
+      <section class="brief">
+        <h2>Requirements</h2>
+        <ol>
+          <li>Draw the face with CSS.</li>
+          <li>Add hour markers.</li>
+          <li>Animate the second hand with <code>steps(60, end)</code>.</li>
+          <li>Animate the minute and hour hands as stretch goals.</li>
+          <li>Respect <code>prefers-reduced-motion</code>.</li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

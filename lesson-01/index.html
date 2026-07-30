@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lesson 01 of the HTML and CSS course: markup, meaning, and the browser."
+    />
+    <title>Lesson 01 - HTML Foundations</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-one">
+    <div class="reveal">
+      <div class="slides">
+        <section
+          class="title-slide"
+          data-background-gradient="linear-gradient(135deg, #10131f 0%, #152b36 52%, #213d34 100%)"
+        >
+          <p class="eyebrow">Lesson 01</p>
+          <h1>HTML Foundations</h1>
+          <p class="lede">Markup, meaning, and the browser</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+          <aside class="notes">
+            Frame this as the first mental model: HTML describes content and
+            relationships before it becomes pixels on a screen.
+          </aside>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>What Students Should Be Able To Do</h2>
+          <div class="objective-grid">
+            <article>
+              <span>01</span>
+              <h3>Explain the browser stack</h3>
+              <p>HTML, CSS, and JavaScript each have a different job.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Write valid HTML</h3>
+              <p>Elements, attributes, nesting, and a modern boilerplate.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Use semantic structure</h3>
+              <p>Choose tags that communicate meaning, not just appearance.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <h3>Inspect source code</h3>
+              <p>Use DevTools to connect written code with rendered output.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="big-question">
+          <p class="eyebrow">Warm-up</p>
+          <h2>What does a browser actually understand?</h2>
+          <div class="browser-stack" aria-label="Browser languages">
+            <span class="html">HTML</span>
+            <span class="css">CSS</span>
+            <span class="js">JavaScript</span>
+          </div>
+          <p>
+            The browser turns text files into a page by building structure,
+            applying style, and running behavior.
+          </p>
+        </section>
+
+        <section>
+          <h2>Three Languages, Three Jobs</h2>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Language</th>
+                <th>Question it answers</th>
+                <th>Example job</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>HTML</strong></td>
+                <td>What is this?</td>
+                <td>A heading, paragraph, link, image, form field.</td>
+              </tr>
+              <tr>
+                <td><strong>CSS</strong></td>
+                <td>How should it look?</td>
+                <td>Layout, color, typography, spacing, motion.</td>
+              </tr>
+              <tr>
+                <td><strong>JavaScript</strong></td>
+                <td>What should happen?</td>
+                <td>Validation, state changes, menus, data updates.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p class="eyebrow">Mental Model</p>
+          <h2>Markup Is Not Programming</h2>
+          <div class="split">
+            <article class="definition-panel">
+              <h3>Markup language</h3>
+              <p>
+                Describes content and relationships so humans, browsers, search
+                engines, and assistive tools can understand the document.
+              </p>
+              <code>&lt;nav&gt; &lt;article&gt; &lt;button&gt;</code>
+            </article>
+            <article class="definition-panel">
+              <h3>Programming language</h3>
+              <p>
+                Makes decisions, stores state, reacts to input, and changes what
+                happens next.
+              </p>
+              <code>if (...) { ... }</code>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Static Websites Are Still Real Websites</h2>
+          <div class="statement-list">
+            <p class="fragment">They can be fast, secure, and accessible.</p>
+            <p class="fragment">They do not need a database for every use case.</p>
+            <p class="fragment">They can still include forms, media, and JavaScript.</p>
+            <p class="fragment">
+              The usual entry file is still <code>index.html</code>.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">URLs</p>
+          <h2>Why Is It Called <code>index.html</code>?</h2>
+          <div class="url-demo">
+            <span>https://example.com/</span>
+            <strong>loads</strong>
+            <span>https://example.com/index.html</span>
+          </div>
+          <p>
+            Web servers commonly look for an index file when a folder is
+            requested.
+          </p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Syntax</p>
+          <h2>An HTML Element</h2>
+          <div class="code-callout">
+            <pre><code class="language-html">&lt;h1&gt;My Website&lt;/h1&gt;</code></pre>
+            <div class="callout-labels">
+              <span>opening tag</span>
+              <span>content</span>
+              <span>closing tag</span>
+            </div>
+          </div>
+          <p>
+            Most elements have a start tag, content, and an end tag. Some
+            elements, like <code>&lt;img&gt;</code>, do not wrap text content.
+          </p>
+        </section>
+
+        <section>
+          <h2>Attributes Add Information</h2>
+          <div class="live-demo" data-demo="attributes">
+            <div>
+              <pre><code class="language-html">&lt;img
+  src="https://placecats.com/200/200"
+  alt="Placeholder cat image"
+  width="180"
+  height="180"
+/&gt;</code></pre>
+            </div>
+            <div class="preview-card">
+              <img
+                src="https://placecats.com/200/200"
+                alt="Placeholder cat image"
+                width="180"
+                height="180"
+              />
+            </div>
+          </div>
+          <p>
+            Attributes can identify, configure, describe, or connect an element
+            to another resource.
+          </p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Structure</p>
+          <h2>Nesting Creates Meaning</h2>
+          <pre><code class="language-html">&lt;section aria-labelledby="about-title"&gt;
+  &lt;header&gt;
+    &lt;h2 id="about-title"&gt;About Me&lt;/h2&gt;
+    &lt;p&gt;Designer, developer, and student.&lt;/p&gt;
+  &lt;/header&gt;
+&lt;/section&gt;</code></pre>
+          <p>
+            Parent, child, and sibling relationships become the document tree.
+          </p>
+        </section>
+
+        <section>
+          <h2>The Browser Builds a Tree</h2>
+          <div class="dom-tree" aria-label="Document tree diagram">
+            <span>html</span>
+            <span>head</span>
+            <span>body</span>
+            <span>header</span>
+            <span>main</span>
+            <span>footer</span>
+            <span>h1</span>
+            <span>section</span>
+            <span>p</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Boilerplate</p>
+          <h2>A Modern Starting Point</h2>
+          <pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;My Basic Website&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My Basic Website&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>What Each Part Does</h2>
+          <div class="part-grid">
+            <article>
+              <code>&lt;!doctype html&gt;</code>
+              <p>Use the current HTML parser mode.</p>
+            </article>
+            <article>
+              <code>lang="en"</code>
+              <p>Tell tools and assistive technology the page language.</p>
+            </article>
+            <article>
+              <code>charset="UTF-8"</code>
+              <p>Support modern text characters reliably.</p>
+            </article>
+            <article>
+              <code>viewport</code>
+              <p>Make the layout match device width on mobile.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Semantic HTML</p>
+          <h2>Use the Element That Means the Thing</h2>
+          <div class="tag-cloud" aria-label="Semantic HTML elements">
+            <code>&lt;header&gt;</code>
+            <code>&lt;nav&gt;</code>
+            <code>&lt;main&gt;</code>
+            <code>&lt;section&gt;</code>
+            <code>&lt;article&gt;</code>
+            <code>&lt;aside&gt;</code>
+            <code>&lt;figure&gt;</code>
+            <code>&lt;footer&gt;</code>
+          </div>
+          <p>
+            Semantics improve accessibility, maintainability, search, and team
+            communication.
+          </p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Tag Lab</p>
+          <h2>Pick the Strongest Element</h2>
+          <div class="choice-grid">
+            <article>
+              <h3>Site navigation</h3>
+              <p><code>&lt;nav&gt;</code>, not just <code>&lt;div&gt;</code></p>
+            </article>
+            <article>
+              <h3>Independent blog post</h3>
+              <p><code>&lt;article&gt;</code>, not only <code>&lt;section&gt;</code></p>
+            </article>
+            <article>
+              <h3>Image plus caption</h3>
+              <p><code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code></p>
+            </article>
+            <article>
+              <h3>Clickable action</h3>
+              <p><code>&lt;button&gt;</code>, not a fake link</p>
+            </article>
+          </div>
+          <aside class="notes">
+            Ask students to defend the choices aloud. The point is not memorizing
+            every element, but noticing intent.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Div Soup vs. Meaningful Structure</h2>
+          <div class="split">
+            <pre><code class="language-html">&lt;div class="top"&gt;
+  &lt;div class="menu"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="content"&gt;...&lt;/div&gt;</code></pre>
+            <pre><code class="language-html">&lt;header&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;...&lt;/main&gt;</code></pre>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Group Exercise</p>
+          <h2>Rewrite the Structure</h2>
+          <div class="split">
+            <pre><code class="language-html">&lt;div class="page"&gt;
+  &lt;div class="top"&gt;
+    &lt;div class="links"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="story"&gt;
+    &lt;div class="headline"&gt;Album Review&lt;/div&gt;
+    &lt;div class="text"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="bottom"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <div class="workshop-card">
+              <h3>15 minutes</h3>
+              <ol>
+                <li>Replace weak containers with semantic elements.</li>
+                <li>Choose one correct heading level strategy.</li>
+                <li>Add useful link text and image alt text.</li>
+                <li>Compare with another group.</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Void Elements Do Not Wrap Content</h2>
+          <div class="split">
+            <article class="definition-panel wrong">
+              <h3>Broken</h3>
+              <pre><code class="language-html">&lt;img src="https://placecats.com/320/200"&gt;
+  Cat Profile
+&lt;/img&gt;</code></pre>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Better</h3>
+              <pre><code class="language-html">&lt;figure&gt;
+  &lt;img src="https://placecats.com/320/200" alt="Cat resting on a sofa" /&gt;
+  &lt;figcaption&gt;Cat Profile&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Accessibility Moment</p>
+          <h2>Accessible Names Are Content</h2>
+          <div class="choice-grid">
+            <article>
+              <h3>Image</h3>
+              <p>Does the <code>alt</code> text communicate the image's purpose?</p>
+            </article>
+            <article>
+              <h3>Link</h3>
+              <p>Would the link still make sense out of context?</p>
+            </article>
+            <article>
+              <h3>Button</h3>
+              <p>Does the label say what action will happen?</p>
+            </article>
+            <article>
+              <h3>Page</h3>
+              <p>Does the heading structure describe the document?</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Build Your First Page</h2>
+          <ol class="task-list">
+            <li>Create a folder named <code>basic_website</code>.</li>
+            <li>Create <code>index.html</code>.</li>
+            <li>Add a modern boilerplate.</li>
+            <li>Add a heading, paragraph, image, and navigation link.</li>
+            <li>Open it with Live Server.</li>
+          </ol>
+        </section>
+
+        <section>
+          <p class="eyebrow">Practical Brief</p>
+          <h2>One-Page Artist Profile</h2>
+          <div class="project-brief">
+            <article>
+              <h3>Content</h3>
+              <p>Artist name, short bio, hero image, latest release, and links.</p>
+            </article>
+            <article>
+              <h3>HTML requirements</h3>
+              <p>Use <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>figure</code>, and <code>footer</code>.</p>
+            </article>
+            <article>
+              <h3>Review</h3>
+              <p>Pair-check nesting, alt text, heading order, and file names.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Live Mini Editor</h2>
+          <div class="editor-demo">
+            <label for="mini-editor">HTML</label>
+            <textarea id="mini-editor" spellcheck="false">&lt;main&gt;
+  &lt;h1&gt;My Basic Website&lt;/h1&gt;
+  &lt;p&gt;Built with semantic HTML.&lt;/p&gt;
+  &lt;button&gt;Say hello&lt;/button&gt;
+&lt;/main&gt;</textarea>
+            <iframe
+              title="Live HTML preview"
+              sandbox="allow-scripts"
+              data-preview-for="mini-editor"
+            ></iframe>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Tools</p>
+          <h2>Inspecting Code Is Part of Writing Code</h2>
+          <div class="inspect-grid">
+            <article>
+              <h3>Elements</h3>
+              <p>See the DOM tree the browser created.</p>
+            </article>
+            <article>
+              <h3>Styles</h3>
+              <p>See which CSS rules win and which rules lose.</p>
+            </article>
+            <article>
+              <h3>Accessibility</h3>
+              <p>Check names, roles, focus order, and contrast.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>What does HTML describe?</p>
+            <p>Why is <code>alt</code> text not optional thinking?</p>
+            <p>When would you choose <code>&lt;main&gt;</code> over <code>&lt;div&gt;</code>?</p>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Homework</p>
+          <h2>Prepare Your Working Environment</h2>
+          <ul class="homework-list">
+            <li>Install Visual Studio Code or your preferred editor.</li>
+            <li>Install a Live Server workflow.</li>
+            <li>Install at least two modern browsers for testing.</li>
+            <li>Bring one website you like and one website you find confusing.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

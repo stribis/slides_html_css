@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lesson 10 of the HTML and CSS course: transforms, transitions, CSS animations, keyframes, motion design, reduced motion, clock animation, and creative scene practice." />
+    <title>Lesson 10 - CSS Motion & Animation</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-ten">
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #6d5bd0 44%, #e86f51 100%)">
+          <p class="eyebrow">Lesson 10</p>
+          <h1>CSS Motion & Animation</h1>
+          <p class="lede">Transforms, transitions, keyframes, timing, and responsible motion</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Motion With Purpose</h2>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Choose the right animation tool</h3><p>Compare CSS transitions, CSS keyframes, Web Animations API, and JavaScript-driven animation.</p></article>
+            <article><span>02</span><h3>Use transforms safely</h3><p>Move, rotate, scale, and layer elements without breaking document flow.</p></article>
+            <article><span>03</span><h3>Create transitions</h3><p>Animate state changes with property, duration, timing function, delay, and shorthand.</p></article>
+            <article><span>04</span><h3>Write keyframe animations</h3><p>Build looping, staged, stepped, and scene-based animations with CSS.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Why Animate?</h2>
+          <div class="component-map motion-reasons">
+            <article><strong>Feedback</strong><span>A button responds after interaction.</span></article>
+            <article><strong>Orientation</strong><span>A menu reveals where it came from.</span></article>
+            <article><strong>Continuity</strong><span>A state change feels connected instead of abrupt.</span></article>
+            <article><strong>Character</strong><span>A brand or scene can feel alive.</span></article>
+          </div>
+          <p>Animation should explain, guide, or support mood. It should not fight the task.</p>
+        </section>
+
+        <section>
+          <h2>Web Animation Options</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Tool</th><th>Best for</th><th>Control level</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>CSS transition</strong></td><td>Simple change between two states.</td><td>Low to medium.</td></tr>
+              <tr><td><strong>CSS keyframes</strong></td><td>Looping, staged, or reusable animation sequences.</td><td>Medium.</td></tr>
+              <tr><td><strong>Web Animations API</strong></td><td>CSS-like animations controlled from JavaScript.</td><td>High.</td></tr>
+              <tr><td><strong>JavaScript loop</strong></td><td>Physics, canvas, games, data-driven motion.</td><td>Very high.</td></tr>
+              <tr><td><strong>Video / Lottie / Canvas</strong></td><td>Complex illustrations, product demos, or custom rendering.</td><td>Depends on tool.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>CSS vs. JavaScript Animation</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Question</th><th>CSS is good when...</th><th>JS is better when...</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>What triggers it?</td><td>A class, state, pseudo-class, or media query.</td><td>Complex user input or data changes drive it.</td></tr>
+              <tr><td>How complex?</td><td>Few properties, predictable timing, repeatable sequence.</td><td>Physics, scrubbing, timelines, interruption, or choreography.</td></tr>
+              <tr><td>Who owns state?</td><td>The browser state is enough.</td><td>App state decides what should happen next.</td></tr>
+              <tr><td>How interactive?</td><td>Hover, focus, checked, open, loading, looping decoration.</td><td>Drag, gestures, games, live charts, scroll-linked logic.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Pros of CSS Animation</h2>
+          <div class="part-grid">
+            <article><code>declarative</code><p>Describe the motion in CSS near the visual design.</p></article>
+            <article><code>state-friendly</code><p>Works well with hover, focus, checked, open, and class changes.</p></article>
+            <article><code>reusable</code><p>Keyframes and transitions can become part of a design system.</p></article>
+            <article><code>performant</code><p>When using the right properties, browsers can optimize heavily.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Cons of CSS Animation</h2>
+          <div class="part-grid">
+            <article><code>limited logic</code><p>CSS does not know your application rules.</p></article>
+            <article><code>hard interruption</code><p>Complex pause, reverse, scrub, or physics behavior gets awkward.</p></article>
+            <article><code>support details</code><p>Some modern motion features need fallbacks or testing.</p></article>
+            <article><code>overuse</code><p>Too much motion makes interfaces feel slow, noisy, or inaccessible.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>When Animation Is Too Much</h2>
+          <div class="selector-board">
+            <code>It delays the task</code><span>Users wait for decoration before doing the next thing.</span>
+            <code>It repeats forever</code><span>Constant motion steals attention from content.</span>
+            <code>It surprises users</code><span>Large movement appears without user action or context.</span>
+            <code>It ignores preferences</code><span>No reduced-motion fallback.</span>
+            <code>It hides state</code><span>Users cannot tell what changed after the animation ends.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Performance: Animate the Right Properties</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Usually safer</th><th>Use carefully</th><th>Avoid for frequent motion</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>transform</code></td><td><code>filter</code></td><td><code>width</code>, <code>height</code></td></tr>
+              <tr><td><code>opacity</code></td><td><code>box-shadow</code></td><td><code>top</code>, <code>left</code></td></tr>
+              <tr><td></td><td><code>background-color</code></td><td><code>margin</code>, <code>padding</code></td></tr>
+            </tbody>
+          </table>
+          <p>Layout-heavy properties can force the browser to recalculate and repaint more than necessary.</p>
+        </section>
+
+        <section>
+          <h2>Reduced Motion Is Required Practice</h2>
+          <pre><code class="language-css">@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+  }
+}</code></pre>
+          <p>Better: replace large motion with opacity, color, or an immediate state change.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Motion Audit</h2>
+          <ol class="task-list compact">
+            <li>Find three animations on a real website.</li>
+            <li>Identify the trigger, purpose, and animated properties.</li>
+            <li>Decide whether CSS or JavaScript likely drives each one.</li>
+            <li>Suggest one reduced-motion alternative.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Transforms Change the Painted Result</h2>
+          <pre><code class="language-css">.card.featured {
+  transform: translateY(-0.35rem) rotate(-1deg);
+  transform-origin: center;
+}</code></pre>
+          <p>Transforms do not move neighboring elements in layout. They change how the element is painted.</p>
+        </section>
+
+        <section>
+          <h2>Transform Functions</h2>
+          <div class="transform-board">
+            <article><span class="transform-box translate">A</span><code>translate()</code></article>
+            <article><span class="transform-box scale">B</span><code>scale()</code></article>
+            <article><span class="transform-box rotate">C</span><code>rotate()</code></article>
+            <article><span class="transform-box skew">D</span><code>skew()</code></article>
+          </div>
+          <p>Use transforms for visual emphasis, not for document structure.</p>
+        </section>
+
+        <section>
+          <h2>Transform Order Matters</h2>
+          <div class="split">
+            <article class="definition-panel">
+              <h3>Move, then rotate</h3>
+              <pre><code class="language-css">transform:
+  translateX(80px)
+  rotate(20deg);</code></pre>
+            </article>
+            <article class="definition-panel">
+              <h3>Rotate, then move</h3>
+              <pre><code class="language-css">transform:
+  rotate(20deg)
+  translateX(80px);</code></pre>
+            </article>
+          </div>
+          <p>Transform functions are applied in order, which changes the final result.</p>
+        </section>
+
+        <section>
+          <h2><code>transform-origin</code></h2>
+          <pre><code class="language-css">.door {
+  transform-origin: left center;
+  transform: rotateY(18deg);
+}</code></pre>
+          <div class="origin-demo">
+            <span>center</span>
+            <span>left edge</span>
+            <span>bottom right</span>
+          </div>
+          <p>The origin is the hinge point for rotation and scaling.</p>
+        </section>
+
+        <section>
+          <h2>Individual Transform Properties</h2>
+          <pre><code class="language-css">.badge {
+  translate: 0 -0.25rem;
+  rotate: -3deg;
+  scale: 1.05;
+}</code></pre>
+          <p>Modern CSS also supports individual <code>translate</code>, <code>rotate</code>, and <code>scale</code> properties.</p>
+        </section>
+
+        <section>
+          <h2>Transform Side Effects</h2>
+          <div class="selector-board">
+            <code>Stacking context</code><span>A transformed element can create a new layering context.</span>
+            <code>Hit area</code><span>The visible element may no longer match where you expected it in the layout.</span>
+            <code>Text</code><span>Rotated or scaled text can become harder to read.</span>
+            <code>Compositing</code><span>Transforms are often efficient, but too many moving layers still cost memory.</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Transform Warm-Up</h2>
+          <ol class="task-list compact">
+            <li>Move one card with <code>translate</code>.</li>
+            <li>Rotate one badge around a different <code>transform-origin</code>.</li>
+            <li>Scale one image slightly without changing surrounding layout.</li>
+            <li>Explain which transform would be unsafe on body text.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Transitions Animate a State Change</h2>
+          <pre><code class="language-css">.button {
+  background: #efc84a;
+  transform: translateY(0);
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.button:hover {
+  background: #e86f51;
+  transform: translateY(-4px);
+}</code></pre>
+          <p>A transition needs a before state, an after state, and time between them.</p>
+        </section>
+
+        <section>
+          <h2>Transition Longhand</h2>
+          <div class="selector-board">
+            <code>transition-property</code><span>Which property should animate?</span>
+            <code>transition-duration</code><span>How long should it take?</span>
+            <code>transition-timing-function</code><span>How should speed change over time?</span>
+            <code>transition-delay</code><span>Should it wait before starting?</span>
+            <code>transition-behavior</code><span>Can discrete properties transition in supporting browsers?</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Use Specific Properties</h2>
+          <div class="split">
+            <article class="definition-panel wrong">
+              <h3>Too Broad</h3>
+              <pre><code class="language-css">transition: all 300ms ease;</code></pre>
+              <p>Unexpected properties may animate later.</p>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Better</h3>
+              <pre><code class="language-css">transition:
+  color 180ms ease,
+  transform 180ms ease;</code></pre>
+              <p>Only the intended properties animate.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Timing Functions</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Function</th><th>Feel</th><th>Common use</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>linear</code></td><td>Constant speed.</td><td>Clocks, loaders, mechanical movement.</td></tr>
+              <tr><td><code>ease</code></td><td>Default browser easing.</td><td>General UI if you do not choose another.</td></tr>
+              <tr><td><code>ease-out</code></td><td>Starts fast, settles gently.</td><td>Elements entering or responding.</td></tr>
+              <tr><td><code>ease-in</code></td><td>Starts slowly, exits faster.</td><td>Elements leaving.</td></tr>
+              <tr><td><code>cubic-bezier()</code></td><td>Custom curve.</td><td>Brand-specific motion feel.</td></tr>
+              <tr><td><code>steps()</code></td><td>Jumps in fixed intervals.</td><td>Clocks, sprite-like states, counters.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>State Triggers for Transitions</h2>
+          <div class="selector-board">
+            <code>:hover</code><span>Pointer is over the element.</span>
+            <code>:focus-visible</code><span>Keyboard-visible focus state.</span>
+            <code>:checked</code><span>Checkbox or radio selection state.</span>
+            <code>[open]</code><span><code>&lt;details&gt;</code> or <code>&lt;dialog&gt;</code> state.</span>
+            <code>:popover-open</code><span>Popover is visible.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Multiple Transitions</h2>
+          <pre><code class="language-css">.card {
+  transition:
+    transform 180ms ease-out,
+    box-shadow 180ms ease-out,
+    background-color 300ms linear;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 12px 12px 0 rgb(21 25 35 / 0.18);
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Modern Discrete Transitions</h2>
+          <pre><code class="language-css">.menu {
+  display: none;
+  opacity: 0;
+  transition:
+    opacity 180ms ease,
+    display 180ms allow-discrete;
+}
+
+.menu[open] {
+  display: block;
+  opacity: 1;
+}</code></pre>
+          <p>Discrete transitions are newer. Use them as enhancement, not the only way content appears.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Practice</p>
+          <h2>Transitions Lab</h2>
+          <div class="material-links">
+            <a href="../materials/lesson-10/transitions-lab/index.html">Open transitions template</a>
+            <a href="../materials/lesson-10/transitions-lab/styles.css">Open CSS starter</a>
+          </div>
+          <ol class="task-list compact">
+            <li>Add hover and focus transitions to buttons.</li>
+            <li>Use different durations for color and transform.</li>
+            <li>Compare <code>linear</code>, <code>ease-out</code>, and <code>cubic-bezier()</code>.</li>
+            <li>Add one checkbox-driven transition.</li>
+            <li>Remove any <code>transition: all</code>.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Keyframes Animate a Sequence</h2>
+          <pre><code class="language-css">@keyframes pulse {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.08;
+  }
+}</code></pre>
+          <p>Use keyframes when two states are not enough.</p>
+        </section>
+
+        <section>
+          <h2>Applying an Animation</h2>
+          <pre><code class="language-css">.badge {
+  animation-name: pulse;
+  animation-duration: 1.6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Animation Properties</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Property</th><th>Question</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>animation-name</code></td><td>Which keyframes?</td><td><code>pulse</code></td></tr>
+              <tr><td><code>animation-duration</code></td><td>How long?</td><td><code>800ms</code></td></tr>
+              <tr><td><code>animation-timing-function</code></td><td>What speed curve?</td><td><code>ease-in-out</code></td></tr>
+              <tr><td><code>animation-delay</code></td><td>Wait first?</td><td><code>200ms</code></td></tr>
+              <tr><td><code>animation-iteration-count</code></td><td>How many loops?</td><td><code>infinite</code></td></tr>
+              <tr><td><code>animation-direction</code></td><td>Alternate direction?</td><td><code>alternate</code></td></tr>
+              <tr><td><code>animation-fill-mode</code></td><td>Keep before/after styles?</td><td><code>both</code></td></tr>
+              <tr><td><code>animation-play-state</code></td><td>Pause or run?</td><td><code>paused</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>The Animation Shorthand</h2>
+          <pre><code class="language-css">.loader {
+  animation: spin 1s linear infinite;
+}
+
+.toast {
+  animation: slide-in 260ms ease-out both;
+}</code></pre>
+          <p>Shorthand is compact, but students should know the longhand parts first.</p>
+        </section>
+
+        <section>
+          <h2>Percentages Create Stages</h2>
+          <pre><code class="language-css">@keyframes float-card {
+  0% { translate: 0 0; }
+  35% { translate: 0 -0.8rem; }
+  70% { translate: 0 0.2rem; }
+  100% { translate: 0 0; }
+}</code></pre>
+          <p>Use stages when motion needs a path, bounce, pause, or change of emphasis.</p>
+        </section>
+
+        <section>
+          <h2><code>steps()</code> Creates Jumps</h2>
+          <pre><code class="language-css">.second-hand {
+  animation: tick 60s steps(60, end) infinite;
+}
+
+@keyframes tick {
+  to {
+    rotate: 360deg;
+  }
+}</code></pre>
+          <p>This is perfect for clock hands that move once per second.</p>
+        </section>
+
+        <section>
+          <h2>Pause on Interaction</h2>
+          <pre><code class="language-css">.scene:hover .cloud,
+.scene:focus-within .cloud {
+  animation-play-state: paused;
+}</code></pre>
+          <p>Useful for inspecting motion, respecting attention, and debugging animated scenes.</p>
+        </section>
+
+        <section>
+          <h2>Multiple Animations</h2>
+          <pre><code class="language-css">.ship {
+  animation:
+    sail 12s linear infinite,
+    bob 1.8s ease-in-out infinite alternate;
+}</code></pre>
+          <p>Multiple animations can layer movement, but keep names and timing readable.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Practice</p>
+          <h2>Animate a Realistic Website</h2>
+          <div class="material-links">
+            <a href="../materials/lesson-10/animation-site/index.html">Open website template</a>
+            <a href="../materials/lesson-10/animation-site/styles.css">Open CSS starter</a>
+          </div>
+          <ol class="task-list compact">
+            <li>Add one meaningful loading or status animation.</li>
+            <li>Add one subtle hero or card animation.</li>
+            <li>Add one looping decorative detail that can pause.</li>
+            <li>Add a reduced-motion alternative.</li>
+            <li>Explain why each animation belongs on the page.</li>
+          </ol>
+        </section>
+
+        <section>
+          <p class="eyebrow">Practice</p>
+          <h2>Pure CSS Clock</h2>
+          <div class="material-links">
+            <a href="../materials/lesson-10/clock-lab/index.html">Open clock template</a>
+            <a href="../materials/lesson-10/clock-lab/styles.css">Open CSS starter</a>
+          </div>
+          <ol class="task-list compact">
+            <li>Draw the clock face with HTML and CSS.</li>
+            <li>Place 12 hour markers.</li>
+            <li>Create hour, minute, and second hands.</li>
+            <li>Animate the second hand with <code>60s steps(60, end)</code>.</li>
+            <li>Add reduced-motion handling.</li>
+          </ol>
+        </section>
+
+        <section>
+          <p class="eyebrow">Creative Build</p>
+          <h2>Animated Scene</h2>
+          <div class="material-links">
+            <a href="../materials/lesson-10/scene-lab/index.html">Open scene template</a>
+            <a href="../materials/lesson-10/scene-lab/styles.css">Open CSS starter</a>
+          </div>
+          <ol class="task-list compact">
+            <li>Invent a scene: sea, space, city, forest, stage, kitchen, anything.</li>
+            <li>Animate at least four independent elements.</li>
+            <li>Use at least one transform-based animation.</li>
+            <li>Use at least one staged keyframe sequence.</li>
+            <li>Make motion pause or simplify for reduced motion.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Debugging Motion</h2>
+          <div class="selector-board">
+            <code>DevTools animations panel</code><span>Inspect timing, keyframes, and playback.</span>
+            <code>Slow it down</code><span>Use longer durations while debugging.</span>
+            <code>Add outlines</code><span>See the real box versus the transformed result.</span>
+            <code>Disable pieces</code><span>Comment out one animation at a time.</span>
+            <code>Check preferences</code><span>Simulate reduced motion in DevTools.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Responsible Motion Checklist</h2>
+          <div class="checklist-grid">
+            <article><h3>Purpose</h3><p>Every animation has a reason.</p></article>
+            <article><h3>Properties</h3><p>Prefer transform and opacity for frequent motion.</p></article>
+            <article><h3>Control</h3><p>Users can pause, ignore, or avoid distracting loops.</p></article>
+            <article><h3>Preference</h3><p>Reduced motion is handled.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>When should you use a transition instead of keyframes?</p>
+            <p>Why is <code>transform</code> usually better than animating <code>top</code>?</p>
+            <p>What is one animation you would remove from a real website?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

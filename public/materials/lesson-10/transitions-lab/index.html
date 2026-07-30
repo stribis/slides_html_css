@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transitions Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="lab-shell">
+      <header class="lab-hero">
+        <p class="eyebrow">Lesson 10</p>
+        <h1>Transitions Lab</h1>
+        <p>
+          Add purposeful hover, focus, checked, and open-state transitions.
+          Avoid <code>transition: all</code>.
+        </p>
+      </header>
+
+      <section class="action-row" aria-label="Button transition examples">
+        <button class="button lift">Lift Button</button>
+        <button class="button color">Color Button</button>
+        <button class="button shadow">Shadow Button</button>
+      </section>
+
+      <section class="card-grid" aria-label="Card transition examples">
+        <article class="demo-card">
+          <span>01</span>
+          <h2>Transform</h2>
+          <p>Move this card without changing layout around it.</p>
+        </article>
+        <article class="demo-card">
+          <span>02</span>
+          <h2>Color</h2>
+          <p>Change background, text, and border with different durations.</p>
+        </article>
+        <article class="demo-card">
+          <span>03</span>
+          <h2>Focus</h2>
+          <p>Make keyboard focus feel as intentional as hover.</p>
+        </article>
+      </section>
+
+      <section class="toggle-panel">
+        <label>
+          <input type="checkbox" />
+          Enable advanced details
+        </label>
+        <div class="details-box">
+          <h2>Checkbox-driven transition</h2>
+          <p>Use <code>:has(input:checked)</code> or sibling selectors to change this panel.</p>
+        </div>
+      </section>
+
+      <details class="faq">
+        <summary>Can transitions work with open states?</summary>
+        <p>Yes, but choose properties that can interpolate. Newer discrete transitions need support checks.</p>
+      </details>
+    </main>
+  </body>
+</html>

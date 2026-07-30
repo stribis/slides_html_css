@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Lesson 09 Component Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="eyebrow">Lesson 09 Workshop</p>
+      <h1>Component Lab</h1>
+      <p>
+        Use this starter to practice native components, scoped CSS, custom
+        properties, modern color, popovers, anchor positioning, and form-control
+        polish.
+      </p>
+    </header>
+
+    <main class="component-board">
+      <section class="component-card notice-card" aria-labelledby="notice-title">
+        <h2 id="notice-title">Notice Component</h2>
+        <p>
+          Turn this into a reusable component with nested CSS and custom
+          properties for background, border, text, and radius.
+        </p>
+        <a href="https://developer.mozilla.org/" target="_blank" rel="noreferrer">Read MDN</a>
+      </section>
+
+      <section class="component-card faq-card" aria-labelledby="faq-title">
+        <h2 id="faq-title">Disclosure Component</h2>
+        <details name="course-faq">
+          <summary>What should this component handle?</summary>
+          <p>Spacing, summary state, focus, and readable content.</p>
+        </details>
+        <details name="course-faq">
+          <summary>Can multiple items be open?</summary>
+          <p>The shared <code>name</code> attribute creates exclusive behavior in supporting browsers.</p>
+        </details>
+      </section>
+
+      <section class="component-card action-card" aria-labelledby="actions-title">
+        <h2 id="actions-title">Native Floating UI</h2>
+        <button type="button" popovertarget="help-popover">Open popover</button>
+        <div id="help-popover" popover>
+          <p>Style this popover and position it near the button.</p>
+        </div>
+
+        <button type="button" commandfor="demo-dialog" command="show-modal">Open dialog</button>
+        <dialog id="demo-dialog">
+          <h3>Dialog Task</h3>
+          <p>Style the dialog and its backdrop. Keep it easy to close.</p>
+          <button type="button" commandfor="demo-dialog" command="close">Close</button>
+        </dialog>
+      </section>
+
+      <section class="component-card form-card" aria-labelledby="form-title">
+        <h2 id="form-title">Form Control Polish</h2>
+        <form>
+          <label for="topic">Topic</label>
+          <select id="topic" name="topic">
+            <option>Native components</option>
+            <option>Scoped CSS</option>
+            <option>Modern color</option>
+          </select>
+
+          <label class="choice">
+            <input type="checkbox" name="notify" />
+            Send workshop notes
+          </label>
+
+          <button type="submit">Save preference</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

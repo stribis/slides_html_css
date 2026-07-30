@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lesson 07 of the HTML and CSS course: media elements, tables, iframes, forms, and validation." />
+    <title>Lesson 07 - Data, Media & Forms</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-seven">
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #1f7a68 54%, #efc84a 100%)">
+          <p class="eyebrow">Lesson 07</p>
+          <h1>Data, Media & Forms</h1>
+          <p class="lede">Audio, video, tables, embeds, form controls, and validation</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Structure Data and Collect Input</h2>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Embed audio and video</h3><p>Use controls, sources, captions, fallback links, and transcripts.</p></article>
+            <article><span>02</span><h3>Write real tables</h3><p>Use captions, headings, scope, and table sections for data.</p></article>
+            <article><span>03</span><h3>Embed responsibly</h3><p>Use iframe titles, dimensions, lazy loading, and sandboxing.</p></article>
+            <article><span>04</span><h3>Build forms properly</h3><p>Understand form submission, labels, controls, validation, and styling.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Video Syntax</h2>
+          <pre><code class="language-html">&lt;video controls width="640" poster="https://placecats.com/640/360"&gt;
+  &lt;source src="performance.webm" type="video/webm" /&gt;
+  &lt;source src="performance.mp4" type="video/mp4" /&gt;
+  &lt;track kind="captions" src="captions.vtt" srclang="en" label="English" /&gt;
+  &lt;a href="performance.mp4"&gt;Download the video&lt;/a&gt;
+&lt;/video&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Audio Syntax</h2>
+          <pre><code class="language-html">&lt;audio controls&gt;
+  &lt;source src="interview.mp3" type="audio/mpeg" /&gt;
+  &lt;source src="interview.ogg" type="audio/ogg" /&gt;
+  &lt;a href="interview.mp3"&gt;Download the audio&lt;/a&gt;
+&lt;/audio&gt;</code></pre>
+          <p>For speech, provide a transcript. For video with speech, provide captions.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Media Embed Checklist</h2>
+          <ol class="task-list compact">
+            <li>Add a video with <code>controls</code>, a <code>poster</code>, and two sources.</li>
+            <li>Add a captions <code>&lt;track&gt;</code>.</li>
+            <li>Add an audio player with a fallback download link.</li>
+            <li>Write where the transcript link would go.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Tables Are for Data, Not Layout</h2>
+          <pre><code class="language-html">&lt;table&gt;
+  &lt;caption&gt;Student grades&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th scope="col"&gt;Name&lt;/th&gt;&lt;th scope="col"&gt;Grade&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope="row"&gt;Hermione&lt;/th&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Table Type: Simple Comparison</h2>
+          <table class="comparison-table">
+            <caption>Image format decision table</caption>
+            <thead><tr><th>Format</th><th>Transparency</th><th>Best for</th></tr></thead>
+            <tbody>
+              <tr><td>JPEG</td><td>No</td><td>Photos</td></tr>
+              <tr><td>PNG</td><td>Yes</td><td>Sharp graphics</td></tr>
+              <tr><td>SVG</td><td>Yes</td><td>Icons and logos</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Table Type: Schedule</h2>
+          <table class="comparison-table">
+            <caption>Workshop schedule</caption>
+            <thead><tr><th scope="col">Time</th><th scope="col">Activity</th><th scope="col">Output</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">09:00</th><td>Audit markup</td><td>Issue list</td></tr>
+              <tr><th scope="row">10:00</th><td>Fix forms</td><td>Working labels</td></tr>
+              <tr><th scope="row">11:00</th><td>Keyboard test</td><td>Focus notes</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Table Type: Numeric Data</h2>
+          <table class="comparison-table">
+            <caption>Page weight before and after optimization</caption>
+            <thead><tr><th scope="col">Asset</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Saved</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Hero image</th><td>1.8 MB</td><td>420 KB</td><td>77%</td></tr>
+              <tr><th scope="row">Gallery</th><td>4.2 MB</td><td>1.1 MB</td><td>74%</td></tr>
+              <tr><th scope="row">Icons</th><td>180 KB</td><td>24 KB</td><td>87%</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Recreate Three Tables</h2>
+          <ol class="task-list compact">
+            <li>Build a comparison table with a caption and column headers.</li>
+            <li>Build a schedule table with row headers using <code>scope="row"</code>.</li>
+            <li>Build a numeric table and right-align numeric cells with CSS.</li>
+            <li>Test whether each table still makes sense when read row by row.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>When Are iFrames Useful?</h2>
+          <div class="part-grid">
+            <article><code>maps</code><p>Embed a hosted map without building map logic.</p></article>
+            <article><code>videos</code><p>Embed YouTube, Vimeo, or internal media platforms.</p></article>
+            <article><code>payments</code><p>Secure third-party payment forms.</p></article>
+            <article><code>sandboxes</code><p>Isolated previews, demos, or external widgets.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>iFrame Pros and Cons</h2>
+          <table class="comparison-table">
+            <thead><tr><th>Pros</th><th>Cons</th></tr></thead>
+            <tbody>
+              <tr><td>Fast way to include external functionality</td><td>Less control over performance and styling</td></tr>
+              <tr><td>Can isolate risky content with sandboxing</td><td>Third-party privacy and security concerns</td></tr>
+              <tr><td>Useful for maps, videos, payments, previews</td><td>Needs a useful title and responsive sizing</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Embedding With <code>&lt;iframe&gt;</code></h2>
+          <pre><code class="language-html">&lt;iframe
+  title="Map showing the venue location"
+  src="https://www.openstreetmap.org/..."
+  loading="lazy"
+  sandbox="allow-scripts allow-same-origin"
+&gt;&lt;/iframe&gt;</code></pre>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Responsible Embed Pass</h2>
+          <ol class="task-list compact">
+            <li>Add an iframe with a useful <code>title</code>.</li>
+            <li>Add a wrapper that controls aspect ratio.</li>
+            <li>Add <code>loading="lazy"</code>.</li>
+            <li>Decide whether <code>sandbox</code> is possible for the embed.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>What Is a Form?</h2>
+          <pre><code class="language-html">&lt;form action="/contact" method="post"&gt;
+  &lt;!-- controls go here --&gt;
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          <p>A form groups controls and defines how their name/value pairs are submitted.</p>
+        </section>
+
+        <section>
+          <h2>How Form Data Is Created</h2>
+          <pre><code class="language-html">&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" name="email" type="email" value="cat@example.com" /&gt;</code></pre>
+          <p>The submitted pair is <code>email=cat@example.com</code>. Without <code>name</code>, most controls are not submitted.</p>
+        </section>
+
+        <section>
+          <h2>Labels Come Before Styling</h2>
+          <pre><code class="language-html">&lt;label for="email"&gt;Email address&lt;/label&gt;
+&lt;input id="email" name="email" type="email" autocomplete="email" required /&gt;</code></pre>
+          <p>Placeholder text is not a label. Labels stay available after the user types.</p>
+        </section>
+
+        <section>
+          <h2>Group Related Fields</h2>
+          <pre><code class="language-html">&lt;fieldset&gt;
+  &lt;legend&gt;Preferred contact method&lt;/legend&gt;
+  &lt;label&gt;&lt;input type="radio" name="contact" value="email" /&gt; Email&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="contact" value="phone" /&gt; Phone&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Form Example: Contact</h2>
+          <pre><code class="language-html">&lt;form action="/contact" method="post"&gt;
+  &lt;label for="name"&gt;Name&lt;/label&gt;
+  &lt;input id="name" name="name" autocomplete="name" required /&gt;
+
+  &lt;label for="message"&gt;Message&lt;/label&gt;
+  &lt;textarea id="message" name="message" minlength="20"&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Input Types: Text-Like</h2>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Type</th><th>Example</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td><code>text</code></td><td><code>&lt;input type="text" name="name"&gt;</code></td><td>General text</td></tr>
+              <tr><td><code>email</code></td><td><code>&lt;input type="email" name="email"&gt;</code></td><td>Email format and keyboard</td></tr>
+              <tr><td><code>password</code></td><td><code>&lt;input type="password" name="password"&gt;</code></td><td>Masked entry</td></tr>
+              <tr><td><code>search</code></td><td><code>&lt;input type="search" name="q"&gt;</code></td><td>Search UI</td></tr>
+              <tr><td><code>url</code></td><td><code>&lt;input type="url" name="site"&gt;</code></td><td>URL format</td></tr>
+              <tr><td><code>tel</code></td><td><code>&lt;input type="tel" name="phone"&gt;</code></td><td>Telephone keyboard</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Input Types: Choices</h2>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Control</th><th>Example</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td><code>checkbox</code></td><td><code>&lt;input type="checkbox" name="newsletter"&gt;</code></td><td>Independent yes/no</td></tr>
+              <tr><td><code>radio</code></td><td><code>&lt;input type="radio" name="plan" value="pro"&gt;</code></td><td>One option from a group</td></tr>
+              <tr><td><code>select</code></td><td><code>&lt;select name="country"&gt;...&lt;/select&gt;</code></td><td>Known list</td></tr>
+              <tr><td><code>datalist</code></td><td><code>&lt;input list="cities"&gt;</code></td><td>Suggestions without forcing a choice</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Input Types: Numbers, Dates, Files</h2>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Type</th><th>Example</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td><code>number</code></td><td><code>&lt;input type="number" min="1" max="10"&gt;</code></td><td>Numeric value</td></tr>
+              <tr><td><code>range</code></td><td><code>&lt;input type="range" min="0" max="100"&gt;</code></td><td>Approximate value</td></tr>
+              <tr><td><code>date</code></td><td><code>&lt;input type="date" name="show-date"&gt;</code></td><td>Date picker</td></tr>
+              <tr><td><code>time</code></td><td><code>&lt;input type="time" name="doors"&gt;</code></td><td>Time picker</td></tr>
+              <tr><td><code>color</code></td><td><code>&lt;input type="color" name="brand"&gt;</code></td><td>Color picker</td></tr>
+              <tr><td><code>file</code></td><td><code>&lt;input type="file" name="poster"&gt;</code></td><td>Upload a file</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Input Type Selection</h2>
+          <ol class="task-list compact">
+            <li>Choose input types for booking name, email, phone, show date, and guest count.</li>
+            <li>Add a radio group for ticket type.</li>
+            <li>Add a checkbox for newsletter signup.</li>
+            <li>Add autocomplete values where they make sense.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>HTML Validation Attributes</h2>
+          <div class="selector-board">
+            <code>required</code><span>Must be filled before submission</span>
+            <code>minlength maxlength</code><span>Text length constraints</span>
+            <code>min max step</code><span>Numeric or date constraints</span>
+            <code>pattern</code><span>Regular expression for text-like inputs</span>
+            <code>:valid :invalid</code><span>CSS hooks for validation state</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Validation Example</h2>
+          <pre><code class="language-html">&lt;label for="username"&gt;Username&lt;/label&gt;
+&lt;input
+  id="username"
+  name="username"
+  required
+  minlength="3"
+  maxlength="20"
+  pattern="[a-z0-9-]+"
+/&gt;</code></pre>
+          <p>HTML validation improves UX. Server-side validation is still required.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Validation Pass</h2>
+          <ol class="task-list compact">
+            <li>Make email, name, and message required.</li>
+            <li>Add <code>minlength</code> to the message.</li>
+            <li>Add <code>min</code>, <code>max</code>, and <code>step</code> to a number field.</li>
+            <li>Style <code>:invalid</code> only after the user has interacted when possible.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Form Styling Tips</h2>
+          <div class="part-grid">
+            <article><code>font: inherit</code><p>Make controls match the page typography.</p></article>
+            <article><code>display: grid</code><p>Use consistent label/control spacing.</p></article>
+            <article><code>:focus-visible</code><p>Never remove focus without replacing it.</p></article>
+            <article><code>accent-color</code><p>Quickly theme checkboxes, radios, and range inputs.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Form Styling Example</h2>
+          <pre><code class="language-css">input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  padding: .75rem;
+  border: 2px solid #151923;
+}
+
+input:focus-visible {
+  outline: 4px solid #e86f51;
+  outline-offset: 3px;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>What does the <code>name</code> attribute do in a form?</p>
+            <p>Why is <code>placeholder</code> not a label?</p>
+            <p>Why must validation also happen on the server?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

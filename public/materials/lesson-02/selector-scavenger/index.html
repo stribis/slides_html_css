@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selector Scavenger Hunt</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header id="site-header">
+      <p class="label">Selector Scavenger Hunt</p>
+      <h1>Static Noise Magazine</h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="https://developer.mozilla.org/" target="_blank">MDN</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="features" aria-labelledby="features-title">
+        <h2 id="features-title">Features</h2>
+        <article class="card featured" id="cover-story">
+          <img src="https://placecats.com/640/360" alt="Cat posing for the magazine cover story" />
+          <span class="status">Cover story</span>
+          <h3>How independent artists build a visual system</h3>
+          <p>The strongest releases often pair sound, typography, and motion into one recognizable identity.</p>
+          <p>Start by looking for repeated decisions: spacing, contrast, and rhythm.</p>
+          <a href="https://example.com/interview" target="_blank">Read the interview</a>
+        </article>
+
+        <article class="card">
+          <span class="status"></span>
+          <h3>Three album pages worth studying</h3>
+          <p>Each page uses hierarchy differently, but all three make the primary action obvious.</p>
+          <a href="#reviews">Jump to reviews</a>
+        </article>
+      </section>
+
+      <section id="reviews" aria-labelledby="reviews-title">
+        <h2 id="reviews-title">Reviews</h2>
+        <article class="card review-card">
+          <img src="https://placecats.com/360/360" alt="Black and white cat portrait" />
+          <span class="status">New</span>
+          <h3>Soft Voltage - Night Bus</h3>
+          <p>A compact EP with warm synth lines and careful negative space.</p>
+          <button type="button">Save review</button>
+        </article>
+
+        <article class="card review-card">
+          <span class="status">Archive</span>
+          <h3>Marble Radio - Blue Room</h3>
+          <p>Clear vocal production, strong cover art, and a confident launch page.</p>
+          <button type="button">Save review</button>
+        </article>
+      </section>
+
+      <aside aria-labelledby="sidebar-title">
+        <h2 id="sidebar-title">Useful Links</h2>
+        <ul>
+          <li><a href="https://web.dev/" target="_blank">web.dev</a></li>
+          <li><a href="https://www.w3.org/WAI/" target="_blank">WAI accessibility</a></li>
+          <li><a href="#site-header">Back to top</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer>
+      <p>Static Noise Magazine - practice template for CSS selectors.</p>
+    </footer>
+  </body>
+</html>

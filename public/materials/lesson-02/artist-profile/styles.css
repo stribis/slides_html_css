@@ -1,0 +1,18 @@
+/*
+  Artist Profile Workshop
+
+  Goal: style this page without changing index.html for the first 20 minutes.
+
+  Required:
+  - Add a modern reset.
+  - Define base typography and color.
+  - Use classes for repeated visual patterns.
+  - Use at least one attribute selector.
+  - Use at least one pseudo-class.
+  - Use :has() on a component that contains an image.
+  - Use clamp() for the main heading.
+  - Use svh or dvh for the hero section.
+  - Add visible :focus-visible styles.
+*/
+
+/* Start here. */

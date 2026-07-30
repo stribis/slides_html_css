@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artist Profile Starter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="#">Nova Vale</a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#release">Release</a></li>
+          <li><a href="#shows">Shows</a></li>
+          <li><a href="https://example.com" target="_blank">Listen</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">Independent electronic artist</p>
+          <h1 id="hero-title">Nova Vale</h1>
+          <p>
+            Layered synth pop, field recordings, and intimate club energy from
+            Zurich.
+          </p>
+          <a class="button" href="#release">Explore the latest release</a>
+        </div>
+        <figure class="hero-media">
+          <img src="https://placecats.com/520/520" alt="Cat portrait used as artist profile artwork" />
+          <figcaption>Press photo for the current release cycle.</figcaption>
+        </figure>
+      </section>
+
+      <section id="about" class="section about-section" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <p>
+          Nova Vale writes songs around late-night public transport, overheard
+          conversations, and tiny moments of city silence.
+        </p>
+        <p>
+          The project combines live hardware, textured vocals, and visuals built
+          from scanned ticket stubs and motion experiments.
+        </p>
+      </section>
+
+      <section id="release" class="section release-section" aria-labelledby="release-title">
+        <h2 id="release-title">Latest release</h2>
+        <article class="release-card featured">
+          <img src="https://placecats.com/420/300" alt="Cat cover artwork for the latest release" />
+          <div>
+            <p class="eyebrow">EP - 2026</p>
+            <h3>Night Lines</h3>
+            <p>
+              Four compact tracks about movement, distance, and the way a city
+              sounds after midnight.
+            </p>
+            <a href="https://example.com" target="_blank">Listen on streaming platforms</a>
+          </div>
+        </article>
+      </section>
+
+      <section id="shows" class="section shows-section" aria-labelledby="shows-title">
+        <h2 id="shows-title">Shows</h2>
+        <article class="show-card">
+          <time datetime="2026-09-12">12 Sep 2026</time>
+          <h3>Club Zukunft</h3>
+          <p>Zurich, CH</p>
+        </article>
+        <article class="show-card">
+          <time datetime="2026-10-03">03 Oct 2026</time>
+          <h3>Bad Bonn</h3>
+          <p>Dudingen, CH</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Contact: booking@example.com</p>
+    </footer>
+  </body>
+</html>

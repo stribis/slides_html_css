@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lesson 09 of the HTML and CSS course: modern components, CSS nesting, scoped styles, native UI, anchor positioning, theming, progressive enhancement, and form control styling." />
+    <title>Lesson 09 - Modern HTML & CSS Components</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-nine">
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #1f7a68 46%, #efc84a 100%)">
+          <p class="eyebrow">Lesson 09</p>
+          <h1>Modern HTML & CSS Components</h1>
+          <p class="lede">Native UI, scoped styles, modern color, and progressive enhancement</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Build Components With the Platform</h2>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Organize component CSS</h3><p>Use nesting, custom properties, and scoped styles without creating selector soup.</p></article>
+            <article><span>02</span><h3>Use native interaction</h3><p>Build with <code>&lt;details&gt;</code>, <code>&lt;dialog&gt;</code>, popover, and invoker commands.</p></article>
+            <article><span>03</span><h3>Place floating UI</h3><p>Use anchor positioning for menus, hints, and small teaching bubbles.</p></article>
+            <article><span>04</span><h3>Enhance responsibly</h3><p>Use <code>@supports</code>, Baseline thinking, and fallbacks for newer features.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>What This Lesson Is Not</h2>
+          <div class="statement-list">
+            <p>No CSS Grid deep dive.</p>
+            <p>No responsive design system.</p>
+            <p>No CSS animation lesson.</p>
+            <p>No JavaScript framework component architecture.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>A Component Is a Small Contract</h2>
+          <div class="component-map">
+            <article><strong>HTML</strong><span>Meaning, controls, names, fallback content</span></article>
+            <article><strong>CSS</strong><span>Layout, state, theme, density, visual polish</span></article>
+            <article><strong>State</strong><span>Open, selected, checked, invalid, focused, disabled</span></article>
+            <article><strong>API</strong><span>Classes, attributes, custom properties, slots of content</span></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Component Decision Checklist</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Question</th><th>Good answer</th><th>Risky answer</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Does HTML already have this?</td><td>Use native first.</td><td>Build fake controls from <code>&lt;div&gt;</code>.</td></tr>
+              <tr><td>What is the fallback?</td><td>Content still works without the enhancement.</td><td>The feature is required for basic use.</td></tr>
+              <tr><td>How is it themed?</td><td>Custom properties expose useful decisions.</td><td>Every instance needs copied CSS.</td></tr>
+              <tr><td>How is it tested?</td><td>Keyboard, zoom, support, and state checks.</td><td>Only tested with a mouse on one browser.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Progressive Enhancement Stack</h2>
+          <div class="enhancement-stack">
+            <span>Readable HTML</span>
+            <span>Usable native controls</span>
+            <span>Modern CSS enhancement</span>
+            <span>Optional JavaScript behavior</span>
+          </div>
+          <p>Start from a working experience. Add features when support and benefit justify them.</p>
+        </section>
+
+        <section>
+          <h2>Use <code>@supports</code> for Feature Gates</h2>
+          <pre><code class="language-css">.menu {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+}
+
+@supports (position-area: bottom) {
+  .menu {
+    inset: auto;
+    position-area: bottom;
+  }
+}</code></pre>
+          <p>Fallback first, enhanced rule second.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Feature Support Plan</h2>
+          <ol class="task-list compact">
+            <li>Pick one modern feature from today's lesson.</li>
+            <li>Write the baseline version users should get everywhere.</li>
+            <li>Write the enhanced version inside <code>@supports</code>.</li>
+            <li>Explain what students should test before shipping it.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>CSS Nesting Keeps Component Rules Together</h2>
+          <pre><code class="language-css">.card {
+  padding: 1rem;
+  border: 2px solid currentColor;
+
+  & h2 {
+    margin-block: 0 0.5rem;
+  }
+
+  &:focus-within {
+    outline: 4px solid #e86f51;
+  }
+}</code></pre>
+          <p>Browser-native nesting is not Sass. Keep it shallow and readable.</p>
+        </section>
+
+        <section>
+          <h2>The <code>&amp;</code> Means "This Selector"</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Nested CSS</th><th>Equivalent idea</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>&amp;:hover</code></td><td>The component itself in hover state.</td></tr>
+              <tr><td><code>&amp;[aria-current="page"]</code></td><td>The component itself with an attribute.</td></tr>
+              <tr><td><code>&amp; .icon</code></td><td>A descendant inside the component.</td></tr>
+              <tr><td><code>.toolbar &amp;</code></td><td>The component when it appears inside another context.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Nesting At-Rules</h2>
+          <pre><code class="language-css">.notice {
+  background: #fff7d6;
+  color: #151923;
+
+  @supports (color: light-dark(black, white)) {
+    color: light-dark(#151923, #fff7d6);
+    background: light-dark(#fff7d6, #2c2412);
+  }
+}</code></pre>
+          <p>Use nested at-rules when the rule belongs to the component.</p>
+        </section>
+
+        <section>
+          <h2>Nesting Mistakes</h2>
+          <div class="split">
+            <article class="definition-panel wrong">
+              <h3>Too Deep</h3>
+              <pre><code class="language-css">.card {
+  & .body {
+    & ul {
+      & li {
+        & a { ... }
+      }
+    }
+  }
+}</code></pre>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Clearer</h3>
+              <pre><code class="language-css">.card {
+  ...
+}
+
+.card-list a {
+  ...
+}</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Nesting Refactor</h2>
+          <ol class="task-list compact">
+            <li>Take a component with five repeated class prefixes.</li>
+            <li>Nest only the rules that clearly belong together.</li>
+            <li>Keep nesting to two levels when possible.</li>
+            <li>Compare specificity before and after.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2><code>@scope</code> Limits Selector Reach</h2>
+          <pre><code class="language-css">@scope (.profile-card) {
+  :scope {
+    border: 2px solid #151923;
+  }
+
+  h2 {
+    color: #1f7a68;
+  }
+}</code></pre>
+          <p>Scoped rules target a DOM subtree without needing long, defensive selectors.</p>
+        </section>
+
+        <section>
+          <h2>Scope Root and Scope Limit</h2>
+          <pre><code class="language-css">@scope (.article-body) to (figure) {
+  img {
+    border: 5px solid #efc84a;
+  }
+}</code></pre>
+          <div class="scope-rings">
+            <span>article body</span>
+            <span>paragraph image</span>
+            <span>figure limit</span>
+          </div>
+          <p>The limit creates a boundary. Rules apply inside the root, but stop before the limit.</p>
+        </section>
+
+        <section>
+          <h2>Scoping Proximity</h2>
+          <div class="theme-nesting-demo">
+            <article class="dark-shell">
+              Dark scope
+              <article class="light-shell">Light scope wins for this nested content</article>
+            </article>
+          </div>
+          <p>When scoped rules conflict, the closest scope root can win before source order matters.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Scope a Component</h2>
+          <ol class="task-list compact">
+            <li>Create two cards with different themes.</li>
+            <li>Use <code>@scope</code> to style headings and links inside each card.</li>
+            <li>Nest one card inside the other.</li>
+            <li>Explain which color wins and why.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Custom Properties as Component API</h2>
+          <pre><code class="language-css">.badge {
+  --badge-bg: #efc84a;
+  --badge-fg: #151923;
+  --badge-radius: 999px;
+
+  background: var(--badge-bg);
+  color: var(--badge-fg);
+  border-radius: var(--badge-radius);
+}</code></pre>
+          <p>Expose the decisions people should change. Hide the rest.</p>
+        </section>
+
+        <section>
+          <h2>Fallback Values</h2>
+          <pre><code class="language-css">.callout {
+  border-color: var(--callout-border, #1f7a68);
+  background: var(--callout-bg, #f4fffb);
+  color: var(--callout-fg, #151923);
+}</code></pre>
+          <p>The second value in <code>var()</code> is the fallback if the custom property is missing.</p>
+        </section>
+
+        <section>
+          <h2>Component Variants With Variables</h2>
+          <pre><code class="language-css">.callout.warning {
+  --callout-border: #efc84a;
+  --callout-bg: #fff7d6;
+}
+
+.callout.danger {
+  --callout-border: #e86f51;
+  --callout-bg: #fff0eb;
+}</code></pre>
+          <p>Variants change tokens, not the whole component recipe.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Design a Tiny Component API</h2>
+          <ol class="task-list compact">
+            <li>Choose a component: badge, card, alert, or button.</li>
+            <li>Expose three custom properties.</li>
+            <li>Create two variants by changing only those properties.</li>
+            <li>Explain which values should not be public API.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Modern Color Starts With <code>color-scheme</code></h2>
+          <pre><code class="language-html">&lt;meta name="color-scheme" content="light dark" /&gt;</code></pre>
+          <pre><code class="language-css">:root {
+  color-scheme: light dark;
+}</code></pre>
+          <p>This tells the browser your page can handle both modes, including form controls and scrollbars.</p>
+        </section>
+
+        <section>
+          <h2><code>prefers-color-scheme</code></h2>
+          <pre><code class="language-css">:root {
+  --surface: #fffdf7;
+  --text: #151923;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #151923;
+    --text: #fffdf7;
+  }
+}</code></pre>
+        </section>
+
+        <section>
+          <h2><code>light-dark()</code> Removes Repetition</h2>
+          <pre><code class="language-css">:root {
+  color-scheme: light dark;
+}
+
+.panel {
+  background: light-dark(#fffdf7, #151923);
+  color: light-dark(#151923, #fffdf7);
+}</code></pre>
+          <div class="theme-swatches">
+            <span>Light</span>
+            <span>Dark</span>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>color-mix()</code> Builds Related Colors</h2>
+          <pre><code class="language-css">:root {
+  --brand: #1f7a68;
+  --brand-soft: color-mix(in oklch, var(--brand) 18%, white);
+  --brand-strong: color-mix(in oklch, var(--brand) 70%, black);
+}</code></pre>
+          <p>Use color mixing for consistent tints, borders, hover colors, and theme surfaces.</p>
+        </section>
+
+        <section>
+          <h2>Why OKLCH Is Useful</h2>
+          <div class="selector-board">
+            <code>oklch(70% .16 150)</code><span>Lightness, chroma, hue.</span>
+            <code>Lightness</code><span>Often easier to adjust than RGB channels.</span>
+            <code>Chroma</code><span>How intense the color is.</span>
+            <code>Hue</code><span>Angle around the color wheel.</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Theme Token Pass</h2>
+          <ol class="task-list compact">
+            <li>Create tokens for surface, text, border, brand, and accent.</li>
+            <li>Use <code>light-dark()</code> for one component.</li>
+            <li>Use <code>color-mix()</code> for one soft background.</li>
+            <li>Check contrast in both color schemes.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Native Disclosure: <code>&lt;details&gt;</code></h2>
+          <pre><code class="language-html">&lt;details name="faq"&gt;
+  &lt;summary&gt;Can I submit late?&lt;/summary&gt;
+  &lt;p&gt;Check the course policy and speak to your lecturer early.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+          <p>Use it for simple show/hide content. The <code>name</code> attribute can create exclusive accordions in supporting browsers.</p>
+        </section>
+
+        <section>
+          <h2>Modal Tasks Use <code>&lt;dialog&gt;</code></h2>
+          <pre><code class="language-html">&lt;button commandfor="help" command="show-modal"&gt;Open help&lt;/button&gt;
+
+&lt;dialog id="help"&gt;
+  &lt;h2&gt;Keyboard Help&lt;/h2&gt;
+  &lt;p&gt;Use Tab to move between controls.&lt;/p&gt;
+  &lt;button commandfor="help" command="close"&gt;Close&lt;/button&gt;
+&lt;/dialog&gt;</code></pre>
+          <p>Invoker commands let buttons control dialogs declaratively in modern browsers.</p>
+        </section>
+
+        <section>
+          <h2>Style the Top Layer</h2>
+          <pre><code class="language-css">dialog {
+  border: 3px solid #151923;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+dialog::backdrop {
+  background: rgb(21 25 35 / 0.65);
+}</code></pre>
+          <p><code>::backdrop</code> belongs to dialogs and popovers shown in the top layer.</p>
+        </section>
+
+        <section>
+          <h2>Popover Is for Non-Modal Floating UI</h2>
+          <pre><code class="language-html">&lt;button popovertarget="share-menu"&gt;Share&lt;/button&gt;
+
+&lt;div id="share-menu" popover&gt;
+  &lt;a href="#"&gt;Copy link&lt;/a&gt;
+  &lt;a href="#"&gt;Send email&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+          <p>Auto popovers support light dismiss and top-layer behavior without custom JavaScript.</p>
+        </section>
+
+        <section>
+          <h2>Popover State Selectors</h2>
+          <pre><code class="language-css">[popover] {
+  border: 2px solid #151923;
+  padding: 1rem;
+}
+
+:popover-open {
+  box-shadow: 8px 8px 0 rgb(21 25 35 / 0.18);
+}</code></pre>
+          <p>Use <code>:popover-open</code> for the visible state.</p>
+        </section>
+
+        <section>
+          <h2>Which Native Pattern?</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Need</th><th>Use</th><th>Why</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Show extra inline content</td><td><code>&lt;details&gt;</code></td><td>Disclosure is built in.</td></tr>
+              <tr><td>Require a focused decision</td><td><code>&lt;dialog&gt;</code></td><td>Modal behavior and backdrop.</td></tr>
+              <tr><td>Small floating menu or hint</td><td><code>popover</code></td><td>Light dismiss and top layer.</td></tr>
+              <tr><td>Navigate somewhere</td><td><code>&lt;a&gt;</code></td><td>It is a link, not a button.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Native Pattern Choice</h2>
+          <ol class="task-list compact">
+            <li>FAQ answer that opens below a question.</li>
+            <li>Delete confirmation that blocks the rest of the page.</li>
+            <li>Small account menu attached to an avatar button.</li>
+            <li>Tooltip-like hint for a form field.</li>
+            <li>Link to the full documentation page.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Anchor Positioning Tethers Floating UI</h2>
+          <pre><code class="language-css">.hint {
+  position: absolute;
+  inset: auto;
+  position-area: top;
+}</code></pre>
+          <p>For popovers, the invoker can be an implicit anchor. The floating element can position itself relative to that anchor.</p>
+        </section>
+
+        <section>
+          <h2>Explicit Anchors</h2>
+          <pre><code class="language-css">.avatar {
+  anchor-name: --avatar;
+}
+
+.profile-card {
+  position: absolute;
+  position-anchor: --avatar;
+  position-area: bottom;
+}</code></pre>
+          <p>Use explicit anchors when the positioned element is not naturally tied to a popover invoker.</p>
+        </section>
+
+        <section>
+          <h2>Anchor Positioning Needs Fallbacks</h2>
+          <pre><code class="language-css">.profile-card {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+}
+
+@supports (position-area: bottom) {
+  .profile-card {
+    inset: auto;
+    position-area: bottom;
+  }
+}</code></pre>
+          <p>Anchor positioning is new enough that a basic absolute-position fallback is still a good habit.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Anchored Hint</h2>
+          <ol class="task-list compact">
+            <li>Create a button that opens a popover hint.</li>
+            <li>Place the hint above or below the button using anchor positioning.</li>
+            <li>Add a fallback position outside <code>@supports</code>.</li>
+            <li>Test whether the hint remains readable when content changes.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Form Controls: Start Simple</h2>
+          <pre><code class="language-css">input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #1f7a68;
+}</code></pre>
+          <p><code>accent-color</code> is an easy win for checkboxes, radios, range inputs, and progress-like controls.</p>
+        </section>
+
+        <section>
+          <h2><code>appearance</code> Removes Native Styling</h2>
+          <pre><code class="language-css">input[type="checkbox"] {
+  appearance: none;
+  inline-size: 1.2em;
+  block-size: 1.2em;
+  border: 2px solid currentColor;
+}
+
+input[type="checkbox"]:checked {
+  background: #1f7a68;
+}</code></pre>
+          <p>Only remove native styling when you rebuild states, focus, disabled, and checked visuals.</p>
+        </section>
+
+        <section>
+          <h2>Customizable Select Is Emerging</h2>
+          <pre><code class="language-css">select,
+::picker(select) {
+  appearance: base-select;
+}</code></pre>
+          <pre><code class="language-html">&lt;select&gt;
+  &lt;button&gt;&lt;selectedcontent&gt;&lt;/selectedcontent&gt;&lt;/button&gt;
+  &lt;option&gt;Starter&lt;/option&gt;
+  &lt;option&gt;Studio&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          <p>This is limited availability. Teach it as progressive enhancement, not a requirement.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Form Control Polish</h2>
+          <ol class="task-list compact">
+            <li>Style checkboxes with <code>accent-color</code>.</li>
+            <li>Style one text input focus state.</li>
+            <li>Try <code>appearance: none</code> on a checkbox and rebuild checked state.</li>
+            <li>Write one sentence explaining whether the custom version is worth it.</li>
+          </ol>
+        </section>
+
+        <section>
+          <p class="eyebrow">Workshop</p>
+          <h2>Build a Tiny Component Library</h2>
+          <div class="material-links">
+            <a href="../materials/lesson-09/component-lab/index.html">Open component lab</a>
+            <a href="../materials/lesson-09/component-lab/styles.css">Open CSS starter</a>
+          </div>
+          <ol class="task-list compact">
+            <li>Component CSS with nesting.</li>
+            <li>One scoped theme area.</li>
+            <li>One popover or dialog.</li>
+            <li>One anchored floating UI enhancement.</li>
+            <li>One modern color/theming pass.</li>
+            <li>One polished form control.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Review Checklist</h2>
+          <div class="checklist-grid">
+            <article><h3>Native first</h3><p>Links, buttons, details, dialog, select, and forms stay semantic.</p></article>
+            <article><h3>CSS contained</h3><p>Nesting, scope, and variables make components easier to reason about.</p></article>
+            <article><h3>Feature gated</h3><p>Newer features have fallbacks or clear support requirements.</p></article>
+            <article><h3>Usable states</h3><p>Focus, selected, checked, open, invalid, disabled, and contrast are visible.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>When would you choose popover instead of dialog?</p>
+            <p>What problem does <code>@scope</code> solve that nesting does not?</p>
+            <p>Which feature from today needs the clearest fallback?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

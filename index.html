@@ -1,92 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTML & CSS - WDD 322</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
-  <style>
-    /* === Small CSS Reset === */
-    *{
-      margin: 0;
-      padding: 0;
-    }
-    *, *::after, *::before{
-      box-sizing: border-box;
-    }
-    body {
-      width: 100%;
-      min-height: 100vh;
-      background: #0288d1;
-      color: white;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      font-weight: 500;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Modern HTML and CSS course slides for WDD 326."
+    />
+    <title>HTML & CSS Course Slides</title>
+    <script type="module" src="/src/site.js"></script>
+  </head>
+  <body class="site-shell">
+    <main class="course-home">
+      <header class="course-hero">
+        <p class="eyebrow">WDD 326</p>
+        <h1>HTML & CSS</h1>
+        <p class="hero-copy">
+          A slide-based course for learning the browser platform through
+          semantic markup, modern CSS, practical exercises, and focused
+          workshop material.
+        </p>
+        <div class="hero-actions" aria-label="Course actions">
+          <a class="button primary" href="lesson-01/">Start the Course</a>
+          <a class="button secondary" href="#lessons">Browse Lessons</a>
+          <a class="button secondary" href="resources/">Resources</a>
+          <a class="button secondary" href="#repository-links">Course Code</a>
+        </div>
+      </header>
 
-    nav { 
-      margin-top: 2rem;
-    }
+      <section class="repo-panel" id="repository-links" aria-labelledby="repo-title">
+        <div>
+          <p class="eyebrow">Code Repositories</p>
+          <h2 id="repo-title">Forgejo Primary, GitHub Backup</h2>
+          <p>
+            Lesson cards link to the matching Forgejo folder. GitHub mirrors
+            the full course repository as a backup.
+          </p>
+        </div>
+        <div class="repo-legend" aria-label="Repository services">
+          <a href="https://forgejo.sae.zuerich/stribis/wd326-html-css" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Main Forgejo Repo</a>
+          <a href="https://github.com/stribis/wd326-html-css" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3 19c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.7-1.3-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1.1-2.7-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.5 9.5 0 0 1 5.2 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7.7.7 1.1 1.6 1.1 2.7 0 3.8-2.3 4.7-4.5 4.9.4.3.8 1 .8 2v3.4c0 .3.2.6.8.5A10 10 0 0 0 12 2Z" /></svg> GitHub Backup</a>
+        </div>
+      </section>
 
-    nav a {
-      text-decoration: none;
-      color: white;
-    }
+      <section class="lesson-grid" id="lessons" aria-label="Lessons">
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 01</p>
+          <h2><a href="lesson-01/">HTML Foundations</a></h2>
+          <p>Markup, meaning, document structure, and the browser.</p>
+          <div class="lesson-actions" aria-label="Lesson 01 links">
+            <a class="button primary" href="lesson-01/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/01_html_foundations" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-01"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
 
-    nav a:hover {
-      color: #0115cf;
-    }
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 02</p>
+          <h2><a href="lesson-02/">CSS Foundations</a></h2>
+          <p>Cascade, selectors, units, resets, and responsive thinking.</p>
+          <div class="lesson-actions" aria-label="Lesson 02 links">
+            <a class="button primary" href="lesson-02/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/02_css_foundations" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-02"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
 
-    nav ul li {
-      padding: 0.5rem 1rem;
-      list-style: none;
-    }
-    nav li:nth-child(odd) {
-      background: #ddd;
-    }
-    nav li:nth-child(odd) a {
-      
-      color: #0288d1;
-    }
-    nav li:nth-child(odd) a:hover {
-      color: #1c33ff;
-    } 
-    ul > li {
-      display: flex;
-      justify-content: space-between;
-    }
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 03</p>
+          <h2><a href="lesson-03/">Flexbox Layout</a></h2>
+          <p>Display, flow, axes, alignment, wrapping, and flexible space.</p>
+          <div class="lesson-actions" aria-label="Lesson 03 links">
+            <a class="button primary" href="lesson-03/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/03_flexbox_layout" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-03"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
 
-    ul li a:first-child {
-      margin-right: 2rem;
-    }
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 04</p>
+          <h2><a href="lesson-04/">Box Model & Positioning</a></h2>
+          <p>Sizing boxes, moving elements, layering, and centering.</p>
+          <div class="lesson-actions" aria-label="Lesson 04 links">
+            <a class="button primary" href="lesson-04/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/04_box_model_positioning" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-04"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
 
-    ul li a:last-child:hover {
-      transform: scale(1.2);
-    }
-  </style>
-</head>
-<body>
-  <h1>Slides - HTML & CSS</h1>
-  <nav>
-    <ul>
-      <li><a href="html_css_day_1.html">Day 1: HTML Basics</a><a title="download" href="pdf/HTML and CSS - Day 1.pdf">📄</a></li>
-      <li><a href="html_css_day_2.html">Day 2: CSS Basics</a><a title="download" href="pdf/HTML and CSS - Day 2.pdf">📄</a></li>
-      <li><a href="html_css_day_3.html">Day 3: Layout Basics</a><a title="download" href="pdf/HTML and CSS - Day 3.pdf">📄</a></li>
-      <li><a href="html_css_day_4.html">Day 4: More Layout</a><a title="download" href="pdf/HTML and CSS - Day 4.pdf">📄</a></li>
-      <li><a href="html_css_day_5.html">Day 5: Formatting</a><a title="download" href="pdf/HTML and CSS - Day 5.pdf">📄</a></li>
-      <li><a href="html_css_day_6.html">Day 6: Images and such</a><a title="download" href="pdf/HTML and CSS - Day 6.pdf">📄</a></li>
-      <li><a href="html_css_day_7.html">Day 7: Tables and Forms</a><a title="download" href="pdf/HTML and CSS - Day 7.pdf">📄</a></li>
-      <li><a href="html_css_day_8.html">Day 8: Video / Audio / Accessibility</a><a title="download" href="pdf/HTML and CSS - Day 8.pdf">📄</a></li>
-    </ul>
-  </nav>
-</body>
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 05</p>
+          <h2><a href="lesson-05/">Typography & Visual Polish</a></h2>
+          <p>Links, type systems, gradients, icons, and readable interfaces.</p>
+          <div class="lesson-actions" aria-label="Lesson 05 links">
+            <a class="button primary" href="lesson-05/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/05_typography_visual_polish" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-05"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
+
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 06</p>
+          <h2><a href="lesson-06/">Media on the Web</a></h2>
+          <p>Images, responsive sources, performance, favicons, and SVG.</p>
+          <div class="lesson-actions" aria-label="Lesson 06 links">
+            <a class="button primary" href="lesson-06/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/06_media_on_the_web" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-06"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
+
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 07</p>
+          <h2><a href="lesson-07/">Data, Media & Forms</a></h2>
+          <p>Audio, video, tables, embeds, forms, validation, and input patterns.</p>
+          <div class="lesson-actions" aria-label="Lesson 07 links">
+            <a class="button primary" href="lesson-07/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/07_data_media_forms" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-07"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
+
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 08</p>
+          <h2><a href="lesson-08/">Accessibility Workshop</a></h2>
+          <p>WCAG, keyboard testing, semantic repair, forms, focus, and inclusive UI.</p>
+          <div class="lesson-actions" aria-label="Lesson 08 links">
+            <a class="button primary" href="lesson-08/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/08_accessibility_workshop" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-08"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
+
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 09</p>
+          <h2><a href="lesson-09/">Modern HTML & CSS Components</a></h2>
+          <p>Native UI, scoped styles, modern color, anchor positioning, and progressive enhancement.</p>
+          <div class="lesson-actions" aria-label="Lesson 09 links">
+            <a class="button primary" href="lesson-09/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/09_modern_html_css_components" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-09"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
+
+        <article class="lesson-card">
+          <p class="lesson-kicker">Lesson 10</p>
+          <h2><a href="lesson-10/">CSS Motion & Animation</a></h2>
+          <p>Transforms, transitions, keyframes, motion safety, clocks, and creative CSS scenes.</p>
+          <div class="lesson-actions" aria-label="Lesson 10 links">
+            <a class="button primary" href="lesson-10/"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Open Slides</a>
+            <a class="repo-link" href="https://forgejo.sae.zuerich/stribis/wd326-html-css/src/branch/main/10_css_motion_animation" target="_blank" rel="noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6a3 3 0 1 1 2.8 4H9v4h6v-1.8a3 3 0 1 1 2 0V16H9v1.8a3 3 0 1 1-2 0V10.2A3 3 0 0 1 7 6Z" /></svg> Forgejo</a>
+            <a class="button resource-button" href="resources/#lesson-10"><svg class="button-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H3Z" /><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h5Z" /></svg> Resources</a>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
 </html>
-
-

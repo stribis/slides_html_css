@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artist Profile Workshop Instructions</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        width: min(900px, calc(100% - 2rem));
+        margin: 3rem auto;
+        font-family: system-ui, sans-serif;
+        line-height: 1.55;
+        color: #151923;
+        background: #f7f4ed;
+      }
+      code {
+        padding: 0.15rem 0.35rem;
+        background: white;
+        border: 1px solid #d8d1c1;
+      }
+      li { margin-block: 0.55rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Artist Profile Workshop</h1>
+    <p>
+      Style the Nova Vale artist profile. For the first 20 minutes, do not edit
+      the HTML. The goal is to practice selector choice, cascade control, and
+      modern units.
+    </p>
+    <h2>Required steps</h2>
+    <ol>
+      <li>Add a modern reset with <code>box-sizing: border-box</code>.</li>
+      <li>Set readable base typography, page color, and background color.</li>
+      <li>Use <code>clamp()</code> for the main heading size.</li>
+      <li>Use <code>min-height: 100svh</code> or <code>100dvh</code> on the hero section.</li>
+      <li>Style the navigation with class selectors.</li>
+      <li>Use an attribute selector for external links.</li>
+      <li>Use <code>:focus-visible</code> for keyboard focus.</li>
+      <li>Use <code>:has(img)</code> to style an image-based card.</li>
+      <li>Create a clear card style for releases and shows.</li>
+      <li>Write down one cascade conflict and explain the fix.</li>
+    </ol>
+    <h2>Stretch goals</h2>
+    <ul>
+      <li>Add cascade layers for reset, base, components, and utilities.</li>
+      <li>Use <code>:where()</code> for low-specificity base link styles.</li>
+      <li>Make the layout responsive with flexible widths and spacing.</li>
+    </ul>
+  </body>
+</html>

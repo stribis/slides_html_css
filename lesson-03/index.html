@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lesson 03 of the HTML and CSS course: display, flow, and Flexbox."
+    />
+    <title>Lesson 03 - Flexbox Layout</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-three">
+    <div class="reveal">
+      <div class="slides">
+        <section
+          class="title-slide"
+          data-background-gradient="linear-gradient(135deg, #18202f 0%, #1f7a68 58%, #6d5bd0 100%)"
+        >
+          <p class="eyebrow">Lesson 03</p>
+          <h1>Flexbox Layout</h1>
+          <p class="lede">Flow, axes, alignment, wrapping, and flexible space</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Layout Starts With Flow, Then Flexbox</h2>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Predict normal flow</h3><p>Know what block, inline, and inline-block do before adding layout CSS.</p></article>
+            <article><span>02</span><h3>Explain flex axes</h3><p>Use main axis, cross axis, direction, and wrapping correctly.</p></article>
+            <article><span>03</span><h3>Align with intent</h3><p>Use <code>justify-content</code>, <code>align-items</code>, <code>align-content</code>, and <code>gap</code>.</p></article>
+            <article><span>04</span><h3>Control flexible items</h3><p>Use <code>flex-basis</code>, <code>flex-grow</code>, <code>flex-shrink</code>, <code>flex</code>, and <code>order</code>.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Normal Flow Is Already a Layout System</h2>
+          <div class="display-row">
+            <article><h3>Block</h3><p>Starts on a new line and fills available width.</p></article>
+            <article><h3>Inline</h3><p>Flows with text and ignores width and height.</p></article>
+            <article><h3>Inline-block</h3><p>Flows inline but accepts box dimensions.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Block Elements Claim the Line</h2>
+          <pre><code class="language-html">&lt;header&gt;...&lt;/header&gt;
+&lt;main&gt;...&lt;/main&gt;
+&lt;section&gt;...&lt;/section&gt;
+&lt;p&gt;...&lt;/p&gt;</code></pre>
+          <p>Before Flexbox, the browser stacks most structural elements vertically.</p>
+        </section>
+
+        <section>
+          <h2>Inline Elements Flow With Text</h2>
+          <pre><code class="language-html">&lt;p&gt;
+  Read the &lt;a href="/guide"&gt;layout guide&lt;/a&gt;
+  and mark key words with &lt;strong&gt;strong&lt;/strong&gt;.
+&lt;/p&gt;</code></pre>
+          <p>Inline elements are for text-level meaning, not layout containers.</p>
+        </section>
+
+        <section>
+          <h2>The <code>display</code> Property Changes Participation</h2>
+          <div class="selector-board">
+            <code>display: block</code><span>Document structure</span>
+            <code>display: inline</code><span>Text flow</span>
+            <code>display: inline-block</code><span>Inline box with dimensions</span>
+            <code>display: flex</code><span>One-dimensional layout for direct children</span>
+            <code>display: grid</code><span>Two-dimensional layout, covered later in the course</span>
+            <code>display: none</code><span>Removed from layout and the accessibility tree</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Historical Context</p>
+          <h2>Where Float Fits Today</h2>
+          <div class="context-note">
+            <strong>Float is not your modern layout tool.</strong>
+            <p>Use it mainly to understand older websites and text wrapping around images. Use Flexbox for one-axis layout and let the later Grid lesson handle two-axis page systems.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>What Flexbox Is Good At</h2>
+          <div class="part-grid">
+            <article><code>navigation</code><p>Logo on one side, links on the other, consistent gaps.</p></article>
+            <article><code>toolbars</code><p>Buttons aligned on one row with one item pushed away.</p></article>
+            <article><code>cards</code><p>Equal-height card footers and flexible card content.</p></article>
+            <article><code>media objects</code><p>Image plus text, avatar plus message, icon plus label.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Flexbox Starts on the Parent</h2>
+          <div class="flex-lab">
+            <span>Logo</span>
+            <span>Projects</span>
+            <span>About</span>
+            <span>Contact</span>
+          </div>
+          <pre><code class="language-css">.nav {
+  display: flex;
+}</code></pre>
+          <p>Only the direct children become flex items.</p>
+        </section>
+
+        <section>
+          <h2>Parent vs. Children</h2>
+          <div class="split">
+            <article class="definition-panel">
+              <h3>Flex container</h3>
+              <p>The parent with <code>display: flex</code>. It controls direction, alignment, wrapping, and gaps.</p>
+            </article>
+            <article class="definition-panel">
+              <h3>Flex items</h3>
+              <p>The direct children. They can grow, shrink, set a basis, change order, or align themselves.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Main Axis and Cross Axis</h2>
+          <div class="axis-demo">
+            <div class="axis-box">
+              <span>A</span><span>B</span><span>C</span>
+              <strong class="main-axis">main axis</strong>
+              <strong class="cross-axis">cross axis</strong>
+            </div>
+          </div>
+          <p>The main axis follows <code>flex-direction</code>. The cross axis runs perpendicular to it.</p>
+        </section>
+
+        <section>
+          <h2><code>flex-direction</code> Decides the Main Axis</h2>
+          <div class="direction-grid">
+            <article><h3>row</h3><div class="mini-flex row"><span>1</span><span>2</span><span>3</span></div></article>
+            <article><h3>row-reverse</h3><div class="mini-flex row-reverse"><span>1</span><span>2</span><span>3</span></div></article>
+            <article><h3>column</h3><div class="mini-flex column"><span>1</span><span>2</span><span>3</span></div></article>
+            <article><h3>column-reverse</h3><div class="mini-flex column-reverse"><span>1</span><span>2</span><span>3</span></div></article>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>justify-content</code> Aligns the Main Axis</h2>
+          <div class="alignment-stack">
+            <article><code>flex-start</code><div class="mini-flex justify-start"><span>A</span><span>B</span><span>C</span></div></article>
+            <article><code>center</code><div class="mini-flex justify-center"><span>A</span><span>B</span><span>C</span></div></article>
+            <article><code>space-between</code><div class="mini-flex justify-between"><span>A</span><span>B</span><span>C</span></div></article>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>align-items</code> Aligns the Cross Axis</h2>
+          <div class="alignment-stack">
+            <article><code>stretch</code><div class="mini-flex tall align-stretch"><span>A</span><span>B</span><span>C</span></div></article>
+            <article><code>center</code><div class="mini-flex tall align-center"><span>A</span><span>B</span><span>C</span></div></article>
+            <article><code>flex-end</code><div class="mini-flex tall align-end"><span>A</span><span>B</span><span>C</span></div></article>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>gap</code> Is Layout Spacing</h2>
+          <div class="split">
+            <pre><code class="language-css">.nav {
+  display: flex;
+  gap: 1rem;
+}</code></pre>
+            <article class="definition-panel">
+              <h3>Why it matters</h3>
+              <p><code>gap</code> belongs to the container. It avoids fragile margin rules on individual children.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>flex-wrap</code> Allows Multiple Lines</h2>
+          <div class="wrap-demo">
+            <span>HTML</span><span>CSS</span><span>Selectors</span><span>Flexbox</span><span>Units</span><span>DevTools</span><span>Accessibility</span>
+          </div>
+          <pre><code class="language-css">.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2><code>align-content</code> Needs Wrapped Lines</h2>
+          <div class="context-note">
+            <strong>Common beginner trap:</strong>
+            <p><code>align-content</code> does nothing on a single flex line. It distributes multiple lines inside extra cross-axis space.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>flex-basis</code> Sets the Starting Size</h2>
+          <pre><code class="language-css">.card {
+  flex-basis: 18rem;
+}</code></pre>
+          <p>The basis is the size Flexbox starts from before growing or shrinking happens.</p>
+        </section>
+
+        <section>
+          <h2><code>flex-grow</code> Shares Extra Space</h2>
+          <div class="grow-demo">
+            <span class="grow-1">grow: 1</span>
+            <span class="grow-2">grow: 2</span>
+            <span class="grow-1">grow: 1</span>
+          </div>
+          <pre><code class="language-css">.main { flex-grow: 2; }
+.side { flex-grow: 1; }</code></pre>
+        </section>
+
+        <section>
+          <h2><code>flex-shrink</code> Decides Who Compresses</h2>
+          <div class="context-note">
+            <strong>Default:</strong>
+            <p>Flex items have <code>flex-shrink: 1</code>, so they are allowed to become smaller than their starting size when space is tight.</p>
+          </div>
+          <pre><code class="language-css">.logo {
+  flex-shrink: 0;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>The <code>flex</code> Shorthand</h2>
+          <table class="comparison-table">
+            <thead><tr><th>Shorthand</th><th>Means</th><th>Use case</th></tr></thead>
+            <tbody>
+              <tr><td><code>flex: 1</code></td><td>Grow and share the row</td><td>Equal columns or equal card widths</td></tr>
+              <tr><td><code>flex: 0 0 18rem</code></td><td>Do not grow, do not shrink, start at 18rem</td><td>Fixed sidebar or fixed card basis</td></tr>
+              <tr><td><code>flex: 1 1 16rem</code></td><td>Grow, shrink, start at 16rem</td><td>Responsive wrapping cards</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2><code>margin-left: auto</code> Can Push One Item</h2>
+          <div class="auto-margin-demo">
+            <span>Logo</span>
+            <span class="push">Login</span>
+            <span>Sign up</span>
+          </div>
+          <pre><code class="language-css">.login {
+  margin-left: auto;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2><code>align-self</code> Overrides One Item</h2>
+          <div class="self-demo">
+            <span>A</span><span class="self-end">B</span><span>C</span>
+          </div>
+          <pre><code class="language-css">.item-b {
+  align-self: flex-end;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2><code>order</code> Changes Visual Order</h2>
+          <div class="context-note">
+            <strong>Use carefully.</strong>
+            <p><code>order</code> changes visual order, but not the source order or the default reading order. Do not use it to fix bad HTML structure.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Pattern: Navigation Bar</h2>
+          <pre><code class="language-css">.site-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-list {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Pattern: Media Object</h2>
+          <pre><code class="language-html">&lt;article class="media"&gt;
+  &lt;img src="https://placecats.com/160/160" alt="Cat album cover" /&gt;
+  &lt;div&gt;
+    &lt;h2&gt;Night Lines&lt;/h2&gt;
+    &lt;p&gt;Latest release details.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+          <pre><code class="language-css">.media {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Pattern: Equal Card Actions</h2>
+          <pre><code class="language-css">.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card .button {
+  margin-top: auto;
+}</code></pre>
+          <p>This keeps buttons aligned even when card text lengths differ.</p>
+        </section>
+
+        <section>
+          <h2>What About Grid?</h2>
+          <div class="context-note">
+            <strong>Keep the distinction simple for now.</strong>
+            <p>Flexbox is strongest for one axis: rows or columns. Grid is strongest for two axes: rows and columns together. Grid gets its own future lesson, so today we only need the distinction.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Live Flexbox Editor</h2>
+          <p class="demo-caption">
+            Try changing <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code>, and <code>flex: 1 1 14rem</code>.
+          </p>
+          <div class="editor-demo">
+            <label for="layout-editor">HTML + CSS</label>
+            <textarea id="layout-editor" spellcheck="false">&lt;style&gt;
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: stretch;
+}
+.cards article {
+  flex: 1 1 14rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: white;
+  border: 2px solid #151923;
+}
+.cards a {
+  margin-top: auto;
+}
+&lt;/style&gt;
+&lt;section class="cards"&gt;
+  &lt;article&gt;&lt;h2&gt;Track&lt;/h2&gt;&lt;p&gt;Short text.&lt;/p&gt;&lt;a href="#"&gt;Open&lt;/a&gt;&lt;/article&gt;
+  &lt;article&gt;&lt;h2&gt;Album&lt;/h2&gt;&lt;p&gt;A longer description creates uneven content height.&lt;/p&gt;&lt;a href="#"&gt;Open&lt;/a&gt;&lt;/article&gt;
+  &lt;article&gt;&lt;h2&gt;Tour&lt;/h2&gt;&lt;p&gt;Dates soon.&lt;/p&gt;&lt;a href="#"&gt;Open&lt;/a&gt;&lt;/article&gt;
+&lt;/section&gt;</textarea>
+            <iframe title="Live flexbox preview" sandbox="allow-scripts" data-preview-for="layout-editor"></iframe>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Practice</p>
+          <h2>Flexbox Drills</h2>
+          <ol class="task-list compact">
+            <li>Build a header with logo left and nav links right.</li>
+            <li>Make a tag list wrap onto multiple lines.</li>
+            <li>Create a media object with image and text.</li>
+            <li>Make three cards share available width.</li>
+            <li>Align card buttons at the bottom.</li>
+            <li>Use <code>margin-left: auto</code> to push one nav item.</li>
+            <li>Prevent the logo from shrinking.</li>
+            <li>Change one item's cross-axis alignment with <code>align-self</code>.</li>
+          </ol>
+        </section>
+
+        <section>
+          <p class="eyebrow">Workshop</p>
+          <h2>Add Flex Layout to the Artist Profile</h2>
+          <div class="project-brief">
+            <article><h3>Header</h3><p>Use Flexbox for the logo, navigation, gaps, and one pushed item.</p></article>
+            <article><h3>Release section</h3><p>Use a media object: artwork beside text, then stack naturally on small screens.</p></article>
+            <article><h3>Cards</h3><p>Use Flexbox inside cards so actions align even when content lengths differ.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>Which element gets <code>display: flex</code>: parent or child?</p>
+            <p>What changes when <code>flex-direction</code> changes?</p>
+            <p>When would you use <code>flex: 1 1 16rem</code>?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lesson 02 of the HTML and CSS course: cascade, selectors, and units."
+    />
+    <title>Lesson 02 - CSS Foundations</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-two">
+    <div class="reveal">
+      <div class="slides">
+        <section
+          class="title-slide"
+          data-background-gradient="linear-gradient(135deg, #151923 0%, #263a55 54%, #604c8d 100%)"
+        >
+          <p class="eyebrow">Lesson 02</p>
+          <h1>CSS Foundations</h1>
+          <p class="lede">Cascade, selectors, and units</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>From Document to Designed Page</h2>
+          <div class="objective-grid">
+            <article>
+              <span>01</span>
+              <h3>Connect CSS</h3>
+              <p>Use external stylesheets and understand why inline styles do not scale.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Read selectors</h3>
+              <p>Use visual examples to predict exactly what a selector targets.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Predict winners</h3>
+              <p>Reason about cascade, specificity, inheritance, and layers.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <h3>Choose units</h3>
+              <p>Use fixed, relative, viewport, dynamic viewport, and fluid units.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>CSS Answers One Question</h2>
+          <div class="browser-stack">
+            <span class="html">Content</span>
+            <span class="css">Presentation</span>
+            <span class="js">Behavior</span>
+          </div>
+          <p>CSS separates meaning from visual decisions: color, layout, type, spacing, and motion.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Syntax</p>
+          <h2>Anatomy of a CSS Rule</h2>
+          <div class="code-callout">
+            <pre><code class="language-css">.card {
+  color: #151923;
+  padding: 1rem;
+}</code></pre>
+            <div class="callout-labels">
+              <span>selector</span>
+              <span>property</span>
+              <span>value</span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Three Ways to Add CSS</h2>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Use it for</th>
+                <th>Tradeoff</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>External file</strong></td>
+                <td>Real projects</td>
+                <td>Reusable, cacheable, easiest to maintain.</td>
+              </tr>
+              <tr>
+                <td><strong>&lt;style&gt;</strong></td>
+                <td>Small demos</td>
+                <td>Useful in teaching, weaker for shared design systems.</td>
+              </tr>
+              <tr>
+                <td><strong>style=""</strong></td>
+                <td>Rare exceptions</td>
+                <td>Hard to override and mixes content with presentation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Link CSS Like This</h2>
+          <pre><code class="language-html">&lt;head&gt;
+  &lt;link rel="stylesheet" href="styles.css" /&gt;
+&lt;/head&gt;</code></pre>
+          <p>Keep CSS in its own file so every page can share the same visual language.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Reset</p>
+          <h2>Start From a Predictable Baseline</h2>
+          <pre><code class="language-css">*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Selectors Tell CSS What to Style</h2>
+          <div class="selector-board">
+            <code>p</code><span>Every paragraph element</span>
+            <code>.card</code><span>Every element with class="card"</span>
+            <code>#site-header</code><span>The one element with id="site-header"</span>
+            <code>a[href]</code><span>Links that have an href attribute</span>
+            <code>article &gt; h2</code><span>Direct h2 children of articles</span>
+            <code>h2 + p</code><span>The first paragraph immediately after an h2</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Pseudo-Classes Select a State or Position</h2>
+          <div class="selector-board">
+            <code>a:hover</code><span>A link while the pointer is over it</span>
+            <code>a:focus-visible</code><span>A link or control reached by keyboard focus</span>
+            <code>a:visited</code><span>A link the browser knows has been visited</span>
+            <code>li:first-child</code><span>The first list item inside its parent</span>
+            <code>li:nth-child(odd)</code><span>Odd-numbered list items</span>
+            <code>li:last-child</code><span>The last list item inside its parent</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Pseudo-Elements Select Part of an Element</h2>
+          <div class="selector-board">
+            <code>p::first-line</code><span>The first rendered line of each paragraph</span>
+            <code>p::first-letter</code><span>The first letter of each paragraph</span>
+            <code>.card::before</code><span>Generated content before a card's real content</span>
+            <code>.card::after</code><span>Generated content after a card's real content</span>
+            <code>input::placeholder</code><span>The placeholder text inside a form field</span>
+            <code>::selection</code><span>Text highlighted by the user</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Visual Selector</p>
+          <h2>Type Selector: <code>p</code></h2>
+          <div class="selector-visual">
+            <pre><code class="language-html">&lt;article&gt;
+  &lt;h2&gt;New Release&lt;/h2&gt;
+  &lt;p&gt;The first single is out now.&lt;/p&gt;
+  &lt;p&gt;Tour dates arrive next week.&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+            <div class="selected-preview">
+              <span>h2</span>
+              <span class="is-selected">p</span>
+              <span class="is-selected">p</span>
+            </div>
+          </div>
+          <p>A type selector targets every element with that tag name.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Visual Selector</p>
+          <h2>Class Selector: <code>.featured</code></h2>
+          <div class="selector-visual">
+            <pre><code class="language-html">&lt;article class="card featured"&gt;...&lt;/article&gt;
+&lt;article class="card"&gt;...&lt;/article&gt;
+&lt;article class="card featured"&gt;...&lt;/article&gt;</code></pre>
+            <div class="selected-preview cards-preview">
+              <span class="is-selected">card featured</span>
+              <span>card</span>
+              <span class="is-selected">card featured</span>
+            </div>
+          </div>
+          <p>Classes are reusable. They are the main styling hook in most projects.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Visual Selector</p>
+          <h2>ID Selector: <code>#site-header</code></h2>
+          <div class="selector-visual">
+            <pre><code class="language-html">&lt;header id="site-header"&gt;...&lt;/header&gt;
+&lt;main&gt;...&lt;/main&gt;
+&lt;footer id="site-footer"&gt;...&lt;/footer&gt;</code></pre>
+            <div class="selected-preview page-preview">
+              <span class="is-selected">site-header</span>
+              <span>main</span>
+              <span>site-footer</span>
+            </div>
+          </div>
+          <p>ID selectors are powerful and unique. Use them sparingly for styling.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Visual Selector</p>
+          <h2>Attribute Selector: <code>a[target="_blank"]</code></h2>
+          <div class="selector-visual">
+            <pre><code class="language-html">&lt;a href="/about"&gt;About&lt;/a&gt;
+&lt;a href="https://example.com" target="_blank"&gt;External&lt;/a&gt;
+&lt;a href="/contact"&gt;Contact&lt;/a&gt;</code></pre>
+            <div class="selected-preview link-preview">
+              <span>About</span>
+              <span class="is-selected">External</span>
+              <span>Contact</span>
+            </div>
+          </div>
+          <p>Attribute selectors are useful when markup already contains meaningful data.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Visual Selector</p>
+          <h2>Child Selector: <code>article &gt; h2</code></h2>
+          <div class="selector-visual">
+            <pre><code class="language-html">&lt;article&gt;
+  &lt;h2&gt;Selected&lt;/h2&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Not selected&lt;/h2&gt;
+  &lt;/section&gt;
+&lt;/article&gt;</code></pre>
+            <div class="selected-preview nested-preview">
+              <span>article</span>
+              <span class="is-selected">direct h2</span>
+              <span>section</span>
+              <span>nested h2</span>
+            </div>
+          </div>
+          <p>The <code>&gt;</code> combinator only matches direct children.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Modern Selectors</p>
+          <h2><code>:is()</code> Groups Alternatives</h2>
+          <div class="selector-visual">
+            <pre><code class="language-css">:is(header, main, footer) a {
+  color: #1f7a68;
+}</code></pre>
+            <div class="selected-preview page-preview">
+              <span class="is-selected">header a</span>
+              <span class="is-selected">main a</span>
+              <span class="is-selected">footer a</span>
+            </div>
+          </div>
+          <p>Use <code>:is()</code> to avoid repeating the same selector ending.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Modern Selectors</p>
+          <h2><code>:where()</code> Keeps Specificity Low</h2>
+          <div class="selector-visual">
+            <pre><code class="language-css">:where(article, aside, nav) a {
+  text-underline-offset: 0.2em;
+}</code></pre>
+            <div class="selected-preview specificity-preview">
+              <span class="is-selected">matches links</span>
+              <span>adds 0 specificity</span>
+              <span>easy to override</span>
+            </div>
+          </div>
+          <p>Great for base styles because later component styles can still win easily.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Modern Selectors</p>
+          <h2><code>:has()</code> Selects by Relationship</h2>
+          <div class="selector-visual">
+            <pre><code class="language-css">.card:has(img) {
+  border-color: #1f7a68;
+}</code></pre>
+            <div class="selected-preview cards-preview">
+              <span class="is-selected">card with img</span>
+              <span>text-only card</span>
+              <span class="is-selected">card with img</span>
+            </div>
+          </div>
+          <p><code>:has()</code> lets a parent react to its children.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Modern Selectors</p>
+          <h2><code>:focus-visible</code> Supports Keyboard Users</h2>
+          <div class="selector-visual">
+            <pre><code class="language-css">button:focus-visible {
+  outline: 4px solid #e86f51;
+  outline-offset: 4px;
+}</code></pre>
+            <div class="selected-preview link-preview">
+              <span>mouse click</span>
+              <span class="is-selected">keyboard focus</span>
+              <span>inactive</span>
+            </div>
+          </div>
+          <p>Focus styles are not decoration. They are navigation.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Practice</p>
+          <h2>Selector Scavenger Hunt</h2>
+          <div class="material-links">
+            <a href="../materials/lesson-02/selector-scavenger/index.html">Open HTML template</a>
+            <a href="../materials/lesson-02/selector-scavenger/styles.css">Open CSS starter</a>
+          </div>
+          <p>
+            Students style a small music-zine page without changing the HTML.
+            The goal is to choose the right selector for each target.
+          </p>
+        </section>
+
+        <section>
+          <h2>Scavenger Hunt: 10 Targets</h2>
+          <ol class="task-list compact">
+            <li>Style the page title using a type selector.</li>
+            <li>Style every card using the shared <code>.card</code> class.</li>
+            <li>Make only the featured card visually stronger.</li>
+            <li>Style external links that open in a new tab.</li>
+            <li>Style direct list items in the main navigation.</li>
+            <li>Style the first paragraph after each article heading.</li>
+            <li>Style cards that contain an image with <code>:has()</code>.</li>
+            <li>Style empty status badges differently with <code>:empty</code>.</li>
+            <li>Add keyboard focus styles with <code>:focus-visible</code>.</li>
+            <li>Use <code>:where()</code> for low-specificity base link styling.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Specificity Is a Priority Score</h2>
+          <div class="specificity-examples">
+            <article><strong>Type</strong><code>article</code><span>0-0-1</span></article>
+            <article><strong>Class</strong><code>.card</code><span>0-1-0</span></article>
+            <article><strong>ID</strong><code>#site-header</code><span>1-0-0</span></article>
+            <article><strong>Inline</strong><code>style="color: red"</code><span>beats selectors</span></article>
+            <article><strong>Important</strong><code>color: red !important</code><span>last resort</span></article>
+          </div>
+          <p>Source order only decides when selectors have the same priority.</p>
+        </section>
+
+        <section>
+          <h2>Specificity Example: Who Wins?</h2>
+          <pre><code class="language-css">article { color: gray; }
+.card { color: green; }
+#release-card { color: purple; }</code></pre>
+          <pre><code class="language-html">&lt;article id="release-card" class="card"&gt;
+  New EP announcement
+&lt;/article&gt;</code></pre>
+          <p>The ID selector wins because it has the highest specificity.</p>
+        </section>
+
+        <section>
+          <h2>Cascade Layers Organize Priority</h2>
+          <div class="layer-stack">
+            <span>utilities</span>
+            <span>components</span>
+            <span>base</span>
+            <span>reset</span>
+          </div>
+          <p>
+            Layers let you say which groups of CSS should win before selector
+            specificity is compared inside the same layer.
+          </p>
+        </section>
+
+        <section>
+          <h2>Why Use Layers?</h2>
+          <div class="part-grid">
+            <article><code>reset</code><p>Normalize browser defaults without fighting component styles later.</p></article>
+            <article><code>base</code><p>Set typography, links, body color, and shared document behavior.</p></article>
+            <article><code>components</code><p>Style reusable patterns like cards, buttons, nav, and forms.</p></article>
+            <article><code>utilities</code><p>Small override classes that intentionally win.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Layer Example</h2>
+          <pre><code class="language-css">@layer reset, base, components, utilities;
+
+@layer base {
+  a { color: #1f7a68; }
+}
+
+@layer components {
+  .button { color: white; background: #151923; }
+}
+
+@layer utilities {
+  .text-green { color: #1f7a68; }
+}</code></pre>
+          <p>A simple selector in a later layer can beat a more complex selector in an earlier layer.</p>
+        </section>
+
+        <section>
+          <h2>Units Are Design Decisions</h2>
+          <div class="unit-lab">
+            <article><strong>px</strong><span>Precise borders, shadows, tiny details.</span></article>
+            <article><strong>rem</strong><span>Typography and spacing that respect root size.</span></article>
+            <article><strong>%</strong><span>Relative to available parent size.</span></article>
+            <article><strong>vw / vh</strong><span>Relative to viewport width or height.</span></article>
+            <article><strong>svh / lvh / dvh</strong><span>Small, large, and dynamic viewport height for mobile browser chrome.</span></article>
+            <article><strong>vi / vb</strong><span>Viewport units that follow writing mode: inline and block.</span></article>
+            <article><strong>cqw / cqh</strong><span>Container-query units for component-aware sizing.</span></article>
+            <article><strong>clamp()</strong><span>Fluid values with sensible minimums and maximums.</span></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Viewport Units in Practice</h2>
+          <div class="viewport-demo">
+            <article><code>100vh</code><p>Classic full viewport height, but can feel jumpy on mobile.</p></article>
+            <article><code>100svh</code><p>Small viewport height. Safer when browser controls are visible.</p></article>
+            <article><code>100dvh</code><p>Dynamic viewport height. Updates as browser controls expand or collapse.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Live Mini Editor: Parent-Aware Cards</h2>
+          <p class="demo-caption">
+            Delete the image, then add it back. The parent card changes because
+            <code>.card:has(img)</code> detects the image inside it.
+          </p>
+          <div class="editor-demo">
+            <label for="css-editor">HTML + CSS</label>
+            <textarea id="css-editor" spellcheck="false">&lt;style&gt;
+@layer base, components;
+
+@layer base {
+  body { padding: 1rem; }
+  :where(a) { color: #1f7a68; }
+}
+
+@layer components {
+  .card {
+    max-width: 34rem;
+    padding: 1.5rem;
+    background: white;
+    border: 3px solid #151923;
+    box-shadow: 10px 10px 0 #efc84a;
+  }
+  .card:has(img) {
+    border-color: #1f7a68;
+    background: #f4fffb;
+  }
+  .card a:focus-visible {
+    outline: 4px solid #e86f51;
+    outline-offset: 4px;
+  }
+}
+&lt;/style&gt;
+&lt;article class="card"&gt;
+  &lt;img src="https://placecats.com/320/180" alt="Cat sitting in soft light"&gt;
+  &lt;h1&gt;Selector-powered card&lt;/h1&gt;
+  &lt;p&gt;This card reacts to its own content.&lt;/p&gt;
+  &lt;a href="#"&gt;Focus this link with Tab&lt;/a&gt;
+&lt;/article&gt;</textarea>
+            <iframe title="Live selector preview" sandbox="allow-scripts" data-preview-for="css-editor"></iframe>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Workshop</p>
+          <h2>Style the Artist Profile</h2>
+          <div class="material-links">
+            <a href="../materials/lesson-02/artist-profile/index.html">Open starter page</a>
+            <a href="../materials/lesson-02/artist-profile/styles.css">Open CSS starter</a>
+            <a href="../materials/lesson-02/artist-profile/instructions.html">Open instructions</a>
+          </div>
+          <p>
+            This continues the Lesson 1 HTML project. Students add a CSS file,
+            a reset, selector strategy, typography, color, and spacing.
+          </p>
+        </section>
+
+        <section>
+          <h2>Workshop Instructions</h2>
+          <ol class="task-list compact">
+            <li>Do not change the HTML for the first 20 minutes.</li>
+            <li>Add the reset and base type styles.</li>
+            <li>Use classes for reusable visual patterns.</li>
+            <li>Use at least one attribute selector and one pseudo-class.</li>
+            <li>Use <code>:has()</code> for a card that contains an image.</li>
+            <li>Use <code>clamp()</code> for the main heading size.</li>
+            <li>Use <code>dvh</code> or <code>svh</code> for the hero section.</li>
+            <li>Explain one cascade conflict and how you fixed it.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>Which selector would you use for external links and why?</p>
+            <p>What problem do cascade layers solve?</p>
+            <p>When would <code>100dvh</code> be better than <code>100vh</code>?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

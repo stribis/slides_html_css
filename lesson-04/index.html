@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lesson 04 of the HTML and CSS course: box model, positioning, and centering."
+    />
+    <title>Lesson 04 - Box Model & Positioning</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-four">
+    <div class="reveal">
+      <div class="slides">
+        <section
+          class="title-slide"
+          data-background-gradient="linear-gradient(135deg, #151923 0%, #7c3f3f 52%, #1f7a68 100%)"
+        >
+          <p class="eyebrow">Lesson 04</p>
+          <h1>Box Model & Positioning</h1>
+          <p class="lede">Sizing boxes, moving elements, and avoiding layout surprises</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Control the Box Before You Move It</h2>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Read the box model</h3><p>Content, padding, border, margin, width, and height.</p></article>
+            <article><span>02</span><h3>Predict final size</h3><p>Explain <code>content-box</code> and <code>border-box</code> with numbers.</p></article>
+            <article><span>03</span><h3>Position deliberately</h3><p>Static, relative, absolute, fixed, sticky, offsets, and containing blocks.</p></article>
+            <article><span>04</span><h3>Layer safely</h3><p>Use <code>z-index</code> and stacking context without guessing.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Every Element Becomes a Box</h2>
+          <div class="box-model">
+            <div class="margin">
+              <span>margin</span>
+              <div class="border">
+                <span>border</span>
+                <div class="padding">
+                  <span>padding</span>
+                  <div class="content">content</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Box Model Vocabulary</h2>
+          <div class="box-parts">
+            <article><strong>content</strong><p>The actual text, image, video, or child elements.</p></article>
+            <article><strong>padding</strong><p>Space inside the box, between content and border.</p></article>
+            <article><strong>border</strong><p>The line around padding and content.</p></article>
+            <article><strong>margin</strong><p>Space outside the border, between this box and other boxes.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>DevTools Shows the Same Layers</h2>
+          <div class="devtools-box">
+            <div class="dev-margin">margin <span>24</span>
+              <div class="dev-border">border <span>4</span>
+                <div class="dev-padding">padding <span>20</span>
+                  <div class="dev-content">300 x 160</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>When a layout feels wrong, inspect the box before changing random values.</p>
+        </section>
+
+        <section>
+          <h2><code>content-box</code> Adds Padding and Border</h2>
+          <div class="box-size-demo">
+            <article>
+              <h3>CSS</h3>
+              <pre><code class="language-css">.box {
+  width: 300px;
+  padding: 20px;
+  border: 4px solid;
+  box-sizing: content-box;
+}</code></pre>
+            </article>
+            <article class="calculation-card">
+              <h3>Rendered width</h3>
+              <p><code>300 + 20 + 20 + 4 + 4 = 348px</code></p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>border-box</code> Includes Padding and Border</h2>
+          <div class="box-size-demo">
+            <article>
+              <h3>CSS</h3>
+              <pre><code class="language-css">.box {
+  width: 300px;
+  padding: 20px;
+  border: 4px solid;
+  box-sizing: border-box;
+}</code></pre>
+            </article>
+            <article class="calculation-card">
+              <h3>Rendered width</h3>
+              <p><code>300px total</code></p>
+              <p>The content area becomes smaller so the whole box stays predictable.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Use This Reset</h2>
+          <pre><code class="language-css">*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}</code></pre>
+          <p>This makes component widths behave the way most people expect.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Practice</p>
+          <h2>Predict the Final Width</h2>
+          <div class="choice-grid">
+            <article><h3>Box A</h3><p><code>width: 300px; padding: 20px; border: 4px</code><br />with <code>content-box</code></p></article>
+            <article><h3>Box B</h3><p><code>width: 300px; padding: 20px; border: 4px</code><br />with <code>border-box</code></p></article>
+            <article><h3>Box C</h3><p><code>width: 50%; padding: 2rem;</code><br />inside a 900px parent</p></article>
+            <article><h3>Box D</h3><p><code>max-width: 60rem; width: 100%;</code><br />inside a narrow viewport</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Margin Is Outside the Box</h2>
+          <div class="margin-demo">
+            <span class="box-one">box</span>
+            <span class="gap-label">margin creates outside space</span>
+            <span class="box-two">box</span>
+          </div>
+          <p>Margins push boxes away from other boxes. Padding makes a box feel roomier inside.</p>
+        </section>
+
+        <section>
+          <h2>Margins Collapse Vertically</h2>
+          <div class="context-note">
+            <strong>Two vertical margins can combine.</strong>
+            <p>This surprises beginners because horizontal margins do not behave the same way. Use DevTools to inspect the actual space.</p>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Positioning</p>
+          <h2>Positioning Changes the Coordinate System</h2>
+          <div class="position-map">
+            <span class="normal-flow">normal flow</span>
+            <span class="offset-box">offset box</span>
+            <span class="viewport-box">viewport</span>
+          </div>
+          <p>Before using <code>top</code>, <code>right</code>, <code>bottom</code>, or <code>left</code>, ask: relative to what?</p>
+        </section>
+
+        <section>
+          <h2>Position Values</h2>
+          <table class="comparison-table">
+            <thead><tr><th>Value</th><th>Relative to</th><th>Use case</th></tr></thead>
+            <tbody>
+              <tr><td><strong>static</strong></td><td>Normal flow</td><td>Default document layout.</td></tr>
+              <tr><td><strong>relative</strong></td><td>Itself</td><td>Nudge an element or create a positioning context.</td></tr>
+              <tr><td><strong>absolute</strong></td><td>Nearest positioned ancestor</td><td>Badges, overlays, tooltips.</td></tr>
+              <tr><td><strong>fixed</strong></td><td>Viewport</td><td>Persistent controls or banners.</td></tr>
+              <tr><td><strong>sticky</strong></td><td>Scroll container</td><td>Headings or nav that stick while scrolling.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2><code>position: static</code></h2>
+          <div class="position-explain">
+            <article><h3>Default</h3><p>The element stays in normal flow.</p></article>
+            <article><h3>Offsets ignored</h3><p><code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code> do not move static elements.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>position: relative</code></h2>
+          <div class="relative-demo">
+            <span class="ghost">original space remains</span>
+            <span class="moved">moved visually</span>
+          </div>
+          <pre><code class="language-css">.moved {
+  position: relative;
+  top: 24px;
+  left: 48px;
+}</code></pre>
+          <p>The element moves visually, but its original space is still reserved.</p>
+        </section>
+
+        <section>
+          <h2><code>position: absolute</code></h2>
+          <div class="absolute-demo">
+            <span class="parent-label">positioned parent</span>
+            <span class="absolute-badge">absolute child</span>
+          </div>
+          <pre><code class="language-css">.card {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>The Containing Block Rule</h2>
+          <div class="context-note">
+            <strong>Absolute positioning searches upward.</strong>
+            <p>An absolute element positions itself against the nearest ancestor that is not <code>position: static</code>. If none exists, it uses the initial containing block.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Offsets and <code>inset</code></h2>
+          <div class="selector-board">
+            <code>top: 1rem</code><span>Place the top edge 1rem from the containing block's top edge</span>
+            <code>right: 1rem</code><span>Place the right edge 1rem from the containing block's right edge</span>
+            <code>inset: 0</code><span>Set top, right, bottom, and left to 0</span>
+            <code>inset-block: 1rem</code><span>Set logical block-start and block-end offsets</span>
+            <code>inset-inline: auto 0</code><span>Use logical inline offsets for writing-mode-aware layouts</span>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>position: fixed</code></h2>
+          <div class="viewport-demo-card">
+            <span class="fixed-pill">fixed</span>
+            <p>Fixed elements stay attached to the viewport while the document scrolls behind them.</p>
+          </div>
+          <p>Useful for persistent controls, but easy to overuse on small screens.</p>
+        </section>
+
+        <section>
+          <h2><code>position: sticky</code></h2>
+          <div class="sticky-demo-card">
+            <span class="sticky-heading">sticky heading</span>
+            <span></span><span></span><span></span>
+          </div>
+          <pre><code class="language-css">.section-title {
+  position: sticky;
+  top: 0;
+}</code></pre>
+          <p>Sticky starts in normal flow, then sticks after crossing the offset.</p>
+        </section>
+
+        <section>
+          <h2>Layering Uses <code>z-index</code></h2>
+          <div class="position-stage">
+            <span class="layer-a">z-index: 1</span>
+            <span class="layer-b">z-index: 2</span>
+            <span class="layer-c">z-index: 3</span>
+          </div>
+          <p><code>z-index</code> works on positioned elements and inside stacking contexts.</p>
+        </section>
+
+        <section>
+          <h2>Stacking Contexts Are Mini Universes</h2>
+          <div class="context-note">
+            <strong>A high <code>z-index</code> is not always enough.</strong>
+            <p>If an element is inside a lower stacking context, it cannot escape above a sibling stacking context just by using a giant number.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Common Positioning Mistakes</h2>
+          <div class="part-grid">
+            <article><code>absolute everywhere</code><p>Removes too much from normal flow and makes responsive layout fragile.</p></article>
+            <article><code>missing parent context</code><p>The badge positions itself against the page instead of the card.</p></article>
+            <article><code>magic pixel offsets</code><p>Large arbitrary offsets usually hide a layout problem.</p></article>
+            <article><code>z-index arms race</code><p>Use small, intentional layers and inspect stacking contexts.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Centering Methods</h2>
+          <div class="center-grid">
+            <article><h3>Text</h3><code>text-align: center</code></article>
+            <article><h3>Block horizontally</h3><code>margin-inline: auto</code></article>
+            <article><h3>One item both axes</h3><code>display: grid; place-items: center</code></article>
+            <article><h3>Rows and controls</h3><code>display: flex; align-items: center</code></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Live Positioning Editor</h2>
+          <p class="demo-caption">
+            Try removing <code>position: relative</code> from <code>.poster</code>. Watch where the badge goes.
+          </p>
+          <div class="editor-demo">
+            <label for="position-editor">HTML + CSS</label>
+            <textarea id="position-editor" spellcheck="false">&lt;style&gt;
+.poster {
+  position: relative;
+  width: min(32rem, 90vw);
+  padding: 3rem 2rem;
+  background: white;
+  border: 3px solid #151923;
+}
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #efc84a;
+  padding: .5rem .75rem;
+  font-weight: 800;
+}
+&lt;/style&gt;
+&lt;article class="poster"&gt;
+  &lt;span class="badge"&gt;New&lt;/span&gt;
+  &lt;h1&gt;Tour Dates&lt;/h1&gt;
+  &lt;p&gt;Positioned badge, normal content flow.&lt;/p&gt;
+&lt;/article&gt;</textarea>
+            <iframe title="Live positioning preview" sandbox="allow-scripts" data-preview-for="position-editor"></iframe>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Practice</p>
+          <h2>Positioning Drills</h2>
+          <ol class="task-list compact">
+            <li>Add a badge to a card with absolute positioning.</li>
+            <li>Move an element with relative positioning and explain what space remains.</li>
+            <li>Create a fixed back-to-top button.</li>
+            <li>Create a sticky section heading.</li>
+            <li>Use <code>inset</code> to pin an overlay to all four sides.</li>
+            <li>Debug one broken absolute element by finding its containing block.</li>
+          </ol>
+        </section>
+
+        <section>
+          <p class="eyebrow">Workshop</p>
+          <h2>Polish the Artist Profile</h2>
+          <div class="project-brief">
+            <article><h3>Box model</h3><p>Add consistent spacing, borders, and card widths with <code>border-box</code>.</p></article>
+            <article><h3>Positioning</h3><p>Add one absolute badge inside a positioned card and one sticky section label.</p></article>
+            <article><h3>Debugging</h3><p>Use DevTools to inspect one box-model issue and one positioning issue.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>What is included in <code>border-box</code> sizing?</p>
+            <p>What does an absolutely positioned element position itself against?</p>
+            <p>Why can <code>z-index: 9999</code> still fail?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

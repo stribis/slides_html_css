@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lesson 05 of the HTML and CSS course: links, paths, typography, gradients, and icons." />
+    <title>Lesson 05 - Typography & Visual Polish</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-five">
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #6d5bd0 48%, #e86f51 100%)">
+          <p class="eyebrow">Lesson 05</p>
+          <h1>Typography & Visual Polish</h1>
+          <p class="lede">Links, paths, type systems, gradients, and icons</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Make Interfaces Feel Intentional</h2>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Use links correctly</h3><p>Internal links, external links, fragments, email, phone, and relative paths.</p></article>
+            <article><span>02</span><h3>Build type systems</h3><p>Families, fallbacks, scale, line-height, measure, rhythm, and contrast.</p></article>
+            <article><span>03</span><h3>Add visual polish</h3><p>Gradients, shadows, decoration, and state styles that support usability.</p></article>
+            <article><span>04</span><h3>Choose icons responsibly</h3><p>Use SVG, icon libraries, or font icons with accessible names.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>The <code>&lt;a&gt;</code> Element Creates Navigation</h2>
+          <pre><code class="language-html">&lt;a href="about.html"&gt;About&lt;/a&gt;
+&lt;a href="#contact"&gt;Contact section&lt;/a&gt;
+&lt;a href="https://sbb.ch" target="_blank" rel="noopener"&gt;SBB&lt;/a&gt;</code></pre>
+          <p>Links move users somewhere. Buttons perform actions on the current page.</p>
+        </section>
+
+        <section>
+          <h2>Useful <code>href</code> Patterns</h2>
+          <div class="selector-board">
+            <code>href="/"</code><span>Root of the current site</span>
+            <code>href="#shows"</code><span>Fragment link to an element ID</span>
+            <code>href="mailto:name@example.com"</code><span>Open an email client</span>
+            <code>href="tel:+41442001201"</code><span>Start a phone call on capable devices</span>
+            <code>href="../assets/poster.jpg"</code><span>Relative path up one folder</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Path Lab</p>
+          <h2>Where Does This Path Go?</h2>
+          <div class="folder-tree">
+            <code>project/</code>
+            <code>index.html</code>
+            <code>css/style.css</code>
+            <code>pages/about.html</code>
+            <code>images/cat.jpg</code>
+            <code>downloads/press-kit.pdf</code>
+          </div>
+          <div class="context-note">
+            <strong>Prompt the room:</strong>
+            <p>From <code>pages/about.html</code>, where do <code>../images/cat.jpg</code>, <code>../css/style.css</code>, and <code>/images/cat.jpg</code> point?</p>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Relative Path Drill</h2>
+          <ol class="task-list compact">
+            <li>Link from <code>index.html</code> to <code>pages/about.html</code>.</li>
+            <li>Load <code>images/cat.jpg</code> from <code>index.html</code>.</li>
+            <li>Load the same image from <code>pages/about.html</code>.</li>
+            <li>Link from <code>pages/about.html</code> back to the homepage.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Typography Is Interface Design</h2>
+          <table class="comparison-table dense-table type-property-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>What it controls</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>font-family</code></td><td>Typeface and fallback stack.</td><td><code>font-family: Inter, Arial, sans-serif;</code></td></tr>
+              <tr><td><code>font-size</code></td><td>Text size and hierarchy.</td><td><code>font-size: 1.125rem;</code></td></tr>
+              <tr><td><code>font-weight</code></td><td>Light, regular, bold, or variable weight.</td><td><code>font-weight: 750;</code></td></tr>
+              <tr><td><code>font-style</code></td><td>Normal or italic style.</td><td><code>font-style: italic;</code></td></tr>
+              <tr><td><code>line-height</code></td><td>Vertical rhythm between lines.</td><td><code>line-height: 1.55;</code></td></tr>
+              <tr><td><code>letter-spacing</code></td><td>Space between characters.</td><td><code>letter-spacing: 0.08em;</code></td></tr>
+              <tr><td><code>text-transform</code></td><td>Visual casing without changing the HTML text.</td><td><code>text-transform: uppercase;</code></td></tr>
+              <tr><td><code>text-align</code></td><td>Inline text alignment.</td><td><code>text-align: center;</code></td></tr>
+              <tr><td><code>max-width</code></td><td>Readable line length, often called measure.</td><td><code>max-width: 65ch;</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>CSS Variables Store Design Decisions</h2>
+          <pre><code class="language-css">:root {
+  --font-body: Inter, Arial, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --measure: 65ch;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  max-width: var(--measure);
+}</code></pre>
+          <p>Variables keep repeated choices consistent and make experiments faster.</p>
+        </section>
+
+        <section>
+          <h2>Type Scale: Small System, Big Difference</h2>
+          <pre><code class="language-css">:root {
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.563rem;
+  --step-3: 1.953rem;
+}
+
+h1 { font-size: var(--step-3); }
+h2 { font-size: var(--step-2); }</code></pre>
+          <p>A scale keeps headings related instead of randomly sized.</p>
+        </section>
+
+        <section>
+          <h2>Fluid Type With <code>clamp()</code></h2>
+          <pre><code class="language-css">h1 {
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  line-height: 0.95;
+}</code></pre>
+          <div class="clamp-visual" aria-label="Clamp visualization">
+            <article>
+              <span class="viewport small"></span>
+              <strong>Small viewport</strong>
+              <code>2.5rem min</code>
+            </article>
+            <article>
+              <span class="viewport medium"></span>
+              <strong>Growing viewport</strong>
+              <code>8vw preferred</code>
+            </article>
+            <article>
+              <span class="viewport large"></span>
+              <strong>Large viewport</strong>
+              <code>7rem max</code>
+            </article>
+          </div>
+          <p><code>clamp(min, preferred, max)</code> lets type grow with the viewport, then stop before it becomes awkward.</p>
+        </section>
+
+        <section>
+          <h2>Readable Body Text</h2>
+          <div class="selector-board">
+            <code>line-height: 1.5</code><span>More readable than cramped paragraphs</span>
+            <code>max-width: 65ch</code><span>Comfortable line length for long text</span>
+            <code>font-size: 1rem</code><span>Respect user browser defaults</span>
+            <code>color + background</code><span>Needs strong contrast, not just a nice palette</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Typography Tune-Up</h2>
+          <ol class="task-list compact">
+            <li>Create a type scale for <code>h1</code>, <code>h2</code>, body, and labels.</li>
+            <li>Set body text to a comfortable <code>line-height</code>.</li>
+            <li>Limit paragraph measure with <code>max-width</code>.</li>
+            <li>Use <code>clamp()</code> for the main hero heading.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Online Font Services</h2>
+          <div class="resource-list">
+            <a href="https://fonts.google.com/">Google Fonts</a>
+            <a href="https://fonts.adobe.com/">Adobe Fonts</a>
+            <a href="https://fonts.bunny.net/">Bunny Fonts</a>
+            <a href="https://fontsource.org/">Fontsource</a>
+          </div>
+          <pre><code class="language-html">&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&amp;display=swap" rel="stylesheet" /&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Self-Hosted Fonts Use <code>@font-face</code></h2>
+          <pre><code class="language-css">@font-face {
+  font-family: "Studio Grotesk";
+  src: url("fonts/studio-grotesk.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Online vs. Self-Hosted Fonts</h2>
+          <table class="comparison-table">
+            <thead><tr><th>Choice</th><th>Pros</th><th>Cons</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Online service</strong></td><td>Easy setup, many families, CDN delivery</td><td>Third-party dependency, privacy/legal questions, less control</td></tr>
+              <tr><td><strong>Self-hosted</strong></td><td>More control, fewer third-party requests, predictable deployment</td><td>More setup, licensing responsibility, file optimization is on you</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Font Loading Decision</h2>
+          <ol class="task-list compact">
+            <li>Pick one online font and define a fallback stack.</li>
+            <li>Rewrite the same setup as a self-hosted <code>@font-face</code>.</li>
+            <li>Discuss which choice you would use for a client site and why.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Gradients Are Images Made by CSS</h2>
+          <pre><code class="language-css">.hero {
+  background:
+    linear-gradient(135deg, #151923, #1f7a68),
+    #151923;
+}</code></pre>
+          <p>Use gradients to support hierarchy, light, and depth.</p>
+        </section>
+
+        <section>
+          <h2>Gradient Stops Create Hard Edges</h2>
+          <pre><code class="language-css">.flag {
+  background: linear-gradient(
+    to right,
+    #1f7a68 0 33%,
+    #efc84a 33% 66%,
+    #e86f51 66% 100%
+  );
+}</code></pre>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Gradient Flag Challenge</h2>
+          <div class="flag-grid">
+            <article>
+              <span class="flag-swatch colombia"></span>
+              <strong>Colombia</strong>
+            </article>
+            <article>
+              <span class="flag-swatch italy"></span>
+              <strong>Italy</strong>
+            </article>
+            <article>
+              <span class="flag-swatch zimbabwe"><i class="flag-star" aria-hidden="true"></i></span>
+              <strong>Zimbabwe</strong>
+            </article>
+            <article>
+              <span class="flag-swatch tanzania"></span>
+              <strong>Tanzania</strong>
+            </article>
+            <article>
+              <span class="flag-swatch usa"></span>
+              <strong>United States</strong>
+            </article>
+            <article>
+              <span class="flag-swatch switzerland"></span>
+              <strong>Switzerland</strong>
+            </article>
+          </div>
+          <p>Use only HTML, CSS gradients, and when useful <code>::before</code> / <code>::after</code>.</p>
+        </section>
+
+        <section>
+          <h2>Icons: Choose the Right Source</h2>
+          <div class="resource-list">
+            <a href="https://lucide.dev/">Lucide</a>
+            <a href="https://heroicons.com/">Heroicons</a>
+            <a href="https://simpleicons.org/">Simple Icons</a>
+            <a href="https://fontawesome.com/">Font Awesome</a>
+            <a href="https://icomoon.io/">IcoMoon</a>
+            <a href="https://fontello.com/">Fontello</a>
+          </div>
+          <p>Prefer SVG for modern UI. Font icons are still useful to recognize in existing projects.</p>
+        </section>
+
+        <section>
+          <h2>Accessible Icon Buttons</h2>
+          <pre><code class="language-html">&lt;button aria-label="Download press kit"&gt;
+  &lt;svg aria-hidden="true" viewBox="0 0 24 24"&gt;...&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+          <p>If the icon has no visible text, the button still needs an accessible name.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Icon Button States</h2>
+          <ol class="task-list compact">
+            <li>Create a download button with an SVG icon and text.</li>
+            <li>Create a compact icon-only version with <code>aria-label</code>.</li>
+            <li>Add clear <code>:hover</code> and <code>:focus-visible</code> states.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>How do you decide between an online font service and self-hosting?</p>
+            <p>Why does <code>max-width: 65ch</code> help readability?</p>
+            <p>When does an icon need an accessible name?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lesson 08 of the HTML and CSS course: accessibility, WCAG, keyboard testing, semantic repair, forms, focus, and inclusive interaction." />
+    <title>Lesson 08 - Accessibility Workshop</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-eight">
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #2d5f9a 48%, #1f7a68 100%)">
+          <p class="eyebrow">Lesson 08</p>
+          <h1>Accessibility Workshop</h1>
+          <p class="lede">Build pages people can perceive, operate, understand, and trust</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Three Hours of Practical Accessibility</h2>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Read the standards</h3><p>Use WCAG 2.2 as a practical target for student work.</p></article>
+            <article><span>02</span><h3>Audit by hand</h3><p>Keyboard, focus, names, headings, labels, contrast, zoom, and motion.</p></article>
+            <article><span>03</span><h3>Repair common issues</h3><p>Improve real markup without overusing ARIA.</p></article>
+            <article><span>04</span><h3>Build a repeatable habit</h3><p>Leave with a testing checklist students can reuse on every project.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Accessibility Is Context</h2>
+          <div class="persona-grid">
+            <article>
+              <h3>Permanent</h3>
+              <p>Blindness, low vision, deafness, motor disability, cognitive disability.</p>
+            </article>
+            <article>
+              <h3>Temporary</h3>
+              <p>Broken arm, eye strain, migraine, lost headphones, slow connection.</p>
+            </article>
+            <article>
+              <h3>Situational</h3>
+              <p>Bright sunlight, noisy train, one-handed use, old device, limited time.</p>
+            </article>
+          </div>
+          <p>Accessible work is not extra polish. It is resilient design.</p>
+        </section>
+
+        <section>
+          <h2>The POUR Model</h2>
+          <div class="browser-stack">
+            <span class="html">Perceivable</span>
+            <span class="css">Operable</span>
+            <span class="js">Understandable</span>
+            <span class="a11y">Robust</span>
+          </div>
+          <p>WCAG organizes accessibility around four questions: can people get the information, use the interface, understand what happens, and rely on it with assistive technology?</p>
+        </section>
+
+        <section>
+          <h2>WCAG Levels</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Meaning</th>
+                <th>Classroom target</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A</strong></td>
+                <td>Minimum barriers removed. Missing these often blocks users completely.</td>
+                <td>Always meet.</td>
+              </tr>
+              <tr>
+                <td><strong>AA</strong></td>
+                <td>Common legal and professional target for public web work.</td>
+                <td>Meet wherever the assignment scope allows.</td>
+              </tr>
+              <tr>
+                <td><strong>AAA</strong></td>
+                <td>Enhanced accessibility. Valuable, but not realistic for every page.</td>
+                <td>Use selectively as stretch goals.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>WCAG 2.2 Additions Worth Knowing</h2>
+          <div class="wcag-grid">
+            <article><code>2.4.11</code><p>Focus is not fully hidden behind sticky headers, overlays, or cookie banners.</p></article>
+            <article><code>2.5.7</code><p>Dragging has a simple pointer alternative.</p></article>
+            <article><code>2.5.8</code><p>Targets are large enough or spaced well enough for real fingers.</p></article>
+            <article><code>3.3.7</code><p>Do not make users re-enter the same information unnecessarily.</p></article>
+            <article><code>3.3.8</code><p>Authentication does not require hard memory puzzles without alternatives.</p></article>
+            <article><code>3.2.6</code><p>Help is easy to find in a consistent location when it exists.</p></article>
+          </div>
+          <p>WCAG 3 is still draft work, so teach it as future direction rather than the current grading target.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Match the Barrier to POUR</h2>
+          <ol class="task-list compact">
+            <li>A pale gray button on a white background.</li>
+            <li>A menu that only opens on hover.</li>
+            <li>An error message that says "Invalid input".</li>
+            <li>A custom checkbox made from a <code>&lt;div&gt;</code>.</li>
+            <li>A video with speech but no captions.</li>
+            <li>A form field with no label or autocomplete hint.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Manual Audit Flow</h2>
+          <div class="audit-flow">
+            <span>Keyboard</span>
+            <span>Focus</span>
+            <span>Structure</span>
+            <span>Names</span>
+            <span>Contrast</span>
+            <span>Forms</span>
+            <span>Motion</span>
+            <span>Zoom</span>
+          </div>
+          <p>Automated tools help, but they do not understand intent. Human testing is part of the job.</p>
+        </section>
+
+        <section>
+          <h2>Keyboard Testing</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>What to check</th>
+                <th>Common failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Tab</code></td><td>Can every interactive item be reached?</td><td>Custom controls skipped.</td></tr>
+              <tr><td><code>Shift + Tab</code></td><td>Can users move backward logically?</td><td>Focus jumps around the page.</td></tr>
+              <tr><td><code>Enter</code></td><td>Can links and buttons activate?</td><td>Fake buttons ignore keyboard input.</td></tr>
+              <tr><td><code>Space</code></td><td>Can checkboxes, buttons, and disclosure widgets operate?</td><td>Only click events were scripted.</td></tr>
+              <tr><td><code>Escape</code></td><td>Can modal UI close safely?</td><td>Focus gets stuck.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Focus Must Be Visible</h2>
+          <div class="split">
+            <article class="definition-panel wrong">
+              <h3>Broken</h3>
+              <pre><code class="language-css">*:focus {
+  outline: none;
+}</code></pre>
+              <p>No visible position for keyboard users.</p>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Better</h3>
+              <pre><code class="language-css">:focus-visible {
+  outline: 4px solid #e86f51;
+  outline-offset: 4px;
+}</code></pre>
+              <p>Clear focus without showing rings for every mouse click.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Focus Must Not Be Covered</h2>
+          <pre><code class="language-css">:target,
+:focus-visible {
+  scroll-margin-block: 6rem;
+}
+
+.skip-link:focus-visible {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+}</code></pre>
+          <p>Sticky nav, cookie banners, and fixed toolbars can hide the focused thing. Leave room for focus to land.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Keyboard Pass</h2>
+          <ol class="task-list compact">
+            <li>Open one lesson deck.</li>
+            <li>Use only <code>Tab</code>, <code>Shift + Tab</code>, <code>Enter</code>, <code>Space</code>, and arrow keys.</li>
+            <li>List every item that cannot be reached or activated.</li>
+            <li>List every place where focus is hidden or unclear.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Semantic Structure</h2>
+          <pre><code class="language-html">&lt;body&gt;
+  &lt;a class="skip-link" href="#main"&gt;Skip to main content&lt;/a&gt;
+  &lt;header&gt;...&lt;/header&gt;
+  &lt;nav aria-label="Primary"&gt;...&lt;/nav&gt;
+  &lt;main id="main"&gt;
+    &lt;h1&gt;Checkout&lt;/h1&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;...&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+          <p>Landmarks and headings create the page outline people use to navigate quickly.</p>
+        </section>
+
+        <section>
+          <h2>Heading Rules</h2>
+          <div class="selector-board">
+            <code>&lt;h1&gt;</code><span>Main page or view title.</span>
+            <code>&lt;h2&gt;</code><span>Major page sections.</span>
+            <code>&lt;h3&gt;</code><span>Subsections inside an <code>&lt;h2&gt;</code>.</span>
+            <code>Do not</code><span>Choose headings only because of visual size.</span>
+            <code>Do</code><span>Style headings with CSS after the structure is correct.</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Outline Repair</h2>
+          <ol class="task-list compact">
+            <li>Take a messy page with several <code>&lt;div&gt;</code> blocks.</li>
+            <li>Add one <code>&lt;main&gt;</code>, useful sections, and a heading hierarchy.</li>
+            <li>Add a skip link if navigation appears before the main content.</li>
+            <li>Check the accessibility tree in browser devtools.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Accessible Names</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr>
+                <th>Thing</th>
+                <th>Good name source</th>
+                <th>Weak pattern</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Button</td><td>Visible text inside the button.</td><td>Icon-only button with no label.</td></tr>
+              <tr><td>Link</td><td>Specific link text.</td><td>"Click here" repeated everywhere.</td></tr>
+              <tr><td>Image</td><td><code>alt</code> that matches the image purpose.</td><td>Filename or missing alt.</td></tr>
+              <tr><td>Input</td><td>Connected <code>&lt;label&gt;</code>.</td><td>Placeholder used as the only label.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Icon Buttons Need Names</h2>
+          <div class="split">
+            <article class="definition-panel wrong">
+              <h3>Broken</h3>
+              <pre><code class="language-html">&lt;button&gt;
+  &lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Better</h3>
+              <pre><code class="language-html">&lt;button aria-label="Open navigation"&gt;
+  &lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Image Alt Text Decisions</h2>
+          <div class="selector-board">
+            <code>Informative</code><span>Describe the information the image contributes.</span>
+            <code>Functional</code><span>Describe the action, such as "Search" or "Download report".</span>
+            <code>Decorative</code><span>Use empty alt: <code>alt=""</code>.</span>
+            <code>Complex</code><span>Summarize nearby and link to full data if needed.</span>
+            <code>Do not</code><span>Start with "image of" unless the medium matters.</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Name Audit</h2>
+          <ol class="task-list compact">
+            <li>Find three links and rewrite vague text.</li>
+            <li>Find one icon button and give it an accessible name.</li>
+            <li>Find two images and decide if each is informative or decorative.</li>
+            <li>Check one input in the accessibility tree.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Color and Contrast</h2>
+          <div class="contrast-grid">
+            <article class="contrast-pass">
+              <h3>Pass</h3>
+              <p>Text has enough contrast against its background.</p>
+            </article>
+            <article class="contrast-fail">
+              <h3>Fail</h3>
+              <p>Pretty is not enough if people cannot read it.</p>
+            </article>
+          </div>
+          <p>Do not communicate state with color alone. Pair color with text, icons, shape, or position.</p>
+        </section>
+
+        <section>
+          <h2>Zoom and Reflow</h2>
+          <div class="part-grid">
+            <article><code>200%</code><p>Text should remain usable when browser zoom increases.</p></article>
+            <article><code>320 CSS px</code><p>Layouts should reflow without requiring two-dimensional scrolling for normal content.</p></article>
+            <article><code>rem</code><p>Use relative sizing for type and spacing that should respond to user settings.</p></article>
+            <article><code>clamp()</code><p>Set type and spacing ranges without locking the page to one viewport.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Contrast and Zoom Pass</h2>
+          <ol class="task-list compact">
+            <li>Pick one page and test text contrast with devtools or an extension.</li>
+            <li>Increase browser zoom to 200%.</li>
+            <li>Resize the viewport to a narrow width.</li>
+            <li>Write down what breaks first and why.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Forms Need More Than Labels</h2>
+          <pre><code class="language-html">&lt;label for="email"&gt;Email address&lt;/label&gt;
+&lt;input
+  id="email"
+  name="email"
+  type="email"
+  autocomplete="email"
+  required
+  aria-describedby="email-hint"
+/&gt;
+&lt;p id="email-hint"&gt;Use the address for your course account.&lt;/p&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Error Messages</h2>
+          <pre><code class="language-html">&lt;label for="password"&gt;Password&lt;/label&gt;
+&lt;input
+  id="password"
+  name="password"
+  type="password"
+  aria-invalid="true"
+  aria-describedby="password-error"
+/&gt;
+&lt;p id="password-error"&gt;Password must be at least 12 characters.&lt;/p&gt;</code></pre>
+          <p>Tell users what happened, where it happened, and how to fix it.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Form Repair</h2>
+          <ol class="task-list compact">
+            <li>Connect every visible label to one form control.</li>
+            <li>Add helpful autocomplete values where possible.</li>
+            <li>Attach hints and errors with <code>aria-describedby</code>.</li>
+            <li>Make the error text specific enough to act on.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Motion and Animation</h2>
+          <pre><code class="language-css">@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+  }
+}</code></pre>
+          <p>Keep animation purposeful, interruptible, and respectful of user preferences.</p>
+        </section>
+
+        <section>
+          <h2>Pointer and Touch Targets</h2>
+          <div class="part-grid">
+            <article><code>Size</code><p>Buttons and links need enough area for fingers, tremors, and rushed use.</p></article>
+            <article><code>Spacing</code><p>Small targets need extra distance from neighboring actions.</p></article>
+            <article><code>Alternatives</code><p>Do not require dragging when a button, field, or menu can do the same job.</p></article>
+            <article><code>Hover</code><p>Hover can enhance, but it cannot be the only way to reveal content.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Pointer Pass</h2>
+          <ol class="task-list compact">
+            <li>Find the smallest controls on a page.</li>
+            <li>Check whether nearby controls are easy to hit without precision.</li>
+            <li>Find any drag interaction and propose a non-drag alternative.</li>
+            <li>Check whether hover-only content has a keyboard and touch path.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Native Interaction Patterns</h2>
+          <div class="selector-board">
+            <code>&lt;button&gt;</code><span>Use for actions. It already supports keyboard activation.</span>
+            <code>&lt;a&gt;</code><span>Use for navigation to another URL or fragment.</span>
+            <code>&lt;details&gt;</code><span>Use for simple disclosure without custom JavaScript.</span>
+            <code>&lt;dialog&gt;</code><span>Use for modal tasks that temporarily take focus.</span>
+            <code>popover</code><span>Use for non-modal teaching bubbles, menus, and small overlays.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>ARIA Rules</h2>
+          <div class="statement-list">
+            <p>Use native HTML first.</p>
+            <p>Do not change semantics unless you understand the keyboard pattern too.</p>
+            <p>ARIA can name and describe. It does not add behavior by itself.</p>
+            <p>No ARIA is better than wrong ARIA.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Useful Testing Tools</h2>
+          <div class="resource-list">
+            <article><h3>Browser DevTools</h3><p>Accessibility tree, contrast hints, responsive viewport, Lighthouse.</p></article>
+            <article><h3>axe DevTools</h3><p>Automated issue detection for common accessibility failures.</p></article>
+            <article><h3>WAVE</h3><p>Visual page overlay for structure, names, contrast, and form issues.</p></article>
+            <article><h3>Screen readers</h3><p>VoiceOver, NVDA, JAWS, TalkBack, and Narrator expose real user experience.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Workshop</p>
+          <h2>Open the Accessibility Audit Lab</h2>
+          <div class="material-links">
+            <a href="../materials/lesson-08/accessibility-audit/index.html">Open audit lab</a>
+          </div>
+          <ol class="task-list compact">
+            <li>Audit the page manually first.</li>
+            <li>Use the built-in checklist to track issues.</li>
+            <li>Reveal hints only after your first pass.</li>
+            <li>Write a repair plan before touching code.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Audit Lab: First Pass</h2>
+          <ol class="task-list compact">
+            <li>Can you skip repeated navigation?</li>
+            <li>Can you operate every control with the keyboard?</li>
+            <li>Can you tell where focus is?</li>
+            <li>Are headings useful out of context?</li>
+            <li>Do images and icon buttons have correct names?</li>
+            <li>Are form fields, hints, and errors connected?</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Audit Lab: Repair Sprint</h2>
+          <ol class="task-list compact">
+            <li>Fix the document structure and skip link.</li>
+            <li>Repair link and button names.</li>
+            <li>Repair labels, hints, errors, and autocomplete.</li>
+            <li>Improve focus, contrast, and target size.</li>
+            <li>Add reduced-motion handling.</li>
+            <li>Retest with keyboard and browser zoom.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>Which accessibility issue did you only find by using the keyboard?</p>
+            <p>Which issue could an automated checker find?</p>
+            <p>Which issue required human judgement?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

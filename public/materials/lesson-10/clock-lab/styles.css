@@ -1,0 +1,157 @@
+:root {
+  --ink: #151923;
+  --muted: #5d6678;
+  --paper: #f7f4ed;
+  --surface: #fffdf7;
+  --line: #d8d1c1;
+  --green: #1f7a68;
+  --yellow: #efc84a;
+  --coral: #e86f51;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    linear-gradient(90deg, rgb(21 25 35 / 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(21 25 35 / 0.05) 1px, transparent 1px),
+    var(--paper);
+  background-size: 36px 36px;
+  color: var(--ink);
+}
+
+.clock-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1fr);
+  gap: 34px;
+  width: min(1120px, calc(100% - 40px));
+  min-height: 100vh;
+  align-items: center;
+  margin-inline: auto;
+  padding-block: 48px;
+}
+
+.eyebrow {
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 0.86;
+}
+
+header p:not(.eyebrow),
+.brief li {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.5;
+}
+
+.clock {
+  position: relative;
+  width: min(520px, 100%);
+  aspect-ratio: 1;
+  justify-self: center;
+  border: 8px solid var(--ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--surface) 0 62%, transparent 63%),
+    repeating-conic-gradient(from -1deg, var(--ink) 0 2deg, transparent 2deg 30deg),
+    var(--surface);
+  box-shadow: 14px 14px 0 rgb(21 25 35 / 0.14);
+}
+
+.marker {
+  position: absolute;
+  color: var(--ink);
+  font-size: 1.6rem;
+  font-weight: 950;
+}
+
+.m12 {
+  top: 6%;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.m3 {
+  top: 50%;
+  right: 7%;
+  translate: 0 -50%;
+}
+
+.m6 {
+  bottom: 6%;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.m9 {
+  top: 50%;
+  left: 8%;
+  translate: 0 -50%;
+}
+
+.hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  width: 6px;
+  border-radius: 999px;
+  background: var(--ink);
+  transform-origin: bottom center;
+}
+
+.hour {
+  height: 25%;
+}
+
+.minute {
+  height: 35%;
+  background: var(--green);
+}
+
+.second {
+  width: 3px;
+  height: 41%;
+  background: var(--coral);
+}
+
+.pin {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 22px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  translate: -50% -50%;
+}
+
+.brief {
+  grid-column: 1 / -1;
+  padding: 22px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 7px 7px 0 rgb(21 25 35 / 0.14);
+}
+
+@media (max-width: 840px) {
+  .clock-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Student work starts here. Add keyframes and hand animations below. */

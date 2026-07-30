@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lesson 06 of the HTML and CSS course: images, responsive media, backgrounds, favicons, and SVG." />
+    <title>Lesson 06 - Media on the Web</title>
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-six">
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #2d5f9a 54%, #1f7a68 100%)">
+          <p class="eyebrow">Lesson 06</p>
+          <h1>Media on the Web</h1>
+          <p class="lede">Image formats, responsive sources, CSS backgrounds, SVG, and performance</p>
+          <p class="byline">Martin Hutchings - WDD 326</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Choose the Right Media Tool</h2>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Pick formats</h3><p>Use JPEG, PNG, GIF, SVG, WebP, and AVIF for the right jobs.</p></article>
+            <article><span>02</span><h3>Write responsive images</h3><p>Use <code>srcset</code>, <code>sizes</code>, and <code>&lt;picture&gt;</code> intentionally.</p></article>
+            <article><span>03</span><h3>Handle CSS backgrounds</h3><p>Know decorative images, fallbacks, overlays, and gradients.</p></article>
+            <article><span>04</span><h3>Improve performance</h3><p>Use dimensions, lazy loading, decoding, fetch priority, and budgets.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Image Format Comparison</h2>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Format</th><th>Compression</th><th>Transparency</th><th>Animation</th><th>Best for</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JPEG</strong></td><td>Lossy</td><td>No</td><td>No</td><td>Photos, large realistic images</td></tr>
+              <tr><td><strong>PNG</strong></td><td>Lossless</td><td>Yes</td><td>No</td><td>Transparency, screenshots, sharp UI details</td></tr>
+              <tr><td><strong>GIF</strong></td><td>Lossless, limited palette</td><td>Basic</td><td>Yes</td><td>Legacy simple animation</td></tr>
+              <tr><td><strong>SVG</strong></td><td>Vector text/code</td><td>Yes</td><td>With CSS/SMIL/JS</td><td>Icons, logos, simple graphics</td></tr>
+              <tr><td><strong>WebP</strong></td><td>Lossy or lossless</td><td>Yes</td><td>Yes</td><td>General modern raster replacement</td></tr>
+              <tr><td><strong>AVIF</strong></td><td>Lossy or lossless</td><td>Yes</td><td>Yes</td><td>High compression, photos, hero images</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Format Decision Rules</h2>
+          <div class="part-grid">
+            <article><code>Photo?</code><p>Try AVIF/WebP, fall back to JPEG when needed.</p></article>
+            <article><code>Logo or icon?</code><p>Use SVG when it is simple vector artwork.</p></article>
+            <article><code>Transparency?</code><p>Use PNG, WebP, AVIF, or SVG depending on content.</p></article>
+            <article><code>Animation?</code><p>Prefer video for real motion; GIF is usually heavy.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Format Triage</h2>
+          <ol class="task-list compact">
+            <li>Choose a format for a photographer portfolio hero.</li>
+            <li>Choose a format for a black one-color logo.</li>
+            <li>Choose a format for an app screenshot with transparency.</li>
+            <li>Choose a format for a looping 8-second concert clip.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Content Images Need <code>alt</code></h2>
+          <div class="split">
+            <pre><code class="language-html">&lt;img
+  src="https://placecats.com/640/360"
+  alt="Cat looking toward a bright window"
+  width="640"
+  height="360"
+/&gt;</code></pre>
+            <article class="definition-panel"><h3>Ask</h3><p>If the image failed to load or was read aloud, what information would be missing?</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2><code>srcset</code> Handles Resolution Choice</h2>
+          <pre><code class="language-html">&lt;img
+  src="https://placecats.com/800/500"
+  srcset="https://placecats.com/400/250 400w,
+          https://placecats.com/800/500 800w,
+          https://placecats.com/1400/875 1400w"
+  sizes="(max-width: 700px) 90vw, 45vw"
+  alt="Relaxed cat on a sofa"
+/&gt;</code></pre>
+          <p>Use this when the same image should load at different file sizes.</p>
+        </section>
+
+        <section>
+          <h2><code>&lt;picture&gt;</code> Handles Source Choice</h2>
+          <pre><code class="language-html">&lt;picture&gt;
+  &lt;source media="(max-width: 600px)" srcset="https://placecats.com/500/700" /&gt;
+  &lt;source srcset="https://placecats.com/1200/600" /&gt;
+  &lt;img src="https://placecats.com/800/500" alt="Cat sitting by a window" /&gt;
+&lt;/picture&gt;</code></pre>
+          <p>Use this for art direction, different crops, or format fallbacks.</p>
+        </section>
+
+        <section>
+          <h2><code>srcset</code> vs. <code>&lt;picture&gt;</code></h2>
+          <table class="comparison-table">
+            <thead><tr><th>Need</th><th>Use</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>Same image, different sizes</td><td><code>img srcset sizes</code></td><td>Browser chooses the efficient resource</td></tr>
+              <tr><td>Different crop on mobile</td><td><code>&lt;picture&gt;</code></td><td>You choose the source by media query</td></tr>
+              <tr><td>AVIF/WebP with fallback</td><td><code>&lt;picture&gt;</code></td><td>Browser picks first supported format</td></tr>
+              <tr><td>Decorative background</td><td>CSS</td><td>No accessible content meaning</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Responsive Image Decision</h2>
+          <ol class="task-list compact">
+            <li>Write one <code>srcset</code> example for the same cat image at three sizes.</li>
+            <li>Write one <code>&lt;picture&gt;</code> example with a portrait mobile crop.</li>
+            <li>Explain which one is art direction and which one is resolution switching.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>CSS Background Fallbacks</h2>
+          <pre><code class="language-css">.hero {
+  background-color: #151923;
+  background-image:
+    linear-gradient(rgb(0 0 0 / .35), rgb(0 0 0 / .35)),
+    image-set(
+      url("cat.avif") type("image/avif"),
+      url("cat.webp") type("image/webp"),
+      url("cat.jpg") type("image/jpeg")
+    );
+  background-size: cover;
+}</code></pre>
+          <p>Always include a background color. Use gradients for overlays and fallbacks.</p>
+        </section>
+
+        <section>
+          <h2>Performance Attributes, Expanded</h2>
+          <div class="selector-board">
+            <code>width height</code><span>Reserve space and reduce layout shift</span>
+            <code>loading="lazy"</code><span>Delay off-screen images, not critical hero images</span>
+            <code>decoding="async"</code><span>Allow asynchronous decoding</span>
+            <code>fetchpriority="high"</code><span>Only for the likely largest above-the-fold image</span>
+            <code>sizes</code><span>Tell the browser the rendered image width before CSS is complete</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Performance Examples</h2>
+          <pre><code class="language-html">&lt;img
+  src="https://placecats.com/1200/700"
+  alt="Cat stretched across a keyboard"
+  width="1200"
+  height="700"
+  fetchpriority="high"
+/&gt;
+
+&lt;img
+  src="https://placecats.com/640/360"
+  alt="Cat peeking over a table"
+  width="640"
+  height="360"
+  loading="lazy"
+  decoding="async"
+/&gt;</code></pre>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>Performance Pass</h2>
+          <ol class="task-list compact">
+            <li>Add explicit dimensions to three images.</li>
+            <li>Lazy-load only the images below the first viewport.</li>
+            <li>Choose one image, if any, that deserves <code>fetchpriority="high"</code>.</li>
+            <li>Explain why lazy-loading the hero image is usually a mistake.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>SVG Needs More Than One Slide</h2>
+          <div class="part-grid">
+            <article><code>vector</code><p>Scales cleanly at every size.</p></article>
+            <article><code>currentColor</code><p>Icons can inherit text color from CSS.</p></article>
+            <article><code>viewBox</code><p>Defines the internal coordinate system.</p></article>
+            <article><code>accessibility</code><p>Decorative icons use <code>aria-hidden</code>; meaningful graphics need names.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Inline SVG Icon Pattern</h2>
+          <pre><code class="language-html">&lt;button class="icon-button" aria-label="Download press kit"&gt;
+  &lt;svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"&gt;
+    &lt;path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" /&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+          <p>The button has the accessible name. The decorative SVG is hidden.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise</p>
+          <h2>SVG Icon Pass</h2>
+          <ol class="task-list compact">
+            <li>Add an inline SVG icon to a button.</li>
+            <li>Make it use <code>currentColor</code>.</li>
+            <li>Add a visible text label, or add an <code>aria-label</code> for icon-only UI.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Favicon Generators</h2>
+          <div class="resource-list">
+            <a href="https://favicon.io/">favicon.io</a>
+            <a href="https://realfavicongenerator.net/">RealFaviconGenerator</a>
+            <a href="https://www.favicon-generator.org/">favicon-generator.org</a>
+            <a href="https://svg-favicon-maker.vercel.app/">SVG Favicon Maker</a>
+          </div>
+          <pre><code class="language-html">&lt;link rel="icon" href="/favicon.ico" sizes="any" /&gt;
+&lt;link rel="icon" href="/icon.svg" type="image/svg+xml" /&gt;
+&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png" /&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Exit Ticket</h2>
+          <div class="statement-list">
+            <p>When is <code>&lt;picture&gt;</code> better than <code>srcset</code>?</p>
+            <p>How do CSS background image fallbacks work?</p>
+            <p>Which image should get <code>fetchpriority="high"</code>?</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
