@@ -500,6 +500,7 @@ textarea {
 
 .reveal .slides section {
   min-height: 100%;
+  text-align: left;
 }
 
 .reveal h1,
