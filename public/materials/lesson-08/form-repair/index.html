@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Repair Lab</title>
+    <link rel="stylesheet" href="../repair-labs.css" />
+  </head>
+  <body>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Exercise</p>
+      <h1>Form Repair Lab</h1>
+      <p>Repair labels, hints, autocomplete, required fields, grouped controls, and error messages.</p>
+    </header>
+
+    <main class="lab-shell">
+      <section class="brief">
+        <h2>Student Tasks</h2>
+        <ul>
+          <li>Connect every visible label to one form control.</li>
+          <li>Do not rely on placeholder text as the only label.</li>
+          <li>Add useful <code>autocomplete</code> values.</li>
+          <li>Connect hints and errors with <code>aria-describedby</code>.</li>
+          <li>Make error messages specific and mark invalid fields.</li>
+        </ul>
+      </section>
+
+      <section class="student-page bad-focus">
+        <div class="section-pad">
+          <h2>Commission Request</h2>
+          <p>Tell the studio what you need. The form currently has several accessibility problems.</p>
+          <form class="form-stack" novalidate>
+            <span>Name</span>
+            <input name="name" placeholder="Full name" />
+
+            <span>Email</span>
+            <input name="email" placeholder="Email" />
+
+            <span>Budget</span>
+            <select name="budget">
+              <option>Choose one</option>
+              <option>Under 500 CHF</option>
+              <option>500-1500 CHF</option>
+              <option>1500+ CHF</option>
+            </select>
+
+            <span>Project details</span>
+            <textarea name="details" placeholder="What should the artist make?"></textarea>
+            <p class="error">There is a problem.</p>
+            <button type="submit">Send request</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

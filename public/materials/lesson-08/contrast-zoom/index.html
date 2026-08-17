@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contrast and Zoom Lab</title>
+    <link rel="stylesheet" href="../repair-labs.css" />
+  </head>
+  <body>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Exercise</p>
+      <h1>Contrast and Zoom Lab</h1>
+      <p>Test contrast, color-only meaning, 200% zoom, and narrow viewport behavior. Repair the CSS without removing content.</p>
+    </header>
+
+    <main class="lab-shell">
+      <section class="brief">
+        <h2>Student Tasks</h2>
+        <ul>
+          <li>Find all text with weak contrast and improve the color pairings.</li>
+          <li>Make status information work without color alone.</li>
+          <li>Test browser zoom at 200%.</li>
+          <li>Fix the horizontal overflow in the card row.</li>
+        </ul>
+      </section>
+
+      <section class="student-page">
+        <div class="student-nav">
+          <strong>Workshop Tickets</strong>
+          <a href="#schedule">Schedule</a>
+          <a href="#tickets">Tickets</a>
+          <a href="#faq">FAQ</a>
+        </div>
+
+        <div class="hero">
+          <div>
+            <p class="pale-text">Only twelve places left</p>
+            <h2>Weekend CSS Studio</h2>
+            <p class="pale-text">A hands-on session about typography, layout polish, and accessibility habits.</p>
+            <a class="primary-action" href="#tickets">Reserve a seat</a>
+          </div>
+          <img src="https://placecats.com/540/340" alt="Cat sitting beside a notebook" />
+        </div>
+
+        <div id="tickets" class="overflow-row">
+          <article class="card"><h3>Friday</h3><p class="color-only">Available</p><p>Intro and setup.</p></article>
+          <article class="card"><h3>Saturday</h3><p class="color-only">Almost full</p><p>Long workshop day.</p></article>
+          <article class="card"><h3>Sunday</h3><p class="color-only">Sold out</p><p>Review and repair.</p></article>
+          <article class="card"><h3>Online</h3><p class="color-only">Available</p><p>Remote stream ticket.</p></article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

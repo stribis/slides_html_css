@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pointer Pass Lab</title>
+    <link rel="stylesheet" href="../repair-labs.css" />
+  </head>
+  <body>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Exercise</p>
+      <h1>Pointer Pass Lab</h1>
+      <p>Find small targets, hover-only content, drag-only interactions, and controls that require too much precision.</p>
+    </header>
+
+    <main class="lab-shell">
+      <section class="brief">
+        <h2>Student Tasks</h2>
+        <ul>
+          <li>Increase tiny targets or add enough spacing around them.</li>
+          <li>Make hover-only content reachable by keyboard and touch.</li>
+          <li>Provide a non-drag alternative for drag interactions.</li>
+          <li>Check that controls still feel usable on a phone-sized viewport.</li>
+        </ul>
+      </section>
+
+      <section class="student-page bad-focus">
+        <div class="student-nav">
+          <strong>Gallery Planner</strong>
+          <a href="#filters">Filters</a>
+          <a href="#arrange">Arrange</a>
+          <a href="#publish">Publish</a>
+        </div>
+
+        <section id="filters" class="section-pad">
+          <h2>Filters</h2>
+          <div class="button-row">
+            <button class="tiny-action" type="button">All</button>
+            <button class="tiny-action" type="button">Oil</button>
+            <button class="tiny-action" type="button">Ink</button>
+            <button class="tiny-action" type="button">Sold</button>
+          </div>
+        </section>
+
+        <section id="arrange" class="section-pad">
+          <h2>Arrange Works</h2>
+          <p>Students should add buttons or form controls that perform the same action as dragging.</p>
+          <div class="drag-zone">Drag artwork cards here to reorder</div>
+        </section>
+
+        <section id="publish" class="section-pad">
+          <h2>Publish Options</h2>
+          <div class="hover-menu">
+            <button type="button">More actions</button>
+            <ul>
+              <li><a href="#">Preview</a></li>
+              <li><a href="#">Schedule</a></li>
+              <li><a href="#">Archive</a></li>
+            </ul>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

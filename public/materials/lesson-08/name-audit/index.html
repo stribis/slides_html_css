@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Name Audit Lab</title>
+    <link rel="stylesheet" href="../repair-labs.css" />
+  </head>
+  <body>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Exercise</p>
+      <h1>Name Audit Lab</h1>
+      <p>Audit links, buttons, images, and form controls. The page looks usable, but several controls have weak or missing accessible names.</p>
+    </header>
+
+    <main class="lab-shell">
+      <section class="brief">
+        <h2>Student Tasks</h2>
+        <ul>
+          <li>Rewrite vague link text so each link makes sense out of context.</li>
+          <li>Give icon-only buttons useful accessible names.</li>
+          <li>Decide whether each image is informative or decorative.</li>
+          <li>Connect every input to a real label.</li>
+        </ul>
+      </section>
+
+      <section class="student-page bad-focus">
+        <div class="student-nav">
+          <strong>Studio Archive</strong>
+          <a href="#prints">Click here</a>
+          <a href="#events">Read more</a>
+          <a href="#contact">More</a>
+        </div>
+
+        <div class="hero">
+          <div>
+            <h2>Limited print release</h2>
+            <p>Three risograph prints are available this month in small signed editions.</p>
+            <div class="button-row">
+              <button class="icon-action" type="button">+</button>
+              <button class="icon-action" type="button">×</button>
+              <a class="primary-action" href="#prints">More</a>
+            </div>
+          </div>
+          <img src="https://placecats.com/560/360" />
+        </div>
+
+        <div id="prints" class="card-grid">
+          <article class="card">
+            <img src="https://placecats.com/300/220" width="300" height="220" />
+            <h3>Fog Study</h3>
+            <a href="#">Choose</a>
+          </article>
+          <article class="card">
+            <img src="https://placecats.com/301/220" width="300" height="220" alt="print" />
+            <h3>Window Grid</h3>
+            <a href="#">Choose</a>
+          </article>
+          <article class="card">
+            <img src="https://placecats.com/302/220" width="300" height="220" alt="" />
+            <h3>Garden Path</h3>
+            <a href="#">Choose</a>
+          </article>
+        </div>
+
+        <section id="contact" class="section-pad">
+          <h3>Ask About a Print</h3>
+          <form class="form-stack">
+            <input name="email" placeholder="Email" />
+            <input name="print" placeholder="Print title" />
+            <button type="submit">Send</button>
+          </form>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

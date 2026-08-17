@@ -50,13 +50,64 @@
 
         <section>
           <h2>The POUR Model</h2>
+          <div class="pour-acronym" aria-label="POUR">
+            <span>P</span>
+            <span>O</span>
+            <span>U</span>
+            <span>R</span>
+          </div>
+          <p>POUR is the mental shortcut for WCAG's four accessibility principles.</p>
+        </section>
+
+        <section>
+          <h2>What POUR Stands For</h2>
           <div class="browser-stack">
             <span class="html">Perceivable</span>
             <span class="css">Operable</span>
             <span class="js">Understandable</span>
             <span class="a11y">Robust</span>
           </div>
-          <p>WCAG organizes accessibility around four questions: can people get the information, use the interface, understand what happens, and rely on it with assistive technology?</p>
+          <p>Use these words as audit questions: can people get the information, operate the interface, understand the result, and rely on the code with assistive technology?</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">POUR</p>
+          <h2>Perceivable: Can People Get the Information?</h2>
+          <div class="pour-detail">
+            <article><h3>Content alternatives</h3><p>Images need useful alt decisions, video needs captions, audio needs transcripts when speech matters.</p></article>
+            <article><h3>Visual access</h3><p>Text contrast, readable sizing, and not relying on color alone all live here.</p></article>
+            <article><h3>Adaptable content</h3><p>The same content should still make sense when zoomed, read aloud, simplified, or rearranged.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">POUR</p>
+          <h2>Operable: Can People Use the Interface?</h2>
+          <div class="pour-detail">
+            <article><h3>Keyboard access</h3><p>Every interactive thing needs a keyboard path, not only mouse, hover, drag, or touch.</p></article>
+            <article><h3>Visible focus</h3><p>Users need to know where they are before they can decide what to do next.</p></article>
+            <article><h3>Safe interaction</h3><p>Avoid traps, surprise movement, tiny targets, and interactions that demand precision.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">POUR</p>
+          <h2>Understandable: Can People Predict What Happens?</h2>
+          <div class="pour-detail">
+            <article><h3>Clear language</h3><p>Labels, headings, links, and errors should describe purpose instead of making users guess.</p></article>
+            <article><h3>Consistent patterns</h3><p>Navigation, repeated components, and help should appear and behave consistently.</p></article>
+            <article><h3>Helpful recovery</h3><p>Forms should explain what went wrong, where it happened, and how to fix it.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">POUR</p>
+          <h2>Robust: Can Tools Understand the Page?</h2>
+          <div class="pour-detail">
+            <article><h3>Valid semantics</h3><p>Use the right HTML element so browsers, screen readers, and future tools receive the same meaning.</p></article>
+            <article><h3>Names and states</h3><p>Controls need programmatic names, roles, values, and states when native HTML is not enough.</p></article>
+            <article><h3>Progressive enhancement</h3><p>Build the core experience in resilient HTML before adding styling and JavaScript behavior.</p></article>
+          </div>
         </section>
 
         <section>
@@ -67,6 +118,7 @@
                 <th>Level</th>
                 <th>Meaning</th>
                 <th>Classroom target</th>
+                <th>Guidelines</th>
               </tr>
             </thead>
             <tbody>
@@ -74,16 +126,19 @@
                 <td><strong>A</strong></td>
                 <td>Minimum barriers removed. Missing these often blocks users completely.</td>
                 <td>Always meet.</td>
+                <td><a href="https://www.w3.org/WAI/WCAG22/quickref/?versions=2.2&levels=a" target="_blank" rel="noreferrer">Level A criteria</a></td>
               </tr>
               <tr>
                 <td><strong>AA</strong></td>
                 <td>Common legal and professional target for public web work.</td>
                 <td>Meet wherever the assignment scope allows.</td>
+                <td><a href="https://www.w3.org/WAI/WCAG22/quickref/?versions=2.2&levels=aa" target="_blank" rel="noreferrer">Level AA criteria</a></td>
               </tr>
               <tr>
                 <td><strong>AAA</strong></td>
                 <td>Enhanced accessibility. Valuable, but not realistic for every page.</td>
                 <td>Use selectively as stretch goals.</td>
+                <td><a href="https://www.w3.org/WAI/WCAG22/quickref/?versions=2.2&levels=aaa" target="_blank" rel="noreferrer">Level AAA criteria</a></td>
               </tr>
             </tbody>
           </table>
@@ -99,20 +154,24 @@
             <article><code>3.3.8</code><p>Authentication does not require hard memory puzzles without alternatives.</p></article>
             <article><code>3.2.6</code><p>Help is easy to find in a consistent location when it exists.</p></article>
           </div>
-          <p>WCAG 3 is still draft work, so teach it as future direction rather than the current grading target.</p>
         </section>
 
         <section>
           <p class="eyebrow">Exercise</p>
           <h2>Match the Barrier to POUR</h2>
-          <ol class="task-list compact">
-            <li>A pale gray button on a white background.</li>
-            <li>A menu that only opens on hover.</li>
-            <li>An error message that says "Invalid input".</li>
-            <li>A custom checkbox made from a <code>&lt;div&gt;</code>.</li>
-            <li>A video with speech but no captions.</li>
-            <li>A form field with no label or autocomplete hint.</li>
-          </ol>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Barrier</th><th>Likely POUR bucket</th><th>Example fix</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pale gray button on white.</td><td>Perceivable</td><td>Increase contrast and add a clear hover/focus state.</td></tr>
+              <tr><td>Menu only opens on hover.</td><td>Operable</td><td>Use a button, keyboard support, and a visible expanded state.</td></tr>
+              <tr><td>Error says "Invalid input".</td><td>Understandable</td><td>Explain the exact field problem and recovery step.</td></tr>
+              <tr><td>Checkbox made from a <code>&lt;div&gt;</code>.</td><td>Robust</td><td>Use a real checkbox or fully implement name, role, state, and keyboard behavior.</td></tr>
+              <tr><td>Video with speech but no captions.</td><td>Perceivable</td><td>Add synchronized captions and provide a transcript when useful.</td></tr>
+              <tr><td>Form field with no label.</td><td>Understandable / Robust</td><td>Connect a visible <code>&lt;label&gt;</code> and add autocomplete when appropriate.</td></tr>
+            </tbody>
+          </table>
         </section>
 
         <section>
@@ -128,6 +187,65 @@
             <span>Zoom</span>
           </div>
           <p>Automated tools help, but they do not understand intent. Human testing is part of the job.</p>
+        </section>
+
+        <section>
+          <h2>Before You Start: Set Up the Audit</h2>
+          <div class="audit-card-grid">
+            <article><h3>Pick the journey</h3><p>Choose one realistic user task: browse, sign up, search, buy, contact, or submit.</p></article>
+            <article><h3>Define the page state</h3><p>Include menus, modals, errors, hover/focus states, and loaded content.</p></article>
+            <article><h3>Record evidence</h3><p>Write what happened, where, who it blocks, and the smallest useful fix.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Audit Step 1: Keyboard and Focus</h2>
+          <div class="flow-detail">
+            <article><strong>Question</strong><p>Can I complete the task without a mouse?</p></article>
+            <article><strong>Check</strong><p>Tab order, skipped controls, trapped focus, Escape behavior, visible focus, hidden sticky-header landings.</p></article>
+            <article><strong>Evidence</strong><p>"Newsletter close button cannot be reached with Tab" is better than "keyboard is bad".</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Audit Step 2: Structure and Names</h2>
+          <div class="flow-detail">
+            <article><strong>Question</strong><p>Can the page be understood from headings, landmarks, links, buttons, image names, and form labels?</p></article>
+            <article><strong>Check</strong><p>One useful <code>&lt;h1&gt;</code>, heading order, landmark names, link purpose, icon buttons, alt decisions, input labels.</p></article>
+            <article><strong>Evidence</strong><p>"Three links are named Choose, so screen reader users cannot tell which plan each link selects."</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Audit Step 3: Visual Access and Reflow</h2>
+          <div class="flow-detail">
+            <article><strong>Question</strong><p>Can people still read and use the page when the visual conditions change?</p></article>
+            <article><strong>Check</strong><p>Contrast, color-only meaning, 200% zoom, narrow viewport, text spacing, target size, reduced motion.</p></article>
+            <article><strong>Evidence</strong><p>"At 200% zoom the pricing cards require horizontal scrolling to read normal text."</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Audit Step 4: Forms and Error Recovery</h2>
+          <div class="flow-detail">
+            <article><strong>Question</strong><p>Can users understand each field, enter the right data, and recover from mistakes?</p></article>
+            <article><strong>Check</strong><p>Labels, groups, required indicators, autocomplete, hints, error text, <code>aria-describedby</code>, <code>aria-invalid</code>.</p></article>
+            <article><strong>Evidence</strong><p>"The email error is visual only and is not connected to the email field."</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Audit Notes Should Be Actionable</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Weak note</th><th>Better note</th><th>Why it helps</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>"Bad accessibility."</td><td>"The cart icon button has no accessible name."</td><td>Names the issue and location.</td></tr>
+              <tr><td>"Contrast problem."</td><td>"The muted nav links are 2.3:1 against the dark header."</td><td>Gives measurable evidence.</td></tr>
+              <tr><td>"Keyboard broken."</td><td>"The custom filter chip is skipped by Tab and cannot be toggled with Space."</td><td>Explains user impact and expected behavior.</td></tr>
+            </tbody>
+          </table>
         </section>
 
         <section>
@@ -172,6 +290,28 @@
         </section>
 
         <section>
+          <h2><code>:focus</code> vs. <code>:focus-visible</code></h2>
+          <div class="focus-demo-grid">
+            <article>
+              <h3><code>:focus</code></h3>
+              <p>Matches whenever an element has focus: keyboard, mouse click, script focus, or touch depending on the browser.</p>
+              <pre><code class="language-css">button:focus {
+  outline: 3px solid #2d5f9a;
+}</code></pre>
+            </article>
+            <article>
+              <h3><code>:focus-visible</code></h3>
+              <p>Matches when the browser decides a visible indicator is needed, especially keyboard navigation.</p>
+              <pre><code class="language-css">button:focus-visible {
+  outline: 4px solid #e86f51;
+  outline-offset: 4px;
+}</code></pre>
+            </article>
+          </div>
+          <p>Teach both: keep focus styles available, then use <code>:focus-visible</code> to make keyboard focus clear without noisy mouse-click rings.</p>
+        </section>
+
+        <section>
           <h2>Focus Must Not Be Covered</h2>
           <pre><code class="language-css">:target,
 :focus-visible {
@@ -187,14 +327,31 @@
         </section>
 
         <section>
+          <h2>Covered Focus Example</h2>
+          <div class="covered-focus-demo">
+            <span class="sticky-bar">Sticky header</span>
+            <a href="#">Focused link hidden underneath</a>
+            <a class="safe-focus" href="#">Focused link with scroll margin</a>
+          </div>
+          <pre><code class="language-css">main :focus-visible {
+  outline: 4px solid #e86f51;
+  outline-offset: 4px;
+  scroll-margin-block-start: 5rem;
+}</code></pre>
+        </section>
+
+        <section>
           <p class="eyebrow">Exercise</p>
           <h2>Keyboard Pass</h2>
           <ol class="task-list compact">
-            <li>Open one lesson deck.</li>
+            <li>Open the artist website from the earlier workshop.</li>
             <li>Use only <code>Tab</code>, <code>Shift + Tab</code>, <code>Enter</code>, <code>Space</code>, and arrow keys.</li>
             <li>List every item that cannot be reached or activated.</li>
             <li>List every place where focus is hidden or unclear.</li>
           </ol>
+          <div class="material-links">
+            <a href="../materials/lesson-02/artist-profile/index.html">Open artist website</a>
+          </div>
         </section>
 
         <section>
@@ -231,6 +388,9 @@
             <li>Add a skip link if navigation appears before the main content.</li>
             <li>Check the accessibility tree in browser devtools.</li>
           </ol>
+          <div class="material-links">
+            <a href="../materials/lesson-08/outline-repair/index.html">Open messy outline page</a>
+          </div>
         </section>
 
         <section>
@@ -290,6 +450,9 @@
             <li>Find two images and decide if each is informative or decorative.</li>
             <li>Check one input in the accessibility tree.</li>
           </ol>
+          <div class="material-links">
+            <a href="../materials/lesson-08/name-audit/index.html">Open name audit page</a>
+          </div>
         </section>
 
         <section>
@@ -309,11 +472,28 @@
 
         <section>
           <h2>Zoom and Reflow</h2>
+          <p>Reflow means the layout rearranges into one readable direction instead of forcing people to scroll both sideways and vertically.</p>
           <div class="part-grid">
             <article><code>200%</code><p>Text should remain usable when browser zoom increases.</p></article>
             <article><code>320 CSS px</code><p>Layouts should reflow without requiring two-dimensional scrolling for normal content.</p></article>
             <article><code>rem</code><p>Use relative sizing for type and spacing that should respond to user settings.</p></article>
             <article><code>clamp()</code><p>Set type and spacing ranges without locking the page to one viewport.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Reflow: What Changes?</h2>
+          <div class="reflow-demo">
+            <article>
+              <h3>Before</h3>
+              <span>Nav</span><span>Hero</span><span>Cards</span><span>Form</span>
+              <p>Wide layout can use columns.</p>
+            </article>
+            <article>
+              <h3>After</h3>
+              <span>Nav</span><span>Hero</span><span>Cards</span><span>Form</span>
+              <p>Narrow layout stacks content so reading remains one direction.</p>
+            </article>
           </div>
         </section>
 
@@ -326,6 +506,9 @@
             <li>Resize the viewport to a narrow width.</li>
             <li>Write down what breaks first and why.</li>
           </ol>
+          <div class="material-links">
+            <a href="../materials/lesson-08/contrast-zoom/index.html">Open contrast and zoom page</a>
+          </div>
         </section>
 
         <section>
@@ -365,6 +548,9 @@
             <li>Attach hints and errors with <code>aria-describedby</code>.</li>
             <li>Make the error text specific enough to act on.</li>
           </ol>
+          <div class="material-links">
+            <a href="../materials/lesson-08/form-repair/index.html">Open form repair page</a>
+          </div>
         </section>
 
         <section>
@@ -400,6 +586,9 @@
             <li>Find any drag interaction and propose a non-drag alternative.</li>
             <li>Check whether hover-only content has a keyboard and touch path.</li>
           </ol>
+          <div class="material-links">
+            <a href="../materials/lesson-08/pointer-pass/index.html">Open pointer pass page</a>
+          </div>
         </section>
 
         <section>
@@ -420,6 +609,52 @@
             <p>Do not change semantics unless you understand the keyboard pattern too.</p>
             <p>ARIA can name and describe. It does not add behavior by itself.</p>
             <p>No ARIA is better than wrong ARIA.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Important ARIA: Names and Descriptions</h2>
+          <table class="comparison-table dense-table">
+            <thead>
+              <tr><th>Attribute</th><th>Use when</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>aria-label</code></td><td>There is no visible text to use as the name.</td><td><code>&lt;button aria-label="Close dialog"&gt;</code></td></tr>
+              <tr><td><code>aria-labelledby</code></td><td>Visible text elsewhere should name the control or region.</td><td><code>&lt;nav aria-labelledby="main-nav-title"&gt;</code></td></tr>
+              <tr><td><code>aria-describedby</code></td><td>Hints, requirements, or errors should be announced with a field.</td><td><code>&lt;input aria-describedby="email-error"&gt;</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Important ARIA: States and Relationships</h2>
+          <div class="aria-grid">
+            <article><code>aria-expanded</code><p>Disclosure, menu, or accordion button is open or closed.</p></article>
+            <article><code>aria-controls</code><p>Button controls another element, such as a menu panel.</p></article>
+            <article><code>aria-current</code><p>Current page, step, location, date, or item in a set.</p></article>
+            <article><code>aria-invalid</code><p>Form value failed validation and needs correction.</p></article>
+            <article><code>aria-live</code><p>Status updates should be announced without moving focus.</p></article>
+            <article><code>aria-hidden</code><p>Decorative or duplicate content should be ignored by assistive tech.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>ARIA Does Not Add Behavior</h2>
+          <div class="split">
+            <article class="definition-panel wrong">
+              <h3>Still broken</h3>
+              <pre><code class="language-html">&lt;div role="button" aria-pressed="false"&gt;
+  Play
+&lt;/div&gt;</code></pre>
+              <p>No built-in keyboard behavior, disabled behavior, or form behavior.</p>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Better</h3>
+              <pre><code class="language-html">&lt;button type="button" aria-pressed="false"&gt;
+  Play
+&lt;/button&gt;</code></pre>
+              <p>Native role, keyboard support, focus behavior, and state can work together.</p>
+            </article>
           </div>
         </section>
 

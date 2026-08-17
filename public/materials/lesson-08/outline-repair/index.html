@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outline Repair Lab</title>
+    <link rel="stylesheet" href="../repair-labs.css" />
+  </head>
+  <body>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Exercise</p>
+      <h1>Outline Repair Lab</h1>
+      <p>Repair the messy structure below. Keep the visual design roughly the same, but replace generic containers with useful landmarks, sections, and headings.</p>
+    </header>
+
+    <main class="lab-shell">
+      <section class="brief">
+        <h2>Student Tasks</h2>
+        <ul>
+          <li>Add a skip link that targets the main content.</li>
+          <li>Replace layout-only <code>&lt;div&gt;</code> elements with <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;footer&gt;</code> where appropriate.</li>
+          <li>Create a useful heading hierarchy with one <code>&lt;h1&gt;</code>.</li>
+          <li>Check the accessibility tree after your repair.</li>
+        </ul>
+      </section>
+
+      <div class="student-page bad-focus">
+        <div class="student-nav">
+          <strong>Mira Vale</strong>
+          <a href="#work">Work</a>
+          <a href="#shows">Shows</a>
+          <a href="#mail">Newsletter</a>
+        </div>
+
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visual artist</p>
+            <h2>New landscapes in thread and ink</h2>
+            <p>Mira creates textile studies inspired by weather maps, city edges, and quiet architecture.</p>
+          </div>
+          <img src="https://placecats.com/520/340" alt="" />
+        </div>
+
+        <div id="work" class="card-grid">
+          <div class="card">
+            <h4>Blue Field</h4>
+            <p>Thread, paper, pigment.</p>
+          </div>
+          <div class="card">
+            <h3>Night Survey</h3>
+            <p>Ink and cut paper.</p>
+          </div>
+          <div class="card">
+            <h5>Soft Grid</h5>
+            <p>Woven cotton study.</p>
+          </div>
+        </div>
+
+        <div id="shows" class="section-pad">
+          <h3>Current Shows</h3>
+          <p>Open studio every Friday from 16:00. Group exhibition in September.</p>
+        </div>
+
+        <div id="mail" class="section-pad">
+          <h3>Stay Updated</h3>
+          <p>Sign up for studio notes and exhibition announcements.</p>
+          <a class="primary-action" href="#">Join newsletter</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

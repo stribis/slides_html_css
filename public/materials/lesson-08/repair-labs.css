@@ -1,0 +1,304 @@
+:root {
+  --ink: #151923;
+  --muted: #5d6678;
+  --paper: #f7f4ed;
+  --surface: #fffdf7;
+  --line: #d8d1c1;
+  --green: #1f7a68;
+  --blue: #2d5f9a;
+  --yellow: #efc84a;
+  --coral: #e86f51;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    linear-gradient(90deg, rgb(17 24 39 / 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(17 24 39 / 0.05) 1px, transparent 1px),
+    var(--paper);
+  background-size: 36px 36px;
+  color: var(--ink);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.lab-header,
+.lab-shell {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.lab-header {
+  padding: 46px 0 22px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+  margin-block: 0 0.65rem;
+  line-height: 1;
+}
+
+h1 {
+  max-width: 880px;
+  font-size: clamp(3rem, 9vw, 6.2rem);
+}
+
+.lab-header p {
+  max-width: 780px;
+  color: var(--muted);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.lab-shell {
+  display: grid;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.brief,
+.student-page,
+.repair-notes {
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 8px 8px 0 rgb(17 24 39 / 0.15);
+}
+
+.brief,
+.repair-notes {
+  padding: 22px;
+}
+
+.brief ul,
+.repair-notes ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.brief li,
+.repair-notes li {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.student-page {
+  overflow: hidden;
+}
+
+.student-nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 24px;
+  background: #1d2740;
+  color: white;
+}
+
+.student-nav strong {
+  margin-right: auto;
+}
+
+.student-nav a {
+  color: #98a2b8;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.hero,
+.section-pad {
+  padding: 34px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 26px;
+  align-items: center;
+}
+
+.hero h2 {
+  max-width: 620px;
+  font-size: clamp(2.4rem, 5vw, 4.8rem);
+}
+
+.hero p,
+.section-pad p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding: 34px;
+}
+
+.card {
+  padding: 20px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: white;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.primary-action,
+.tiny-action,
+.icon-action,
+.fake-control {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 1rem;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.icon-action {
+  width: 42px;
+  padding: 0;
+}
+
+.tiny-action {
+  min-height: 28px;
+  padding: 0.2rem 0.35rem;
+  font-size: 0.75rem;
+}
+
+.fake-control {
+  border-radius: 999px;
+  background: var(--green);
+  color: white;
+}
+
+.bad-focus a:focus,
+.bad-focus button:focus,
+.bad-focus input:focus,
+.bad-focus select:focus,
+.bad-focus textarea:focus,
+.bad-focus [tabindex]:focus {
+  outline: none;
+}
+
+.pale-text {
+  color: #bdb6a5;
+}
+
+.overflow-row {
+  display: grid;
+  grid-template-columns: repeat(4, 260px);
+  gap: 18px;
+  padding: 34px;
+}
+
+.form-stack {
+  display: grid;
+  gap: 14px;
+  max-width: 520px;
+}
+
+.form-stack input,
+.form-stack select,
+.form-stack textarea {
+  min-height: 42px;
+  padding: 0.65rem;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+}
+
+.error {
+  margin: 0;
+  color: #c84a2f;
+  font-weight: 800;
+}
+
+.color-only {
+  color: var(--green);
+  font-weight: 950;
+}
+
+.drag-zone {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  border: 3px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.hover-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-menu ul {
+  position: absolute;
+  left: 0;
+  display: none;
+  width: 220px;
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  border: 2px solid var(--ink);
+  background: white;
+}
+
+.hover-menu:hover ul {
+  display: grid;
+  gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .hero,
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-nav {
+    flex-wrap: wrap;
+  }
+}
