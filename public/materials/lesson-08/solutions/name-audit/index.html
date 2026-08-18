@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Name Audit Solution</title>
+    <link rel="stylesheet" href="../solutions.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Solution</p>
+      <h1>Name Audit Solution</h1>
+      <p>This solution gives links, icon buttons, images, and form controls names that match their purpose.</p>
+    </header>
+
+    <main class="lab-shell" id="main">
+      <section class="solution-notes" aria-labelledby="solution-notes">
+        <h2 id="solution-notes">What Changed</h2>
+        <ul>
+          <li>Replaced vague link text with specific destination/action text.</li>
+          <li>Added <code>aria-label</code> only to icon-only buttons where visible text is not available.</li>
+          <li>Made alt text decisions: informative hero image, decorative repeated cat thumbnails.</li>
+          <li>Connected form inputs with visible labels and helpful autocomplete.</li>
+        </ul>
+      </section>
+
+      <section class="student-page" aria-labelledby="release-title">
+        <header class="student-nav">
+          <strong>Studio Archive</strong>
+          <a href="#prints">View available prints</a>
+          <a href="#release-info">Read release details</a>
+          <a href="#contact">Ask about a print</a>
+        </header>
+
+        <div class="hero">
+          <div>
+            <h2 id="release-title">Limited print release</h2>
+            <p id="release-info">Three risograph prints are available this month in small signed editions.</p>
+            <div class="button-row">
+              <button class="icon-action" type="button" aria-label="Add print release to favorites">+</button>
+              <button class="icon-action" type="button" aria-label="Close print release panel">×</button>
+              <a class="primary-action" href="#prints">View the print collection</a>
+            </div>
+          </div>
+          <img src="https://placecats.com/560/360" alt="Cat sitting beside a stack of art prints" />
+        </div>
+
+        <section id="prints" class="card-grid" aria-labelledby="prints-title">
+          <h2 id="prints-title">Available Prints</h2>
+          <article class="card">
+            <img src="https://placecats.com/300/220" width="300" height="220" alt="" />
+            <h3>Fog Study</h3>
+            <a href="#contact">Ask about Fog Study</a>
+          </article>
+          <article class="card">
+            <img src="https://placecats.com/301/220" width="300" height="220" alt="" />
+            <h3>Window Grid</h3>
+            <a href="#contact">Ask about Window Grid</a>
+          </article>
+          <article class="card">
+            <img src="https://placecats.com/302/220" width="300" height="220" alt="" />
+            <h3>Garden Path</h3>
+            <a href="#contact">Ask about Garden Path</a>
+          </article>
+        </section>
+
+        <section id="contact" class="section-pad" aria-labelledby="contact-title">
+          <h2 id="contact-title">Ask About a Print</h2>
+          <form class="form-stack">
+            <div class="field">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="print">Print title</label>
+              <input id="print" name="print" autocomplete="off" />
+            </div>
+            <button class="primary-action" type="submit">Send print enquiry</button>
+          </form>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

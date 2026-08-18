@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outline Repair Solution</title>
+    <link rel="stylesheet" href="../solutions.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Solution</p>
+      <h1>Outline Repair Solution</h1>
+      <p>This solution keeps the original visual layout but repairs landmarks, navigation, heading order, and focus visibility.</p>
+    </header>
+
+    <main class="lab-shell" id="main">
+      <section class="solution-notes" aria-labelledby="solution-notes">
+        <h2 id="solution-notes">What Changed</h2>
+        <ul>
+          <li>Added a skip link and a real <code>&lt;main&gt;</code> target.</li>
+          <li>Replaced generic layout containers with <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;footer&gt;</code>.</li>
+          <li>Used one page-level <code>&lt;h1&gt;</code>, then logical <code>&lt;h2&gt;</code> and <code>&lt;h3&gt;</code> headings.</li>
+          <li>Removed the bad focus suppression by relying on the shared visible focus styles.</li>
+        </ul>
+      </section>
+
+      <article class="student-page">
+        <header class="student-nav">
+          <strong>Mira Vale</strong>
+          <nav aria-label="Artist portfolio">
+            <a href="#work">Work</a>
+            <a href="#shows">Shows</a>
+            <a href="#newsletter">Newsletter</a>
+          </nav>
+        </header>
+
+        <section class="hero" aria-labelledby="artist-title">
+          <div>
+            <p class="eyebrow">Visual artist</p>
+            <h2 id="artist-title">New landscapes in thread and ink</h2>
+            <p>Mira creates textile studies inspired by weather maps, city edges, and quiet architecture.</p>
+          </div>
+          <img src="https://placecats.com/520/340" alt="" />
+        </section>
+
+        <section id="work" class="card-grid" aria-labelledby="work-title">
+          <h2 id="work-title">Selected Work</h2>
+          <article class="card">
+            <h3>Blue Field</h3>
+            <p>Thread, paper, pigment.</p>
+          </article>
+          <article class="card">
+            <h3>Night Survey</h3>
+            <p>Ink and cut paper.</p>
+          </article>
+          <article class="card">
+            <h3>Soft Grid</h3>
+            <p>Woven cotton study.</p>
+          </article>
+        </section>
+
+        <section id="shows" class="section-pad" aria-labelledby="shows-title">
+          <h2 id="shows-title">Current Shows</h2>
+          <p>Open studio every Friday from 16:00. Group exhibition in September.</p>
+        </section>
+
+        <section id="newsletter" class="section-pad" aria-labelledby="newsletter-title">
+          <h2 id="newsletter-title">Stay Updated</h2>
+          <p>Sign up for studio notes and exhibition announcements.</p>
+          <a class="primary-action" href="mailto:studio@example.com?subject=Newsletter">Join Mira Vale's newsletter</a>
+        </section>
+
+        <footer class="section-pad">
+          <p>Contact the studio for commissions, visits, and exhibition notes.</p>
+        </footer>
+      </article>
+    </main>
+  </body>
+</html>

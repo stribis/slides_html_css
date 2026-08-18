@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pointer Pass Solution</title>
+    <link rel="stylesheet" href="../solutions.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Solution</p>
+      <h1>Pointer Pass Solution</h1>
+      <p>This solution increases target sizes, removes hover-only access, and gives drag interactions button alternatives.</p>
+    </header>
+
+    <main class="lab-shell" id="main">
+      <section class="solution-notes" aria-labelledby="solution-notes">
+        <h2 id="solution-notes">What Changed</h2>
+        <ul>
+          <li>Filter buttons now have larger hit areas and spacing.</li>
+          <li>The reorder interaction has buttons for moving items without dragging.</li>
+          <li>The actions menu uses <code>&lt;details&gt;</code>, so it works with keyboard, pointer, and touch.</li>
+          <li>Visible focus styles are restored.</li>
+        </ul>
+      </section>
+
+      <section class="student-page" aria-labelledby="planner-title">
+        <header class="student-nav">
+          <strong id="planner-title">Gallery Planner</strong>
+          <a href="#filters">Filters</a>
+          <a href="#arrange">Arrange</a>
+          <a href="#publish">Publish</a>
+        </header>
+
+        <section id="filters" class="section-pad" aria-labelledby="filters-title">
+          <h2 id="filters-title">Filters</h2>
+          <div class="toolbar" aria-label="Artwork filters">
+            <button class="filter-button" type="button" aria-pressed="true">All</button>
+            <button class="filter-button" type="button" aria-pressed="false">Oil</button>
+            <button class="filter-button" type="button" aria-pressed="false">Ink</button>
+            <button class="filter-button" type="button" aria-pressed="false">Sold</button>
+          </div>
+        </section>
+
+        <section id="arrange" class="section-pad" aria-labelledby="arrange-title">
+          <h2 id="arrange-title">Arrange Works</h2>
+          <p>Artwork can still be dragged visually, but every move also has a button alternative.</p>
+          <div class="drag-zone" aria-hidden="true">Optional drag area</div>
+          <ol class="arrange-list" aria-label="Artwork order">
+            <li>
+              <span>Blue Field</span>
+              <span class="button-row">
+                <button class="secondary-action" type="button">Move up</button>
+                <button class="secondary-action" type="button">Move down</button>
+              </span>
+            </li>
+            <li>
+              <span>Night Survey</span>
+              <span class="button-row">
+                <button class="secondary-action" type="button">Move up</button>
+                <button class="secondary-action" type="button">Move down</button>
+              </span>
+            </li>
+          </ol>
+        </section>
+
+        <section id="publish" class="section-pad" aria-labelledby="publish-title">
+          <h2 id="publish-title">Publish Options</h2>
+          <details class="menu-details">
+            <summary>More actions</summary>
+            <ul>
+              <li><a href="#">Preview gallery</a></li>
+              <li><a href="#">Schedule publishing</a></li>
+              <li><a href="#">Archive gallery</a></li>
+            </ul>
+          </details>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

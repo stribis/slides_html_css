@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessibility Audit Lab Solution</title>
+    <link rel="stylesheet" href="../solutions.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#sample-main">Skip to sample page</a>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Solution</p>
+      <h1>Accessibility Audit Lab Solution</h1>
+      <p>This is one possible repaired version of the audit lab. It fixes the main issues without redesigning the whole page.</p>
+    </header>
+
+    <main class="lab-shell">
+      <section class="solution-notes" aria-labelledby="solution-notes">
+        <h2 id="solution-notes">What Changed</h2>
+        <ul>
+          <li>Added skip link, landmarks, and a logical heading hierarchy.</li>
+          <li>Replaced vague links and the fake button with named, native controls.</li>
+          <li>Made the hero image decorative with empty alt text because nearby copy already carries the message.</li>
+          <li>Connected form labels, hints, errors, autocomplete, and invalid state.</li>
+          <li>Improved focus visibility, contrast, target size, reflow, and reduced-motion behavior.</li>
+        </ul>
+      </section>
+
+      <article class="student-page" id="sample-main">
+        <header class="student-nav">
+          <strong>CatCare Studio</strong>
+          <nav aria-label="CatCare Studio">
+            <a href="#plans">View plans</a>
+            <a href="#signup">Sign up for a plan</a>
+            <a href="#contact">Contact support</a>
+          </nav>
+        </header>
+
+        <section class="hero" aria-labelledby="hero-title">
+          <div>
+            <p class="eyebrow">New workshop</p>
+            <h2 id="hero-title">Make your portfolio friendlier</h2>
+            <p>
+              A mini landing page repaired for structure, names, keyboard
+              access, color, forms, motion, and responsive behavior.
+            </p>
+            <a class="primary-action" href="#plans">Start with the plans</a>
+          </div>
+          <img src="https://placecats.com/520/340" alt="" />
+        </section>
+
+        <section id="plans" class="responsive-card-grid" aria-labelledby="plans-title">
+          <h2 id="plans-title">Plans</h2>
+          <article class="card">
+            <h3>Starter</h3>
+            <p class="price">9 CHF</p>
+            <p>Good for one small profile page.</p>
+            <a href="#signup">Choose Starter plan</a>
+          </article>
+          <article class="card featured">
+            <h3>Studio</h3>
+            <p class="price">19 CHF</p>
+            <p><strong>Recommended.</strong> Includes audit notes and a responsive rewrite.</p>
+            <a href="#signup">Choose Studio plan</a>
+          </article>
+        </section>
+
+        <section id="signup" class="section-pad" aria-labelledby="signup-title">
+          <h2 id="signup-title">Signup</h2>
+          <form class="form-stack" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                aria-describedby="email-error"
+                aria-invalid="true"
+              />
+              <p class="error" id="email-error">Enter an email address in the format name@example.com.</p>
+            </div>
+            <div class="field">
+              <label for="plan">Plan</label>
+              <select id="plan" name="plan">
+                <option value="">Pick a plan</option>
+                <option value="starter">Starter</option>
+                <option value="studio">Studio</option>
+              </select>
+            </div>
+            <button class="primary-action" type="submit">Send signup request</button>
+          </form>
+        </section>
+
+        <section id="contact" class="section-pad" aria-labelledby="contact-title">
+          <h2 id="contact-title">Need help?</h2>
+          <p>
+            The animated badge below respects reduced-motion preferences.
+          </p>
+          <span class="spin-badge">Audit</span>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

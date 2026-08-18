@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Repair Solution</title>
+    <link rel="stylesheet" href="../solutions.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Solution</p>
+      <h1>Form Repair Solution</h1>
+      <p>This solution repairs labels, hints, autocomplete, validation state, and actionable error text.</p>
+    </header>
+
+    <main class="lab-shell" id="main">
+      <section class="solution-notes" aria-labelledby="solution-notes">
+        <h2 id="solution-notes">What Changed</h2>
+        <ul>
+          <li>Changed loose text labels into real <code>&lt;label for&gt;</code> connections.</li>
+          <li>Added appropriate input types and autocomplete values.</li>
+          <li>Connected hints and errors with <code>aria-describedby</code>.</li>
+          <li>Marked the invalid email field with <code>aria-invalid="true"</code> and a specific error.</li>
+        </ul>
+      </section>
+
+      <section class="student-page" aria-labelledby="form-title">
+        <div class="section-pad">
+          <h2 id="form-title">Commission Request</h2>
+          <p id="form-intro">Tell the studio what you need. Required fields are marked with "required".</p>
+          <form class="form-stack" aria-describedby="form-intro" novalidate>
+            <div class="field">
+              <label for="name">Full name <span aria-hidden="true">(required)</span></label>
+              <input id="name" name="name" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email address <span aria-hidden="true">(required)</span></label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                aria-describedby="email-hint email-error"
+                aria-invalid="true"
+                required
+              />
+              <p class="hint" id="email-hint">Use the address where the studio can reply.</p>
+              <p class="error" id="email-error">Enter an email address in the format name@example.com.</p>
+            </div>
+
+            <div class="field">
+              <label for="budget">Budget range</label>
+              <select id="budget" name="budget">
+                <option value="">Choose one</option>
+                <option value="under-500">Under 500 CHF</option>
+                <option value="500-1500">500-1500 CHF</option>
+                <option value="1500-plus">1500+ CHF</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="details">Project details <span aria-hidden="true">(required)</span></label>
+              <textarea
+                id="details"
+                name="details"
+                rows="5"
+                aria-describedby="details-hint"
+                required
+              ></textarea>
+              <p class="hint" id="details-hint">Include the artwork type, size, deadline, and any important references.</p>
+            </div>
+
+            <button class="primary-action" type="submit">Send commission request</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

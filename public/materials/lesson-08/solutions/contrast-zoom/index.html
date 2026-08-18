@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contrast and Zoom Solution</title>
+    <link rel="stylesheet" href="../solutions.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="lab-header">
+      <p class="eyebrow">Lesson 08 Solution</p>
+      <h1>Contrast and Zoom Solution</h1>
+      <p>This solution improves contrast, adds non-color status cues, and uses responsive tracks that reflow instead of overflowing.</p>
+    </header>
+
+    <main class="lab-shell" id="main">
+      <section class="solution-notes" aria-labelledby="solution-notes">
+        <h2 id="solution-notes">What Changed</h2>
+        <ul>
+          <li>Removed pale text and used readable foreground/background pairs.</li>
+          <li>Added text and icon-like status indicators instead of color-only meaning.</li>
+          <li>Replaced fixed-width card columns with responsive grid tracks.</li>
+          <li>Kept layout usable at 200% zoom and narrow viewport widths.</li>
+        </ul>
+      </section>
+
+      <section class="student-page" aria-labelledby="workshop-title">
+        <header class="student-nav">
+          <strong>Workshop Tickets</strong>
+          <a href="#schedule">Schedule</a>
+          <a href="#tickets">Tickets</a>
+          <a href="#faq">FAQ</a>
+        </header>
+
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Only twelve places left</p>
+            <h2 id="workshop-title">Weekend CSS Studio</h2>
+            <p>A hands-on session about typography, layout polish, and accessibility habits.</p>
+            <a class="primary-action" href="#tickets">Reserve a seat</a>
+          </div>
+          <img src="https://placecats.com/540/340" alt="Cat sitting beside a notebook" />
+        </div>
+
+        <section id="tickets" class="responsive-card-grid" aria-labelledby="tickets-title">
+          <h2 id="tickets-title">Ticket Status</h2>
+          <article class="card"><h3>Friday</h3><p class="status">Available</p><p>Intro and setup.</p></article>
+          <article class="card"><h3>Saturday</h3><p class="status warning">Almost full</p><p>Long workshop day.</p></article>
+          <article class="card"><h3>Sunday</h3><p class="status sold">Sold out</p><p>Review and repair.</p></article>
+          <article class="card"><h3>Online</h3><p class="status">Available</p><p>Remote stream ticket.</p></article>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
