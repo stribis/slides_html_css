@@ -1,0 +1,47 @@
+@use "sass:map";
+
+.button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: $space-unit * 1.5 $space-unit * 2;
+  border: 2px solid $accent-dark;
+  border-radius: $radius;
+  font: inherit;
+  font-weight: 850;
+  text-decoration: none;
+  cursor: pointer;
+
+  &--primary {
+    background: $accent;
+    color: white;
+  }
+
+  &--secondary {
+    background: $surface;
+    color: $accent-dark;
+  }
+
+  &:focus-visible {
+    @include focus-ring($accent-dark);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.status {
+  margin: 0;
+  padding: $space-unit * 2;
+  border-inline-start: $space-unit solid var(--status-color);
+  background: color-mix(in srgb, var(--status-color), white 88%);
+}
+
+@each $name, $color in $statuses {
+  .status--#{$name} {
+    --status-color: #{map.get($statuses, $name)};
+  }
+}

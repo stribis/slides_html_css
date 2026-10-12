@@ -1,0 +1,97 @@
+// This starter intentionally uses deprecated @import rules.
+// Migrate the source to @use and @forward during the exercise.
+@import "tokens";
+@import "tools";
+@import "components";
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: $paper;
+  color: $ink;
+}
+
+.page-shell {
+  width: min(960px, calc(100% - 2rem));
+  margin-inline: auto;
+  padding-block: 3rem;
+}
+
+.page-header,
+.component-section {
+  @include surface-panel;
+  padding: $space-unit * 4;
+}
+
+.component-section {
+  margin-top: $space-unit * 4;
+}
+
+.eyebrow {
+  margin: 0 0 $space-unit;
+  color: $accent-dark;
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-block-start: 0;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-unit * 2;
+}
+
+.stack,
+.form-stack {
+  display: grid;
+  gap: $space-unit * 2;
+}
+
+.theme-dark {
+  background: $ink;
+  color: white;
+}
+
+.artist-card {
+  display: flex;
+  gap: $space-unit * 3;
+  align-items: center;
+
+  img {
+    width: 9rem;
+    border-radius: 50%;
+  }
+}
+
+.form-stack input {
+  min-height: 44px;
+  padding: $space-unit * 1.5;
+  border: 2px solid $ink;
+  border-radius: $radius;
+  font: inherit;
+
+  &:focus-visible {
+    @include focus-ring($accent-dark);
+  }
+}
+
+@media (max-width: 600px) {
+  .artist-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

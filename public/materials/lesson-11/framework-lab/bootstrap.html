@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap Framework Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  </head>
+  <body>
+    <!--
+      BOOTSTRAP TASK
+      Add Bootstrap layout, component, spacing, type, image, and form classes.
+      Keep the semantic elements and accessible names intact.
+      Compare your result with reference.html.
+    -->
+    <main>
+      <header>
+        <p>Bootstrap edition</p>
+        <h1>Northbank Open Studios</h1>
+        <p>Meet local artists, join practical workshops, and explore the studios behind this year's program.</p>
+        <a href="index.html">Back to instructions</a>
+      </header>
+
+      <section aria-label="Featured events">
+        <article>
+          <img src="https://placecats.com/640/420" alt="Cat looking toward the camera in a softly lit room" width="640" height="420" />
+          <div>
+            <p>Workshop · Saturday 14:00</p>
+            <h2>Print &amp; Pattern</h2>
+            <p>Create a two-color poster using simple relief-printing techniques.</p>
+            <a href="#signup">Reserve a place</a>
+          </div>
+        </article>
+        <article>
+          <img src="https://placecats.com/641/420" alt="Cat resting beside art materials" width="640" height="420" />
+          <div>
+            <p>Talk · Saturday 16:30</p>
+            <h2>Making a Practice</h2>
+            <p>Three artists discuss routines, research, and sustainable creative work.</p>
+            <a href="#signup">Reserve a place</a>
+          </div>
+        </article>
+        <article>
+          <img src="https://placecats.com/642/420" alt="Cat sitting among colorful paper shapes" width="640" height="420" />
+          <div>
+            <p>Studio tour · Sunday 11:00</p>
+            <h2>Behind the Work</h2>
+            <p>A guided walk through four studios and their current projects.</p>
+            <button type="button" disabled>Fully booked</button>
+          </div>
+        </article>
+      </section>
+
+      <form id="signup">
+        <label for="bootstrap-email">Email address</label>
+        <input id="bootstrap-email" name="email" type="email" autocomplete="email" required />
+        <button type="submit">Join event updates</button>
+      </form>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>

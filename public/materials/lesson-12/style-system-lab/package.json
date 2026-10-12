@@ -1,0 +1,11 @@
+{
+  "name": "lesson-12-style-system-lab",
+  "private": true,
+  "scripts": {
+    "sass:build": "sass scss/main.scss css/styles.css --style=expanded --source-map",
+    "sass:watch": "sass --watch scss/main.scss css/styles.css --style=expanded --source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.93.0"
+  }
+}

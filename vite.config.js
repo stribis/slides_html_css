@@ -19,6 +19,8 @@ export default defineConfig({
         lesson08: resolve(__dirname, "lesson-08/index.html"),
         lesson09: resolve(__dirname, "lesson-09/index.html"),
         lesson10: resolve(__dirname, "lesson-10/index.html"),
+        lesson11: resolve(__dirname, "lesson-11/index.html"),
+        lesson12: resolve(__dirname, "lesson-12/index.html"),
       },
     },
   },

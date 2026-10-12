@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Style System Lab Instructions</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #f6f3eb; color: #172033; font: 1rem/1.6 Inter, system-ui, sans-serif; }
+      main { width: min(850px, calc(100% - 2rem)); margin: 3rem auto; padding: 2rem; border: 2px solid #172033; background: white; box-shadow: 10px 10px 0 #f0c846; }
+      h1, h2 { line-height: 1.05; }
+      code { padding: 0.1em 0.3em; background: #e8edf4; }
+      li + li { margin-top: 0.6rem; }
+      a { color: #075f68; font-weight: 800; }
+      a:focus-visible { outline: 3px solid #075f68; outline-offset: 3px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>Lesson 12 workshop</p>
+      <h1>Build a Small Style System</h1>
+      <p>The starter works, but its Sass architecture is intentionally dated. Improve the source without changing the semantic HTML.</p>
+
+      <h2>Setup</h2>
+      <ol>
+        <li>Open this folder in a terminal.</li>
+        <li>Run <code>npm install</code>.</li>
+        <li>Run <code>npm run sass:watch</code>.</li>
+        <li>Open <a href="index.html">the component page</a> with a local server.</li>
+      </ol>
+
+      <h2>Tasks</h2>
+      <ol>
+        <li>Create a <code>settings/_index.scss</code> entry point that forwards tokens and configuration.</li>
+        <li>Create a <code>tools/_index.scss</code> entry point that forwards mixins and functions.</li>
+        <li>Replace every Sass <code>@import</code> with namespaced <code>@use</code>.</li>
+        <li>Expose surface, text, and accent values as CSS custom properties so the dark section can override them at runtime.</li>
+        <li>Use a Sass map and <code>@each</code> to generate success, warning, and danger status modifiers.</li>
+        <li>Add a reusable focus-ring mixin and apply it with <code>:focus-visible</code>.</li>
+        <li>Inspect <code>css/styles.css</code>. Remove any source abstraction that creates unnecessary output.</li>
+      </ol>
+
+      <h2>Definition of done</h2>
+      <p>The output has no Sass deprecation warnings, all controls have visible keyboard focus, theme values can change without recompiling, and the generated CSS remains easy to trace back to its source.</p>
+    </main>
+  </body>
+</html>

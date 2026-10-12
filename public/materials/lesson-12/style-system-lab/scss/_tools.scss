@@ -1,0 +1,11 @@
+@mixin focus-ring($color) {
+  outline: 3px solid $color;
+  outline-offset: 3px;
+}
+
+@mixin surface-panel {
+  border: 2px solid $ink;
+  border-radius: $radius;
+  background: $surface;
+  box-shadow: 8px 8px 0 rgb(23 32 51 / 12%);
+}

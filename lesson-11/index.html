@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lesson 11: modern CSS frameworks with Bootstrap 5.3 and Tailwind CSS 4, including setup, utilities, components, customization, accessibility, and practical comparison." />
+    <title>Lesson 11 - CSS Frameworks in Practice</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-eleven">
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #7952b3 46%, #0891b2 100%)">
+          <p class="eyebrow">Lesson 11</p>
+          <h1>CSS Frameworks in Practice</h1>
+          <p class="lede">Bootstrap, Tailwind, trade-offs, and choosing deliberately</p>
+          <p class="byline">Martin Hutchings - Front End Basics</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Learning Goals</h2>
+          <p class="slide-subtitle">Framework fluency is more than memorizing class names</p>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Evaluate</h3><p>Explain what a framework solves and what it adds to a project.</p></article>
+            <article><span>02</span><h3>Build</h3><p>Use Bootstrap components and utilities without losing semantic HTML.</p></article>
+            <article><span>03</span><h3>Compose</h3><p>Use Tailwind utilities, variants, and theme tokens as a design API.</p></article>
+            <article><span>04</span><h3>Choose</h3><p>Compare both approaches using maintainability, accessibility, and delivery needs.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Libraries and Frameworks</h2>
+          <p class="slide-subtitle">Both provide reusable code; the difference is who controls the application flow</p>
+          <div class="control-comparison">
+            <article>
+              <span class="concept-label">Library</span>
+              <h3>Your code calls the library</h3>
+              <div class="control-flow"><strong>Your application</strong><b>→</b><strong>Library function</strong></div>
+              <p>Choose individual capabilities and call them where they are useful.</p>
+              <small>Examples: React, Chart.js, Three.js, date-fns</small>
+            </article>
+            <article>
+              <span class="concept-label">Framework</span>
+              <h3>The framework calls your code</h3>
+              <div class="control-flow"><strong>Framework lifecycle</strong><b>→</b><strong>Your components</strong></div>
+              <p>Work inside an established structure, lifecycle, and set of conventions.</p>
+              <small>Examples: Angular, Next.js, Astro, Laravel</small>
+            </article>
+          </div>
+          <p class="context-note compact-note"><strong>Reality check:</strong> the words are not legal categories. Some tools sit between them, so explain the tool's scope rather than arguing over the label.</p>
+        </section>
+
+        <section>
+          <h2>Packages and Tools</h2>
+          <p class="slide-subtitle">What npm installs is a package; what that package does is a separate question</p>
+          <table class="comparison-table dense-table software-table">
+            <thead><tr><th>Package</th><th>Role</th><th>What it provides</th></tr></thead>
+            <tbody>
+              <tr><td><code>react</code></td><td>Library</td><td>APIs for composing user interfaces</td></tr>
+              <tr><td><code>@angular/core</code></td><td>Framework package</td><td>Part of Angular's application platform</td></tr>
+              <tr><td><code>bootstrap</code></td><td>CSS framework package</td><td>CSS, components, utilities, and optional JS</td></tr>
+              <tr><td><code>sass</code></td><td>Compiler tool</td><td>Turns SCSS source into CSS</td></tr>
+              <tr><td><code>vite</code></td><td>Build tool</td><td>Development server and production build</td></tr>
+            </tbody>
+          </table>
+          <div class="package-formula"><code>npm install</code><b>→</b><span><strong>node_modules/</strong> stores packages</span><b>→</b><span>Your project imports what it needs</span></div>
+        </section>
+
+        <section>
+          <h2>CSS Frameworks</h2>
+          <p class="slide-subtitle">Reusable APIs for recurring design decisions</p>
+          <div class="definition-panel">
+            <p class="big-definition">A shared styling system that turns repeated design decisions into a reusable API.</p>
+          </div>
+          <div class="component-map">
+            <article><strong>Tokens</strong><span>Color, space, type, radii</span></article>
+            <article><strong>Utilities</strong><span>Small single-purpose classes</span></article>
+            <article><strong>Components</strong><span>Buttons, forms, navigation</span></article>
+            <article><strong>Conventions</strong><span>Naming and composition rules</span></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Framework Types</h2>
+          <p class="slide-subtitle">Classless, component-first, utility-first, and token systems</p>
+          <div class="framework-type-grid" aria-label="Examples of CSS framework approaches">
+            <article>
+              <strong>Classless</strong><span>Styles semantic HTML automatically</span>
+              <code>&lt;button&gt;Save&lt;/button&gt;</code><small>Pico CSS, Water.css</small>
+            </article>
+            <article>
+              <strong>Component-first</strong><span>Provides named UI patterns</span>
+              <code>class="btn btn-primary"</code><small>Bootstrap, Bulma</small>
+            </article>
+            <article>
+              <strong>Utility-first</strong><span>Composes small styling decisions</span>
+              <code>class="flex gap-4 p-6"</code><small>Tailwind CSS, UnoCSS</small>
+            </article>
+            <article>
+              <strong>Tokens and primitives</strong><span>Supplies values rather than complete components</span>
+              <code>gap: var(--size-3)</code><small>Open Props, design-token packages</small>
+            </article>
+          </div>
+          <p>“Framework” describes a family of approaches, not one fixed way of writing CSS.</p>
+        </section>
+
+        <section>
+          <h2>Benefits</h2>
+          <p class="slide-subtitle">Speed, consistency, coverage, and a shared team language</p>
+          <div class="part-grid">
+            <article><code>speed</code><p>Common patterns already have names, styles, and documentation.</p></article>
+            <article><code>consistency</code><p>A shared spacing and color vocabulary reduces accidental variation.</p></article>
+            <article><code>coverage</code><p>Many states, screen sizes, and browser quirks are considered.</p></article>
+            <article><code>team language</code><p>Developers can discuss the same component and utility API.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Limits</h2>
+          <p class="slide-subtitle">A framework cannot guarantee good HTML, design, or accessibility</p>
+          <div class="selector-board">
+            <code>Good HTML</code><span>You can still choose the wrong element.<small class="row-example">Example: <code>&lt;a class="btn"&gt;Submit&lt;/a&gt;</code> is not a form button.</small></span>
+            <code>Good design</code><span>Available classes do not make every combination coherent.<small class="row-example">Example: five unrelated colors and spacing values can all be valid classes.</small></span>
+            <code>Accessibility</code><span>Components still need correct content, states, labels, and testing.<small class="row-example">Example: a modal needs a useful name, sensible focus, and keyboard testing.</small></span>
+            <code>Small CSS</code><span>Imports and unused features still affect output.<small class="row-example">Example: a full CDN build may include components this page never uses.</small></span>
+            <code>Longevity</code><span>Your code depends on another project's upgrade path.<small class="row-example">Example: renamed utilities or changed markup contracts require migration work.</small></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Framework Vocabulary</h2>
+          <p class="slide-subtitle">Every framework adds another API to learn</p>
+          <div class="split">
+            <article class="definition-panel">
+              <h3>Vanilla CSS knowledge</h3>
+              <pre><code class="language-css">display: flex;
+gap: 1rem;
+align-items: center;</code></pre>
+            </article>
+            <article class="definition-panel">
+              <h3>Framework vocabulary</h3>
+              <pre><code class="language-html">class="d-flex gap-3 align-items-center"
+
+class="flex items-center gap-4"</code></pre>
+            </article>
+          </div>
+          <p>A framework is fastest after the team learns its vocabulary and rules.</p>
+        </section>
+
+        <section>
+          <h2>Framework Choice</h2>
+          <p class="slide-subtitle">Start with the project, not the popularity chart</p>
+          <ol class="task-list compact">
+            <li>Are we building a one-off page, a product, or a design system?</li>
+            <li>Do we need ready-made components or only reusable primitives?</li>
+            <li>How strongly must the result match a custom visual identity?</li>
+            <li>Does the team already know the framework?</li>
+            <li>Can we own upgrades, accessibility checks, and output size?</li>
+          </ol>
+        </section>
+
+        <section>
+          <p class="eyebrow">Quick exercise - 8 minutes</p>
+          <h2>Context Exercise</h2>
+          <p class="slide-subtitle">Match the tool to the work</p>
+          <div class="scenario-grid">
+            <article><strong>Internal admin tool</strong><p>Twenty forms, three developers, delivery next week.</p></article>
+            <article><strong>Fashion portfolio</strong><p>Art-directed visuals, few repeated controls, strict identity.</p></article>
+            <article><strong>Student prototype</strong><p>One afternoon, no build tooling, learning fundamentals.</p></article>
+          </div>
+          <p>Choose Bootstrap, Tailwind, or vanilla CSS for each. Write down the reason and the risk.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Tooling primer</p>
+          <h2>Live Server</h2>
+          <p class="slide-subtitle">A development server you already know</p>
+          <div class="server-request-flow">
+            <article><strong>Your folder</strong><code>index.html</code><code>style.css</code><code>script.js</code></article>
+            <b>→</b>
+            <article class="live-server-node"><strong>Live Server</strong><span>Serves the files over HTTP</span><span>Reloads after changes</span></article>
+            <b>→</b>
+            <article><strong>Your browser</strong><code>127.0.0.1:5500</code><span>Requests those same files</span></article>
+          </div>
+          <div class="server-boundary">
+            <span><strong>It does:</strong> provide a local URL and automatic reload.</span>
+            <span><strong>It does not:</strong> install packages, compile SCSS, or create optimized deployment files.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Build Tools</h2>
+          <p class="slide-subtitle">An umbrella term for tools that automate project development and production</p>
+          <div class="build-job-grid">
+            <article><strong>Serve</strong><span>Run a local development server</span><code>vite</code></article>
+            <article><strong>Resolve</strong><span>Find imported files and packages</span><code>bootstrap</code></article>
+            <article><strong>Transform</strong><span>Convert SCSS or TypeScript</span><code>.scss → .css</code></article>
+            <article><strong>Bundle</strong><span>Follow imports and group assets</span><code>src/ → assets/</code></article>
+            <article><strong>Optimize</strong><span>Minify, hash, and split files</span><code>app-a81f2.js</code></article>
+          </div>
+          <p class="context-note compact-note"><strong>Important:</strong> “build tool” describes the whole workflow. A bundler is one part of that workflow.</p>
+        </section>
+
+        <section>
+          <h2>Dev Servers</h2>
+          <p class="slide-subtitle">Fast local feedback while you edit source files</p>
+          <div class="dev-server-loop">
+            <span>Edit <code>src/styles.scss</code></span><b>→</b>
+            <span>Dev server transforms it</span><b>→</b>
+            <span>Browser updates</span><b>↺</b>
+          </div>
+          <table class="comparison-table dense-table server-comparison">
+            <thead><tr><th>Live Server</th><th>Modern dev server</th></tr></thead>
+            <tbody>
+              <tr><td>Usually serves files as written</td><td>Can transform requested modules on demand</td></tr>
+              <tr><td>Usually reloads the whole page</td><td>Can replace only the changed module with HMR</td></tr>
+              <tr><td>Reads files already usable by browsers</td><td>Can understand package imports and source formats</td></tr>
+            </tbody>
+          </table>
+          <p><strong>HMR</strong> means Hot Module Replacement: update part of the page without restarting the whole application.</p>
+        </section>
+
+        <section>
+          <h2>Bundlers</h2>
+          <p class="slide-subtitle">Follow a graph of imports and create deployable assets</p>
+          <div class="bundle-graph">
+            <article class="bundle-entry"><strong>main.js</strong><code>import "bootstrap";</code><code>import "./styles.scss";</code><code>import { init } from "./app.js";</code></article>
+            <b>→</b>
+            <div class="bundle-dependencies">
+              <span><code>bootstrap</code><small>from node_modules</small></span>
+              <span><code>styles.scss</code><small>compiled to CSS</small></span>
+              <span><code>app.js</code><small>project module</small></span>
+            </div>
+            <b>→</b>
+            <article class="bundle-output"><strong>dist/</strong><code>app-a81f2.js</code><code>styles-b42c1.css</code><span>Optimized for deployment</span></article>
+          </div>
+          <div class="npm-bundler-roles">
+            <span><strong>Input:</strong> many source files and installed packages.</span>
+            <span><strong>Process:</strong> resolve imports, transform, combine, and optimize.</span>
+            <span><strong>Output:</strong> browser-ready files, often split into several bundles.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>A Tiny Vite Project</h2>
+          <p class="slide-subtitle">Source files, installed packages, and generated output have different jobs</p>
+          <div class="vite-project-map">
+            <div class="project-files" aria-label="Example Vite project folder">
+              <code>artist-site/</code>
+              <code>├── index.html</code>
+              <code>├── package.json</code>
+              <code>├── src/</code>
+              <code>│   ├── main.js</code>
+              <code>│   └── styles.scss</code>
+              <code>├── node_modules/</code>
+              <code>└── dist/</code>
+            </div>
+            <div class="project-file-roles">
+              <article><strong>You edit</strong><code>index.html</code><code>src/</code><code>package.json</code></article>
+              <article><strong>npm generates</strong><code>node_modules/</code><span>Installed dependencies; do not edit it manually.</span></article>
+              <article><strong>Vite generates</strong><code>dist/</code><span>Production output created by <code>npm run build</code>.</span></article>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Entry Files</h2>
+          <p class="slide-subtitle">Imports tell the build tool what belongs to the application</p>
+          <div class="split entry-file-example">
+            <article class="definition-panel">
+              <h3>src/main.js</h3>
+              <pre><code class="language-js">import "bootstrap/dist/css/bootstrap.css";
+import "./styles.scss";
+import "bootstrap";</code></pre>
+            </article>
+            <article>
+              <div class="selector-board compact-board">
+                <code>Line 1</code><span>Include Bootstrap's compiled CSS package.</span>
+                <code>Line 2</code><span>Compile and include our own SCSS.</span>
+                <code>Line 3</code><span>Include Bootstrap's interactive JavaScript.</span>
+              </div>
+            </article>
+          </div>
+          <p>The browser never reads <code>node_modules</code> itself. The build tool resolves these imports for it.</p>
+        </section>
+
+        <section>
+          <h2>npm Scripts</h2>
+          <p class="slide-subtitle">Short, project-owned names for repeatable commands</p>
+          <div class="split npm-script-example">
+            <article class="definition-panel">
+              <h3>package.json</h3>
+              <pre><code class="language-json">{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}</code></pre>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Terminal</h3>
+              <pre><code class="language-bash">npm install
+npm run dev
+
+# Before deployment
+npm run build</code></pre>
+            </article>
+          </div>
+          <p><code>npm run dev</code> means: find the <code>dev</code> script in <code>package.json</code> and execute its command.</p>
+        </section>
+
+        <section>
+          <h2>Development vs. Production</h2>
+          <p class="slide-subtitle">The local working experience is not the final deployed output</p>
+          <div class="dev-production-grid">
+            <article>
+              <span class="concept-label">While developing</span>
+              <h3><code>npm run dev</code></h3>
+              <div class="mini-pipeline"><code>src/</code><b>→</b><strong>Vite dev server</strong><b>→</b><code>localhost</code></div>
+              <ul><li>Fast updates and useful errors</li><li>Source files remain easy to debug</li><li>No deployment folder is required</li></ul>
+            </article>
+            <article>
+              <span class="concept-label">Before deployment</span>
+              <h3><code>npm run build</code></h3>
+              <div class="mini-pipeline"><code>src/</code><b>→</b><strong>production build</strong><b>→</b><code>dist/</code></div>
+              <ul><li>Files are optimized and often minified</li><li>Hashed names support long-term caching</li><li>The generated output is deployed</li></ul>
+            </article>
+          </div>
+          <p class="context-note compact-note"><strong>Live Server serves your source folder.</strong> A production build creates a new output folder specifically for publishing.</p>
+        </section>
+
+        <section class="section-divider" data-background-color="#7952b3">
+          <p class="eyebrow">Part 1</p>
+          <h2>Bootstrap 5.3</h2>
+          <p>Opinionated components plus a broad utility system</p>
+        </section>
+
+        <section>
+          <h2>Bootstrap Architecture</h2>
+          <p class="slide-subtitle">Base styles, utilities, components, and optional behavior</p>
+          <div class="framework-stack bootstrap-stack">
+            <span>Reboot and base styles</span>
+            <span>Layout system</span>
+            <span>Utility classes</span>
+            <span>Components</span>
+            <span>Optional JavaScript behavior</span>
+          </div>
+          <p>You select from an existing visual language, then customize its tokens and components.</p>
+        </section>
+
+        <section>
+          <h2>Bootstrap Setup</h2>
+          <p class="slide-subtitle">CDN for demos; npm for production projects</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Setup</th><th>Use it for</th><th>Know the trade-off</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CDN</strong></td><td>Class demos, prototypes, simple static pages</td><td>Network dependency and broad default bundle</td></tr>
+              <tr><td><strong>npm + bundler</strong></td><td>Projects with source control and a build pipeline</td><td>More setup, but explicit versions and imports</td></tr>
+            </tbody>
+          </table>
+          <pre><code class="language-bash">npm install bootstrap@5.3</code></pre>
+        </section>
+
+        <section>
+          <h2>Bootstrap CDN</h2>
+          <p class="slide-subtitle">A quick classroom setup with no build step</p>
+          <pre><code class="language-html">&lt;link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+&gt;
+
+&lt;script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+&gt;&lt;/script&gt;</code></pre>
+          <p>Use the integrity and crossorigin attributes from the official quick-start page in real projects.</p>
+        </section>
+
+        <section>
+          <h2>Class Anatomy</h2>
+          <p class="slide-subtitle">Base component, variant, size, and state</p>
+          <div class="class-anatomy">
+            <code>btn</code><span>base component</span>
+            <code>btn-primary</code><span>visual variant</span>
+            <code>btn-lg</code><span>size modifier</span>
+            <code>disabled</code><span>state styling; semantics still matter</span>
+          </div>
+          <pre><code class="language-html">&lt;button class="btn btn-primary btn-lg" type="button"&gt;
+  Save changes
+&lt;/button&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Bootstrap Layout</h2>
+          <p class="slide-subtitle">Containers, rows, and the twelve-column grid</p>
+          <pre><code class="language-html">&lt;main class="container py-5"&gt;
+  &lt;div class="row g-4"&gt;
+    &lt;article class="col-12 col-md-6 col-xl-4"&gt;...&lt;/article&gt;
+    &lt;article class="col-12 col-md-6 col-xl-4"&gt;...&lt;/article&gt;
+    &lt;article class="col-12 col-md-6 col-xl-4"&gt;...&lt;/article&gt;
+  &lt;/div&gt;
+&lt;/main&gt;</code></pre>
+          <p>The number describes how many of twelve columns an item occupies at that breakpoint.</p>
+        </section>
+
+        <section>
+          <h2>The 12-Column Grid</h2>
+          <p class="slide-subtitle">Compose common widths from a shared grid</p>
+          <div class="bootstrap-grid-demo" aria-label="Bootstrap twelve column layout example">
+            <span class="span-12">12</span>
+            <span class="span-6">6</span><span class="span-6">6</span>
+            <span class="span-4">4</span><span class="span-4">4</span><span class="span-4">4</span>
+            <span class="span-3">3</span><span class="span-9">9</span>
+          </div>
+          <p>Use the grid for page layout. Use flex utilities for alignment inside components.</p>
+        </section>
+
+        <section>
+          <h2>Utility Grammar</h2>
+          <p class="slide-subtitle">Property, optional breakpoint, and value</p>
+          <div class="utility-formula">
+            <strong>property</strong><span>-</span><strong>breakpoint?</strong><span>-</span><strong>value</strong>
+          </div>
+          <div class="selector-board">
+            <code>mt-4</code><span>margin-top using spacing step 4</span>
+            <code>px-md-5</code><span>horizontal padding step 5 from md upward</span>
+            <code>d-flex</code><span>display flex</span>
+            <code>justify-content-between</code><span>distribute flex items</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Reading Utilities</h2>
+          <p class="slide-subtitle">Translate class names back into CSS decisions</p>
+          <pre><code class="language-html">&lt;div class="d-flex flex-wrap gap-3 align-items-center p-4"&gt;
+  &lt;img class="rounded-circle" src="..." alt="" width="64" height="64"&gt;
+  &lt;div class="me-auto"&gt;
+    &lt;h2 class="h5 mb-1"&gt;Maya Chen&lt;/h2&gt;
+    &lt;p class="text-body-secondary mb-0"&gt;Visual artist&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;a class="btn btn-outline-primary" href="..."&gt;View profile&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+          <p>Framework fluency means translating the classes back into layout and design decisions.</p>
+        </section>
+
+        <section>
+          <h2>Component Contracts</h2>
+          <p class="slide-subtitle">Structure, modifiers, behavior, and accessibility</p>
+          <div class="component-contract">
+            <article><strong>Required structure</strong><span>Expected parent and child classes</span></article>
+            <article><strong>Modifiers</strong><span>Variant, size, and state classes</span></article>
+            <article><strong>Behavior</strong><span>Data attributes and optional JavaScript</span></article>
+            <article><strong>Accessibility</strong><span>Labels, semantics, focus, and state announcements</span></article>
+          </div>
+          <p>Copying only the visible class names can leave a component incomplete.</p>
+        </section>
+
+        <section>
+          <h2>Card Component</h2>
+          <p class="slide-subtitle">Use the documented structure without losing semantic HTML</p>
+          <div class="split">
+            <article class="framework-preview bootstrap-preview">
+              <span class="preview-image">640 x 360</span>
+              <div><small>Workshop</small><h3>Print &amp; Pattern</h3><p>Saturday, 14:00</p><button>Reserve</button></div>
+            </article>
+            <article>
+              <pre class="compact-code"><code class="language-html">&lt;article class="card"&gt;
+  &lt;img
+    class="card-img-top"
+    src="..."
+    alt="..."
+  &gt;
+  &lt;div class="card-body"&gt;
+    &lt;p class="text-primary"&gt;Workshop&lt;/p&gt;
+    &lt;h2 class="card-title"&gt;
+      Print &amp; Pattern
+    &lt;/h2&gt;
+    &lt;p class="card-text"&gt;Saturday, 14:00&lt;/p&gt;
+    &lt;a class="btn btn-primary" href="..."&gt;
+      Reserve
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>JavaScript Components</h2>
+          <p class="slide-subtitle">Some Bootstrap patterns need behavior as well as CSS</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>CSS only</th><th>Bootstrap JavaScript</th><th>Also needs Popper</th></tr></thead>
+            <tbody>
+              <tr><td>Buttons, cards, badges, forms</td><td>Collapse, tabs, modal, carousel, toast</td><td>Dropdown, tooltip, popover</td></tr>
+            </tbody>
+          </table>
+          <p>The bundled script includes Popper. Do not add behavior you are not using just because the demo does.</p>
+        </section>
+
+        <section>
+          <h2>Customization</h2>
+          <p class="slide-subtitle">Override global and component-level Bootstrap variables</p>
+          <pre><code class="language-css">:root {
+  --bs-primary: #176b5b;
+  --bs-primary-rgb: 23, 107, 91;
+  --bs-border-radius: 0.25rem;
+  --bs-body-font-family: "Inter", sans-serif;
+}
+
+.btn-primary {
+  --bs-btn-bg: #176b5b;
+  --bs-btn-border-color: #176b5b;
+}</code></pre>
+          <p>Bootstrap 5.3 exposes global and component-level custom properties for runtime theming.</p>
+        </section>
+
+        <section>
+          <h2>Color Modes</h2>
+          <p class="slide-subtitle">Apply themes with data attributes</p>
+          <pre><code class="language-html">&lt;html lang="en" data-bs-theme="dark"&gt;</code></pre>
+          <pre><code class="language-html">&lt;section data-bs-theme="light"&gt;
+  A light island inside a dark interface
+&lt;/section&gt;</code></pre>
+          <p>Bootstrap provides the styles, not a complete theme picker. Your application still owns preference and state.</p>
+        </section>
+
+        <section>
+          <h2>Bootstrap Accessibility</h2>
+          <p class="slide-subtitle">The framework helps, but the author still owns the result</p>
+          <div class="selector-board">
+            <code>Semantic element</code><span>Use a real button for button behavior.</span>
+            <code>Accessible name</code><span>Icon-only controls still require a clear name.</span>
+            <code>State</code><span>Keep <code>aria-expanded</code>, labels, and visible state accurate.</span>
+            <code>Contrast</code><span>Custom theme colors must be checked again.</span>
+            <code>Keyboard</code><span>Test every interactive component after composition.</span>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise - 20 minutes</p>
+          <h2>Bootstrap Event Card</h2>
+          <p class="slide-subtitle">Build and test a small component</p>
+          <ol class="task-list compact">
+            <li>Open the Bootstrap starter in the framework lab.</li>
+            <li>Create a centered container and a responsive row of event cards.</li>
+            <li>Use spacing, type, color, image, and button utilities.</li>
+            <li>Add a compact registration form with visible labels.</li>
+            <li>Check the page with keyboard navigation and at 200% zoom.</li>
+          </ol>
+          <p><a href="../materials/lesson-11/framework-lab/bootstrap.html" target="_blank" rel="noreferrer">Open Bootstrap starter</a></p>
+        </section>
+
+        <section class="section-divider" data-background-color="#0891b2">
+          <p class="eyebrow">Part 2</p>
+          <h2>Tailwind CSS 4</h2>
+          <p>A utility-first framework with a generated design vocabulary</p>
+        </section>
+
+        <section>
+          <h2>Tailwind Architecture</h2>
+          <p class="slide-subtitle">Scan source, generate utilities, compose in markup</p>
+          <div class="framework-stack tailwind-stack">
+            <span>Scan source files</span>
+            <span>Find complete utility class names</span>
+            <span>Generate only the needed CSS</span>
+            <span>Compose UI in markup</span>
+            <span>Connect utilities to theme tokens</span>
+          </div>
+          <p>Tailwind supplies constrained primitives. You still make the component and visual design decisions.</p>
+        </section>
+
+        <section>
+          <h2>Tailwind Setup</h2>
+          <p class="slide-subtitle">Play CDN for demos; generated CSS for production</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Play CDN</th><th>Vite plugin</th></tr></thead>
+            <tbody>
+              <tr><td>Fast classroom experiments</td><td>Real project builds</td></tr>
+              <tr><td>No install or compilation</td><td>Static generated CSS, zero runtime</td></tr>
+              <tr><td>Explicitly not for production</td><td>Versioned dependencies and source scanning</td></tr>
+            </tbody>
+          </table>
+          <pre><code class="language-html">&lt;script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"&gt;&lt;/script&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Tailwind With Vite</h2>
+          <p class="slide-subtitle">The recommended project workflow</p>
+          <pre><code class="language-bash">npm install tailwindcss @tailwindcss/vite</code></pre>
+          <pre><code class="language-js">import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [tailwindcss()],
+});</code></pre>
+          <pre><code class="language-css">@import "tailwindcss";</code></pre>
+        </section>
+
+        <section>
+          <h2>Utility Classes</h2>
+          <p class="slide-subtitle">Each class represents one visual decision</p>
+          <div class="class-anatomy tailwind-anatomy">
+            <code>flex</code><span><code>display: flex</code></span>
+            <code>gap-4</code><span>tokenized gap</span>
+            <code>rounded-md</code><span>tokenized radius</span>
+            <code>text-sm</code><span>font size and line height</span>
+          </div>
+          <p>The class list becomes a readable record of the element's visual decisions.</p>
+        </section>
+
+        <section>
+          <h2>Variants</h2>
+          <p class="slide-subtitle">Express interaction, state, and environment</p>
+          <pre><code class="language-html">&lt;button class="
+  bg-cyan-700 px-4 py-2 text-white
+  hover:bg-cyan-800
+  focus-visible:outline-2
+  focus-visible:outline-offset-2
+  focus-visible:outline-cyan-700
+  disabled:cursor-not-allowed disabled:opacity-50
+"&gt;
+  Reserve a place
+&lt;/button&gt;</code></pre>
+          <p>Read from base style to interaction states. Do not stop at <code>hover:</code>.</p>
+        </section>
+
+        <section>
+          <h2>Responsive Variants</h2>
+          <p class="slide-subtitle">Base styles first, breakpoint overrides second</p>
+          <pre><code class="language-html">&lt;section class="
+  flex flex-col gap-6
+  md:flex-row md:items-center
+  xl:gap-10
+"&gt;
+  ...
+&lt;/section&gt;</code></pre>
+          <p>Unprefixed utilities are the starting state. Prefixed utilities apply from that breakpoint upward.</p>
+        </section>
+
+        <section>
+          <h2>Theme Variables</h2>
+          <p class="slide-subtitle">Turn design tokens into utility classes</p>
+          <pre><code class="language-css">@import "tailwindcss";
+
+@theme {
+  --font-display: "Archivo", sans-serif;
+  --color-studio: oklch(0.55 0.12 190);
+  --color-sun: oklch(0.86 0.16 88);
+  --radius-card: 0.375rem;
+}</code></pre>
+          <pre><code class="language-html">&lt;h2 class="font-display text-studio"&gt;Open Studio&lt;/h2&gt;
+&lt;article class="rounded-card bg-sun"&gt;...&lt;/article&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Theme vs. Runtime Variables</h2>
+          <p class="slide-subtitle">Choose whether a value generates utilities or cascades normally</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th><code>@theme</code></th><th><code>:root</code></th></tr></thead>
+            <tbody>
+              <tr><td>Creates or changes Tailwind utilities</td><td>Defines ordinary runtime custom properties</td></tr>
+              <tr><td>Design-system vocabulary</td><td>Component state or values not meant as utilities</td></tr>
+              <tr><td>Must be top-level</td><td>Can be scoped and overridden through the cascade</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Source Detection</h2>
+          <p class="slide-subtitle">Tailwind needs complete class names in source files</p>
+          <div class="split">
+            <article class="definition-panel wrong">
+              <h3>Not detectable</h3>
+              <pre><code class="language-js">`bg-${color}-600`</code></pre>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Complete class names</h3>
+              <pre><code class="language-js">const variants = {
+  info: "bg-cyan-700",
+  danger: "bg-red-700",
+};</code></pre>
+            </article>
+          </div>
+          <p>Tailwind scans text; it does not execute your code or understand string interpolation.</p>
+        </section>
+
+        <section>
+          <h2>Arbitrary Values</h2>
+          <p class="slide-subtitle">Useful exceptions should not become the design system</p>
+          <pre><code class="language-html">&lt;div class="top-[117px] w-[43rem] text-[#246bfd]"&gt;...&lt;/div&gt;</code></pre>
+          <div class="selector-board">
+            <code>Useful</code><span>One genuine exception or a value from an external specification.</span>
+            <code>Warning sign</code><span>The same arbitrary value appears throughout the project.</span>
+            <code>Better next step</code><span>Promote repeated decisions into a named theme token.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Preflight</h2>
+          <p class="slide-subtitle">Tailwind resets common browser defaults</p>
+          <div class="selector-board">
+            <code>Margins reset</code><span>Headings and paragraphs begin without browser margins.</span>
+            <code>Borders reset</code><span>Border style and width have predictable defaults.</span>
+            <code>Images constrained</code><span>Media follows consistent block and sizing behavior.</span>
+            <code>Forms inherit</code><span>Controls use inherited typography and color.</span>
+          </div>
+          <p>When something “mysteriously” changed, inspect Preflight before adding overrides.</p>
+        </section>
+
+        <section>
+          <h2>Long Class Lists</h2>
+          <p class="slide-subtitle">Refactor repeated structure without hiding every utility</p>
+          <ol class="task-list compact">
+            <li>Keep classes grouped in a consistent order.</li>
+            <li>Extract repeated markup into a component in your template system.</li>
+            <li>Use theme tokens so repeated values have names.</li>
+            <li>Use custom CSS for a coherent component rule when it reads better.</li>
+            <li>Avoid hiding every utility list behind a custom class immediately.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>CSS Knowledge</h2>
+          <p class="slide-subtitle">Utilities are compressed CSS concepts</p>
+          <div class="translation-grid">
+            <code>items-center</code><span>cross-axis alignment in flex/grid</span>
+            <code>grow</code><span>positive free-space distribution</span>
+            <code>overflow-clip</code><span>overflow behavior</span>
+            <code>isolate</code><span>new stacking context</span>
+            <code>sr-only</code><span>visually hidden accessible content</span>
+          </div>
+          <p>Utilities are compressed CSS concepts. Understanding the concept is what lets you debug them.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise - 20 minutes</p>
+          <h2>Tailwind Event Card</h2>
+          <p class="slide-subtitle">Rebuild the same interface with a utility-first system</p>
+          <ol class="task-list compact">
+            <li>Open the Tailwind starter in the framework lab.</li>
+            <li>Recreate the same content hierarchy used in the Bootstrap version.</li>
+            <li>Add base, hover, focus-visible, and disabled states.</li>
+            <li>Define one custom color token with <code>@theme</code>.</li>
+            <li>Compare the finished HTML with your Bootstrap markup.</li>
+          </ol>
+          <p><a href="../materials/lesson-11/framework-lab/tailwind.html" target="_blank" rel="noreferrer">Open Tailwind starter</a></p>
+        </section>
+
+        <section class="section-divider" data-background-color="#151923">
+          <p class="eyebrow">Part 3</p>
+          <h2>Framework Comparison</h2>
+          <p>The same interface, two different abstractions</p>
+        </section>
+
+        <section>
+          <h2>Bootstrap vs. Tailwind</h2>
+          <p class="slide-subtitle">Two abstractions for the same styling problems</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Question</th><th>Bootstrap</th><th>Tailwind</th></tr></thead>
+            <tbody>
+              <tr><td>Starting point</td><td>Designed components</td><td>Low-level utilities</td></tr>
+              <tr><td>Default look</td><td>Recognizable and coherent</td><td>Minimal; you create the look</td></tr>
+              <tr><td>Customization</td><td>CSS variables and Sass</td><td>Theme variables and utilities</td></tr>
+              <tr><td>Markup</td><td>Component plus helper classes</td><td>Many compositional classes</td></tr>
+              <tr><td>Behavior</td><td>Optional JS components</td><td>No component behavior included</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Mixing Frameworks</h2>
+          <p class="slide-subtitle">Define boundaries before combining systems</p>
+          <div class="selector-board">
+            <code>Reset collision</code><span>Both systems may establish global base styles.</span>
+            <code>Naming collision</code><span>Generic utility or component names can overlap.</span>
+            <code>Bundle growth</code><span>You may ship two solutions for the same problem.</span>
+            <code>Team confusion</code><span>The same component can be built in incompatible ways.</span>
+          </div>
+          <p>Using both can be intentional during migration, but define boundaries and an exit plan.</p>
+        </section>
+
+        <section>
+          <h2>Debugging</h2>
+          <p class="slide-subtitle">Trace the winning rule before adding overrides</p>
+          <div class="process-flow">
+            <span>Inspect computed CSS</span><b>→</b>
+            <span>Identify the winning rule</span><b>→</b>
+            <span>Check the framework docs</span><b>→</b>
+            <span>Fix configuration or composition</span>
+          </div>
+          <p>Adding a stronger selector is rarely the first answer. Find which layer of the system produced the rule.</p>
+        </section>
+
+        <section>
+          <h2>Production Checklist</h2>
+          <p class="slide-subtitle">What to verify before a framework-based site ships</p>
+          <div class="checklist-grid">
+            <article><strong>Version</strong><span>Pin and document it</span></article>
+            <article><strong>Output</strong><span>Inspect the built CSS</span></article>
+            <article><strong>States</strong><span>Hover, focus, disabled, error</span></article>
+            <article><strong>Semantics</strong><span>HTML remains meaningful</span></article>
+            <article><strong>Accessibility</strong><span>Keyboard, zoom, contrast</span></article>
+            <article><strong>Upgrades</strong><span>Read migration notes</span></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Workshop - 35 minutes</p>
+          <h2>Framework Showdown</h2>
+          <p class="slide-subtitle">Use one framework to build, test, and defend a solution</p>
+          <ol class="task-list compact">
+            <li>Choose Bootstrap or Tailwind for an artist event listing.</li>
+            <li>Build a header, filter bar, three event cards, and registration form.</li>
+            <li>Use the framework's intended customization method.</li>
+            <li>Include keyboard-visible focus and a useful narrow-screen layout.</li>
+            <li>Write a five-line decision note: why this tool, what it helped, and what it cost.</li>
+          </ol>
+          <p><a href="../materials/lesson-11/framework-lab/index.html" target="_blank" rel="noreferrer">Open framework lab</a></p>
+        </section>
+
+        <section>
+          <h2>Review Criteria</h2>
+          <p class="slide-subtitle">Judge structure, consistency, interaction, and reasoning</p>
+          <div class="review-rubric">
+            <article><strong>Structure</strong><span>Semantic and understandable HTML</span></article>
+            <article><strong>System use</strong><span>Uses framework patterns consistently</span></article>
+            <article><strong>Visual hierarchy</strong><span>Clear content order and grouping</span></article>
+            <article><strong>Interaction</strong><span>Complete states and keyboard access</span></article>
+            <article><strong>Reasoning</strong><span>Trade-offs are explained honestly</span></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Key Takeaways</h2>
+          <ul class="takeaway-list">
+            <li>A framework is an API for design decisions, not a replacement for HTML and CSS.</li>
+            <li>Bootstrap starts with components; Tailwind starts with composable utilities.</li>
+            <li>Use CDNs for controlled demos and build tools for production projects.</li>
+            <li>Customization, accessibility, output, and upgrades remain your responsibility.</li>
+            <li>The best choice is the smallest system that solves the actual project problem.</li>
+          </ul>
+        </section>
+
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #7952b3 48%, #0891b2 100%)">
+          <p class="eyebrow">Next</p>
+          <h2>Modern CSS Architecture &amp; Sass</h2>
+          <p class="lede">What native CSS can do now, and where preprocessing still earns its place</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

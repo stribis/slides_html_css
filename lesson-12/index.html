@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lesson 12: modern CSS architecture and Sass, including native CSS alternatives, Dart Sass setup, modules, mixins, maps, code generation, and maintainable hybrid workflows." />
+    <title>Lesson 12 - Modern CSS Architecture & Sass</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <script type="module" src="/src/deck.js"></script>
+  </head>
+  <body class="deck-page lesson-twelve">
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #1f7a68 48%, #e86f51 100%)">
+          <p class="eyebrow">Lesson 12</p>
+          <h1>Modern CSS Architecture &amp; Sass</h1>
+          <p class="lede">Native CSS first, preprocessing where it adds real value</p>
+          <p class="byline">Martin Hutchings - Front End Basics</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Today</p>
+          <h2>Learning Goals</h2>
+          <p class="slide-subtitle">Build a styling system you can explain</p>
+          <div class="objective-grid">
+            <article><span>01</span><h3>Compare</h3><p>Identify which former Sass jobs are now handled by native CSS.</p></article>
+            <article><span>02</span><h3>Compile</h3><p>Install Dart Sass locally and understand source-to-output flow.</p></article>
+            <article><span>03</span><h3>Organize</h3><p>Use modules, mixins, functions, maps, and controlled generation.</p></article>
+            <article><span>04</span><h3>Architect</h3><p>Combine compile-time tools with runtime CSS features deliberately.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Modern CSS</h2>
+          <p class="slide-subtitle">Many former preprocessor jobs now belong to the platform</p>
+          <div class="capability-grid">
+            <article><code>--custom-properties</code><p>Runtime tokens with cascade and inheritance.</p></article>
+            <article><code>&amp; nesting</code><p>Related selectors can live together.</p></article>
+            <article><code>@layer</code><p>Explicit cascade ordering.</p></article>
+            <article><code>@scope</code><p>Bounded selector reach.</p></article>
+            <article><code>calc() / clamp()</code><p>Runtime math and fluid values.</p></article>
+            <article><code>color-mix()</code><p>Native color relationships.</p></article>
+          </div>
+          <p>Sass is still useful, but “CSS cannot do that” is no longer a safe starting assumption.</p>
+        </section>
+
+        <section>
+          <h2>Preprocessors</h2>
+          <p class="slide-subtitle">Transform authoring syntax into browser-ready CSS</p>
+          <div class="compile-pipeline">
+            <article><strong>Source</strong><code>scss/main.scss</code></article>
+            <b>compile</b>
+            <article><strong>Output</strong><code>css/styles.css</code></article>
+            <b>load</b>
+            <article><strong>Browser</strong><code>&lt;link ...&gt;</code></article>
+          </div>
+          <p>The browser does not understand SCSS. It receives ordinary CSS generated before the page runs.</p>
+        </section>
+
+        <section>
+          <h2>Compile Time vs. Runtime</h2>
+          <p class="slide-subtitle">Some decisions happen during the build; others happen in the browser</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Compile time</th><th>Runtime in the browser</th></tr></thead>
+            <tbody>
+              <tr><td>Sass variables, loops, maps, mixins</td><td>CSS custom properties, cascade, media queries</td></tr>
+              <tr><td>Values are resolved before delivery</td><td>Values respond to DOM, user settings, and state</td></tr>
+              <tr><td>Can generate many rules</td><td>Can inherit and change without recompiling</td></tr>
+            </tbody>
+          </table>
+          <p>A strong architecture uses each stage for the work it is good at.</p>
+        </section>
+
+        <section>
+          <h2>Do You Need Sass?</h2>
+          <p class="slide-subtitle">Add a build tool only when it solves a real project problem</p>
+          <div class="decision-tree">
+            <article><strong>Need runtime theming?</strong><span>Start with CSS custom properties.</span></article>
+            <article><strong>Need selector nesting?</strong><span>Native CSS nesting may be enough.</span></article>
+            <article><strong>Need modules and generated APIs?</strong><span>Sass can add meaningful value.</span></article>
+            <article><strong>Team already has a build?</strong><span>The operational cost is lower.</span></article>
+          </div>
+        </section>
+
+        <section class="section-divider" data-background-color="#1f7a68">
+          <p class="eyebrow">Part 1</p>
+          <h2>Modern CSS Alternatives</h2>
+          <p>Use the platform before adding another language</p>
+        </section>
+
+        <section>
+          <h2>Custom Properties</h2>
+          <p class="slide-subtitle">Live values that participate in the cascade and inheritance</p>
+          <pre><code class="language-css">:root {
+  --color-accent: #176b5b;
+  --space-card: 1.5rem;
+}
+
+.card {
+  padding: var(--space-card);
+  border-color: var(--color-accent);
+}</code></pre>
+          <p>They participate in the cascade, inherit by default, and remain available to DevTools and JavaScript.</p>
+        </section>
+
+        <section>
+          <h2>Scoped Tokens</h2>
+          <p class="slide-subtitle">Define values as close as possible to where they change</p>
+          <pre><code class="language-css">:root {
+  --surface: white;
+  --text: #172033;
+}
+
+[data-theme="dark"] {
+  --surface: #172033;
+  --text: white;
+}
+
+.alert--warning {
+  --alert-color: #8a5a00;
+}</code></pre>
+          <p>Global tokens describe the system. Local tokens describe one component or state.</p>
+        </section>
+
+        <section>
+          <h2>Sass vs. CSS Variables</h2>
+          <p class="slide-subtitle">Compile-time replacement versus live runtime references</p>
+          <div class="split">
+            <article class="definition-panel">
+              <h3>Sass</h3>
+              <pre><code class="language-scss">$brand: #176b5b;
+
+.button {
+  background: $brand;
+}</code></pre>
+              <p>The value is copied into generated CSS.</p>
+            </article>
+            <article class="definition-panel">
+              <h3>CSS</h3>
+              <pre><code class="language-css">--brand: #176b5b;
+
+.button {
+  background: var(--brand);
+}</code></pre>
+              <p>The reference remains live in the browser.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>CSS Nesting</h2>
+          <p class="slide-subtitle">Group related selectors without repeating the parent</p>
+          <pre><code class="language-css">.card {
+  padding: 1.5rem;
+
+  & h2 {
+    margin-block: 0 0.5rem;
+  }
+
+  &:hover {
+    border-color: var(--accent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: border-color 180ms ease;
+  }
+}</code></pre>
+          <p>Use <code>&amp;</code> when the parent selector must be joined directly to a pseudo-class or modifier.</p>
+        </section>
+
+        <section>
+          <h2>Nesting Depth</h2>
+          <p class="slide-subtitle">Keep relationships shallow and independent of DOM structure</p>
+          <div class="split">
+            <article class="definition-panel correct">
+              <h3>Related and shallow</h3>
+              <pre><code class="language-css">.nav {
+  & a { ... }
+  & a:hover { ... }
+}</code></pre>
+            </article>
+            <article class="definition-panel wrong">
+              <h3>DOM-shaped specificity</h3>
+              <pre><code class="language-css">.header {
+  .nav {
+    ul {
+      li { a { ... } }
+    }
+  }
+}</code></pre>
+            </article>
+          </div>
+          <p>Nesting is for cohesion, not for mirroring every layer of HTML.</p>
+        </section>
+
+        <section>
+          <h2>Runtime Math</h2>
+          <p class="slide-subtitle">Let the browser calculate fluid values</p>
+          <pre><code class="language-css">.page {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 5rem);
+}
+
+.sidebar {
+  flex-basis: calc(18rem + var(--panel-offset));
+}</code></pre>
+          <p>These calculations react to the actual browser environment after the CSS has loaded.</p>
+        </section>
+
+        <section>
+          <h2>Color Functions</h2>
+          <p class="slide-subtitle">Create runtime relationships with <code>color-mix()</code></p>
+          <pre><code class="language-css">:root {
+  --brand: oklch(0.55 0.12 190);
+  --brand-soft: color-mix(in oklch, var(--brand), white 78%);
+  --brand-strong: color-mix(in oklch, var(--brand), black 20%);
+}
+
+.button:hover {
+  background: var(--brand-strong);
+}</code></pre>
+          <p>Unlike a compiled Sass color, the result can still react when <code>--brand</code> changes at runtime.</p>
+        </section>
+
+        <section>
+          <h2>Cascade Layers</h2>
+          <p class="slide-subtitle">Define precedence without specificity battles</p>
+          <pre><code class="language-css">@layer reset, vendor, base, components, utilities;
+
+@import url("vendor.css") layer(vendor);
+
+@layer components {
+  .button { background: var(--accent); }
+}
+
+@layer utilities {
+  .visually-hidden { ... }
+}</code></pre>
+          <p>Layer order beats specificity across layers, making third-party CSS easier to control.</p>
+        </section>
+
+        <section>
+          <h2>Layer Priority</h2>
+          <p class="slide-subtitle">Later layers win for normal declarations</p>
+          <div class="layer-visual">
+            <span>reset</span>
+            <span>vendor</span>
+            <span>base</span>
+            <span>components</span>
+            <span>utilities</span>
+            <strong>unlayered author styles</strong>
+          </div>
+          <p>For normal declarations, later layers win. Unlayered author rules outrank layered author rules.</p>
+        </section>
+
+        <section>
+          <h2><code>@scope</code></h2>
+          <p class="slide-subtitle">Limit how far selectors can reach</p>
+          <pre><code class="language-css">@scope (.artist-card) to (.artist-card__actions) {
+  a {
+    color: var(--card-link);
+  }
+
+  img {
+    border-radius: 50%;
+  }
+}</code></pre>
+          <p>The styles begin at the scope root and stop before the lower boundary. Inheritance can still cross that boundary.</p>
+        </section>
+
+        <section>
+          <h2><code>@property</code></h2>
+          <p class="slide-subtitle">Give custom properties a type, initial value, and inheritance rule</p>
+          <pre><code class="language-css">@property --progress {
+  syntax: "&lt;percentage&gt;";
+  inherits: false;
+  initial-value: 0%;
+}
+
+.meter {
+  --progress: 72%;
+  background: linear-gradient(
+    90deg,
+    var(--accent) var(--progress),
+    #d8dde6 0
+  );
+}</code></pre>
+          <p>Registered properties can validate types, control inheritance, and animate more predictably.</p>
+        </section>
+
+        <section>
+          <h2>Native Architecture</h2>
+          <p class="slide-subtitle">Files, layers, tokens, and naming can provide structure</p>
+          <div class="folder-tree">
+            <code>styles/</code>
+            <code>tokens.css</code>
+            <code>reset.css</code>
+            <code>base.css</code>
+            <code>components/</code>
+            <code>button.css</code>
+            <code>artist-card.css</code>
+            <code>utilities.css</code>
+          </div>
+          <p>Files, layers, tokens, and naming can create structure without a preprocessor.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise - 15 minutes</p>
+          <h2>Native CSS Refactor</h2>
+          <p class="slide-subtitle">Modernize a stylesheet without adding a preprocessor</p>
+          <ol class="task-list compact">
+            <li>Replace repeated colors and spacing with scoped custom properties.</li>
+            <li>Nest only the card states and direct child selectors.</li>
+            <li>Put third-party styles into a lower cascade layer.</li>
+            <li>Use <code>clamp()</code> for one fluid heading or spacing value.</li>
+            <li>Explain which problem Sass would still solve in this file.</li>
+          </ol>
+        </section>
+
+        <section class="section-divider" data-background-color="#e86f51">
+          <p class="eyebrow">Part 2</p>
+          <h2>Modern Dart Sass</h2>
+          <p>Local tooling, modules, and maintainable generation</p>
+        </section>
+
+        <section>
+          <h2>Installation</h2>
+          <p class="slide-subtitle">Use Dart Sass as a project dependency</p>
+          <pre><code class="language-bash">npm install --save-dev sass</code></pre>
+          <pre><code class="language-json">{
+  "scripts": {
+    "sass:build": "sass scss/main.scss css/styles.css --style=compressed",
+    "sass:watch": "sass --watch scss/main.scss css/styles.css"
+  }
+}</code></pre>
+          <p>A project-local dependency gives the team the same compiler version and reproducible scripts.</p>
+        </section>
+
+        <section>
+          <h2>Tooling</h2>
+          <p class="slide-subtitle">Make the build reproducible for every teammate</p>
+          <div class="selector-board">
+            <code>Editor-only extension</code><span>Convenient, but teammates and CI may produce different output.</span>
+            <code>Global install</code><span>Version is detached from the project.</span>
+            <code>Project dependency</code><span>Versioned, scripted, and repeatable.</span>
+            <code>Bundler integration</code><span>Useful when the project already uses Vite or another build tool.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Development and Production</h2>
+          <p class="slide-subtitle">Watch readable source; build optimized output</p>
+          <pre><code class="language-bash">npm run sass:watch
+
+# Before publishing
+npm run sass:build</code></pre>
+          <div class="split">
+            <article class="definition-panel"><h3>During development</h3><p>Readable output and source maps help debugging.</p></article>
+            <article class="definition-panel"><h3>For production</h3><p>Compressed output reduces transfer size; keep source files in version control.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>SCSS Syntax</h2>
+          <p class="slide-subtitle">CSS-compatible syntax with additional language features</p>
+          <pre><code class="language-scss">$accent: #176b5b;
+
+.button {
+  display: inline-flex;
+  background: $accent;
+
+  &:hover {
+    background: color.scale($accent, $lightness: -18%);
+  }
+}</code></pre>
+          <p>Most CSS can be pasted into an SCSS file, then extended with Sass features.</p>
+        </section>
+
+        <section>
+          <h2>Sass Variables</h2>
+          <p class="slide-subtitle">Use them for build decisions and configuration</p>
+          <pre><code class="language-scss">$asset-path: "../images";
+$include-print-styles: true;
+$supported-themes: light, dark, contrast;
+
+.hero {
+  background-image: url("#{$asset-path}/hero.webp");
+}</code></pre>
+          <p>Prefer CSS variables for runtime theme values. Use Sass variables for compilation, configuration, and generation.</p>
+        </section>
+
+        <section>
+          <h2><code>@import</code></h2>
+          <p class="slide-subtitle">The legacy global module system is deprecated</p>
+          <div class="split">
+            <article class="definition-panel wrong">
+              <h3>Legacy</h3>
+              <pre><code class="language-scss">@import "variables";
+@import "buttons";</code></pre>
+              <p>Global namespace, repeated evaluation, unclear ownership.</p>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Module system</h3>
+              <pre><code class="language-scss">@use "tokens";
+@use "buttons";</code></pre>
+              <p>Namespaced members, loaded once, explicit dependencies.</p>
+            </article>
+          </div>
+          <p>Dart Sass has emitted deprecation warnings for <code>@import</code> since version 1.80.0.</p>
+        </section>
+
+        <section>
+          <h2><code>@use</code></h2>
+          <p class="slide-subtitle">Load a module once and access its members through a namespace</p>
+          <pre><code class="language-scss">// _tokens.scss
+$accent: #176b5b;
+$radius: 0.375rem;
+
+// _card.scss
+@use "tokens";
+
+.card {
+  border-color: tokens.$accent;
+  border-radius: tokens.$radius;
+}</code></pre>
+          <p><code>tokens</code> is the namespace. The dot reads as: “get this member from that module.”</p>
+        </section>
+
+        <section>
+          <h2>Namespaces</h2>
+          <p class="slide-subtitle">A prefix that identifies which module owns a member</p>
+          <div class="namespace-demo">
+            <article>
+              <strong>theme/_tokens.scss</strong>
+              <pre><code class="language-scss">$radius: 0.25rem;
+$accent: #176b5b;</code></pre>
+            </article>
+            <article>
+              <strong>card/_tokens.scss</strong>
+              <pre><code class="language-scss">$radius: 1rem;
+$accent: #8a3ffc;</code></pre>
+            </article>
+            <article class="namespace-result">
+              <strong>components/_profile.scss</strong>
+              <pre><code class="language-scss">@use "../theme/tokens" as theme;
+@use "../card/tokens" as card;
+
+.page { color: theme.$accent; }
+.card { border-radius: card.$radius; }</code></pre>
+            </article>
+          </div>
+          <p>Both modules can define <code>$radius</code> because their namespaces prevent a collision.</p>
+        </section>
+
+        <section>
+          <h2>Namespace Aliases</h2>
+          <p class="slide-subtitle">Use a short local name when a module path is long</p>
+          <div class="split">
+            <article class="definition-panel">
+              <h3>Default namespace</h3>
+              <pre><code class="language-scss">@use "components/action-button";
+
+.toolbar {
+  gap: action-button.$gap;
+}</code></pre>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Readable alias</h3>
+              <pre><code class="language-scss">@use "components/action-button" as button;
+
+.toolbar {
+  gap: button.$gap;
+}</code></pre>
+            </article>
+          </div>
+          <p>Aliases are local to the current file. Choose a name that stays clear without being noisy.</p>
+        </section>
+
+        <section>
+          <h2><code>@forward</code></h2>
+          <p class="slide-subtitle">Create one public entry point for several internal modules</p>
+          <div class="forward-demo">
+            <div class="forward-files" aria-label="Sass settings folder">
+              <code>settings/</code>
+              <code>├── _colors.scss</code>
+              <code>├── _spacing.scss</code>
+              <code>└── _index.scss</code>
+              <code>main.scss</code>
+            </div>
+            <div class="forward-flow" aria-label="Module forwarding flow">
+              <span>internal files</span><b>→</b><span>settings/_index.scss</span><b>→</b><span>main.scss</span>
+            </div>
+          </div>
+          <p><code>_index.scss</code> becomes the public door. Consumers do not need to know every internal filename.</p>
+        </section>
+
+        <section>
+          <h2>Forwarding Example</h2>
+          <p class="slide-subtitle">Expose selected values through one public module</p>
+          <div class="code-triptych">
+            <article><strong>_colors.scss</strong><pre><code class="language-scss">$accent: #176b5b;
+$danger: #a61b1b;</code></pre></article>
+            <article><strong>_spacing.scss</strong><pre><code class="language-scss">$small: 0.5rem;
+$large: 2rem;</code></pre></article>
+            <article><strong>_index.scss</strong><pre><code class="language-scss">@forward "colors";
+@forward "spacing";</code></pre></article>
+          </div>
+          <pre><code class="language-scss">// main.scss: one @use gives access to the forwarded members
+@use "settings";
+
+.notice {
+  color: settings.$danger;
+  padding: settings.$large;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Module Configuration</h2>
+          <p class="slide-subtitle">Override <code>!default</code> values when a module is first loaded</p>
+          <pre><code class="language-scss">// _theme.scss
+$accent: #176b5b !default;
+$radius: 0.375rem !default;
+
+// main.scss
+@use "theme" with (
+  $accent: #8a3ffc,
+  $radius: 0.125rem
+);</code></pre>
+          <p>Configuration is set when the module is first loaded, so keep module ownership clear.</p>
+        </section>
+
+        <section>
+          <h2>Mixins</h2>
+          <p class="slide-subtitle">Reuse parameterized groups of declarations</p>
+          <pre><code class="language-scss">@mixin focus-ring($color: currentColor) {
+  outline: 3px solid $color;
+  outline-offset: 3px;
+}
+
+.button:focus-visible {
+  @include focus-ring(#176b5b);
+}
+
+.input:focus-visible {
+  @include focus-ring(#8a3ffc);
+}</code></pre>
+          <p>A mixin is useful when the reusable unit is a group of declarations, not just one value.</p>
+        </section>
+
+        <section>
+          <h2>Abstraction Choices</h2>
+          <p class="slide-subtitle">Match the tool to the kind of reuse</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Use a...</th><th>When you need...</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CSS custom property</strong></td><td>A value that cascades or changes at runtime</td><td><code>--accent</code></td></tr>
+              <tr><td><strong>Utility class</strong></td><td>A small declaration available in markup</td><td><code>.visually-hidden</code></td></tr>
+              <tr><td><strong>Sass mixin</strong></td><td>A parameterized declaration pattern</td><td><code>@include focus-ring</code></td></tr>
+              <tr><td><strong>Component class</strong></td><td>A semantic reusable visual pattern</td><td><code>.artist-card</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Functions</h2>
+          <p class="slide-subtitle">Accept arguments and return one value</p>
+          <pre><code class="language-scss">@use "sass:math";
+
+@function rem($pixels, $base: 16) {
+  @return math.div($pixels, $base) * 1rem;
+}
+
+.caption {
+  font-size: rem(14);
+}</code></pre>
+          <p>Use functions for meaningful domain conversions. Native CSS math is preferable when the browser needs to calculate dynamically.</p>
+        </section>
+
+        <section>
+          <h2>Built-In Modules</h2>
+          <p class="slide-subtitle">Explicit dependencies are named where they are used</p>
+          <p class="term-definition"><strong>Explicit</strong> means visible in the source instead of silently available everywhere.</p>
+          <div class="module-grid">
+            <article><code>sass:color</code><span>Color adjustment and inspection</span></article>
+            <article><code>sass:math</code><span>Division, rounding, powers, units</span></article>
+            <article><code>sass:map</code><span>Read and transform maps</span></article>
+            <article><code>sass:list</code><span>Work with ordered collections</span></article>
+            <article><code>sass:string</code><span>Inspect and transform strings</span></article>
+            <article><code>sass:meta</code><span>Inspect Sass types and APIs</span></article>
+          </div>
+          <pre><code class="language-scss">@use "sass:color";
+
+$hover: color.adjust($accent, $lightness: -12%);</code></pre>
+        </section>
+
+        <section>
+          <h2>Maps</h2>
+          <p class="slide-subtitle">Store related configuration under named keys</p>
+          <pre><code class="language-scss">@use "sass:map";
+
+$themes: (
+  info: #176b5b,
+  warning: #8a5a00,
+  danger: #a61b1b
+);
+
+.alert--warning {
+  --alert-color: #{map.get($themes, warning)};
+}</code></pre>
+          <p>Maps are useful when values form a named set that generation or configuration will consume.</p>
+        </section>
+
+        <section>
+          <h2><code>@each</code></h2>
+          <p class="slide-subtitle">Generate a deliberately small family of related selectors</p>
+          <pre><code class="language-scss">$statuses: (
+  success: #176b5b,
+  warning: #8a5a00,
+  danger: #a61b1b
+);
+
+@each $name, $color in $statuses {
+  .status--#{$name} {
+    --status-color: #{$color};
+  }
+}</code></pre>
+          <p>Generate only classes the product actually needs. A loop can create thousands of unused rules surprisingly quickly.</p>
+        </section>
+
+        <section>
+          <h2>Generated Output</h2>
+          <p class="slide-subtitle">Elegant source can still produce expensive CSS</p>
+          <div class="generation-visual">
+            <article><strong>3 colors</strong><span>×</span><strong>8 shades</strong><span>×</span><strong>6 properties</strong><b>= 144 rules</b></article>
+            <article><strong>7 breakpoints</strong><span>×</span><strong>144 rules</strong><b>= 1,008 variants</b></article>
+          </div>
+          <p>Source code can look elegant while its compiled output becomes expensive.</p>
+        </section>
+
+        <section>
+          <h2>Conditionals</h2>
+          <p class="slide-subtitle">Choose what CSS exists at compile time</p>
+          <pre><code class="language-scss">$include-print-styles: true;
+
+@if $include-print-styles {
+  @media print {
+    .site-nav,
+    .video-player {
+      display: none;
+    }
+  }
+}</code></pre>
+          <p>Sass conditionals choose what CSS exists. CSS media and feature queries choose what applies in the browser.</p>
+        </section>
+
+        <section>
+          <h2><code>@extend</code></h2>
+          <p class="slide-subtitle">Selector merging can create surprising relationships</p>
+          <pre><code class="language-scss">%notice-base {
+  padding: 1rem;
+  border-inline-start: 0.35rem solid;
+}
+
+.notice--info {
+  @extend %notice-base;
+}
+
+.notice--warning {
+  @extend %notice-base;
+}</code></pre>
+          <p><code>@extend</code> merges selectors. That can produce surprising relationships; a mixin or shared class is often easier to reason about.</p>
+        </section>
+
+        <section>
+          <h2>Parent Selector</h2>
+          <p class="slide-subtitle">Reference the current outer selector with <code>&amp;</code></p>
+          <pre><code class="language-scss">.button {
+  &--primary { ... }
+  &__icon { ... }
+  &:hover { ... }
+  [data-theme="dark"] & { ... }
+}</code></pre>
+          <p>Sass can concatenate <code>&amp;</code> into class names. Native CSS nesting does not support every Sass concatenation pattern.</p>
+        </section>
+
+        <section>
+          <h2>Migration</h2>
+          <p class="slide-subtitle">Move from globals to namespaced modules</p>
+          <ol class="task-list compact">
+            <li>Find which files define variables, mixins, functions, and CSS output.</li>
+            <li>Create small module entry points with <code>@forward</code>.</li>
+            <li>Replace globals with namespaced <code>@use</code> references.</li>
+            <li>Convert legacy global built-in functions to <code>sass:</code> modules.</li>
+            <li>Compare compiled CSS before and after the migration.</li>
+          </ol>
+          <p>Sass provides an official migrator, but review its output like any other automated rewrite.</p>
+        </section>
+
+        <section>
+          <h2>Project Structure</h2>
+          <p class="slide-subtitle">A larger Sass codebase needs visible boundaries</p>
+          <div class="sass-architecture" aria-label="Example Sass project architecture">
+            <article class="architecture-group settings-group">
+              <strong>settings/</strong>
+              <code>_colors.scss</code>
+              <code>_spacing.scss</code>
+              <code>_index.scss</code>
+              <span>Values and public API</span>
+            </article>
+            <article class="architecture-group tools-group">
+              <strong>tools/</strong>
+              <code>_focus-ring.scss</code>
+              <code>_fluid-type.scss</code>
+              <code>_index.scss</code>
+              <span>Mixins and functions</span>
+            </article>
+            <article class="architecture-group components-group">
+              <strong>components/</strong>
+              <code>_button.scss</code>
+              <code>_artist-card.scss</code>
+              <code>_form.scss</code>
+              <span>Selectors that output CSS</span>
+            </article>
+            <b class="architecture-arrow">↓</b>
+            <article class="architecture-entry">
+              <strong>main.scss</strong>
+              <span>Loads the modules in a clear order</span>
+              <code>→ css/styles.css</code>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Example Modules</h2>
+          <p class="slide-subtitle">Follow a token from definition to component output</p>
+          <div class="module-file-grid">
+            <article><strong>settings/_colors.scss</strong><pre><code class="language-scss">$accent: #176b5b;
+$on-accent: #fff;</code></pre></article>
+            <article><strong>tools/_focus-ring.scss</strong><pre><code class="language-scss">@mixin focus-ring($color) {
+  outline: 3px solid $color;
+  outline-offset: 3px;
+}</code></pre></article>
+            <article><strong>components/_button.scss</strong><pre><code class="language-scss">@use "../settings";
+@use "../tools";
+
+.button {
+  background: settings.$accent;
+  color: settings.$on-accent;
+
+  &:focus-visible {
+    @include tools.focus-ring(settings.$accent);
+  }
+}</code></pre></article>
+            <article><strong>main.scss</strong><pre><code class="language-scss">@use "components/button";
+@use "components/artist-card";
+@use "components/form";</code></pre></article>
+          </div>
+          <p>Partials beginning with <code>_</code> are modules. Only <code>main.scss</code> is compiled as an entry point.</p>
+        </section>
+
+        <section>
+          <h2>Hybrid Architecture</h2>
+          <p class="slide-subtitle">Sass prepares a token API; CSS applies it at runtime</p>
+          <div class="hybrid-pipeline">
+            <article><strong>1. Sass source</strong><span>Maps store theme definitions</span><code>$themes: (...)</code></article>
+            <b>→</b>
+            <article><strong>2. Compiled CSS</strong><span>Selectors expose custom properties</span><code>--surface: #fff</code></article>
+            <b>→</b>
+            <article><strong>3. Browser</strong><span>Attributes switch the active values</span><code>data-theme="dark"</code></article>
+          </div>
+          <div class="responsibility-strip">
+            <span><strong>Sass:</strong> validates and generates the theme set</span>
+            <span><strong>CSS:</strong> cascades the current values through the page</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Hybrid Source</h2>
+          <p class="slide-subtitle">Generate theme selectors from one Sass map</p>
+          <pre><code class="language-scss">@use "sass:map";
+
+$themes: (
+  light: (surface: #fff, text: #172033),
+  dark: (surface: #172033, text: #fff)
+);
+
+@each $name, $values in $themes {
+  [data-theme="#{$name}"] {
+    --surface: #{map.get($values, surface)};
+    --text: #{map.get($values, text)};
+  }
+}</code></pre>
+          <p>The map is a build-time source of truth. The loop creates only the theme selectors the product supports.</p>
+        </section>
+
+        <section>
+          <h2>Compiled Result</h2>
+          <p class="slide-subtitle">The browser receives ordinary CSS variables it can switch at runtime</p>
+          <div class="split">
+            <article class="definition-panel">
+              <h3>Generated CSS</h3>
+              <pre><code class="language-css">[data-theme="light"] {
+  --surface: #fff;
+  --text: #172033;
+}
+
+[data-theme="dark"] {
+  --surface: #172033;
+  --text: #fff;
+}</code></pre>
+            </article>
+            <article class="definition-panel correct">
+              <h3>Runtime component</h3>
+              <pre><code class="language-css">.card {
+  background: var(--surface);
+  color: var(--text);
+}</code></pre>
+              <pre><code class="language-html">&lt;body data-theme="dark"&gt;
+  &lt;article class="card"&gt;...&lt;/article&gt;
+&lt;/body&gt;</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Errors and Warnings</h2>
+          <p class="slide-subtitle">Make invalid API usage fail early</p>
+          <pre><code class="language-scss">@use "sass:math";
+
+@mixin stack($gap) {
+  @if not math.compatible($gap, 1rem) {
+    @error "$gap must be a length";
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@warn "The $old-radius token is deprecated.";</code></pre>
+          <p>Fail early when a shared API is used incorrectly; warn when teams need time to migrate.</p>
+        </section>
+
+        <section>
+          <p class="eyebrow">Exercise - 15 minutes</p>
+          <h2>Module Repair</h2>
+          <p class="slide-subtitle">Replace legacy globals with a small public module API</p>
+          <ol class="task-list compact">
+            <li>Replace three legacy <code>@import</code> rules with <code>@use</code>.</li>
+            <li>Add namespaces to every variable and mixin reference.</li>
+            <li>Create an <code>_index.scss</code> file that forwards the public settings API.</li>
+            <li>Move one runtime theme value from Sass into a CSS custom property.</li>
+            <li>Compile and compare the result in DevTools.</li>
+          </ol>
+        </section>
+
+        <section class="section-divider" data-background-color="#151923">
+          <p class="eyebrow">Part 3</p>
+          <h2>Architecture in Practice</h2>
+          <p>Make the boundaries visible</p>
+        </section>
+
+        <section>
+          <h2>Tool Responsibilities</h2>
+          <p class="slide-subtitle">Give each concern one clear home</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Concern</th><th>Good home</th></tr></thead>
+            <tbody>
+              <tr><td>Runtime theme value</td><td>CSS custom property</td></tr>
+              <tr><td>Component selector relationship</td><td>Shallow native nesting or Sass nesting</td></tr>
+              <tr><td>Third-party priority</td><td>Cascade layer</td></tr>
+              <tr><td>Reusable declaration pattern</td><td>Sass mixin</td></tr>
+              <tr><td>Named configuration set</td><td>Sass map</td></tr>
+              <tr><td>Browser-dependent behavior</td><td>Native CSS query</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Architecture Smells</h2>
+          <p class="slide-subtitle">Warning signs that the system is becoming harder to change</p>
+          <div class="selector-board">
+            <code>Specificity escalation</code><span>Every repair adds another parent selector or <code>!important</code>.</span>
+            <code>Global mystery values</code><span>No one knows which file owns a token.</span>
+            <code>Generated everything</code><span>Loops produce APIs nobody uses.</span>
+            <code>Deep nesting</code><span>Selectors depend on exact DOM shape.</span>
+            <code>Invisible output</code><span>The team never inspects compiled CSS.</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Code Review</h2>
+          <p class="slide-subtitle">Questions that expose hidden complexity</p>
+          <div class="checklist-grid">
+            <article><strong>Ownership</strong><span>Can we find where this value comes from?</span></article>
+            <article><strong>Runtime</strong><span>Should this remain dynamic in CSS?</span></article>
+            <article><strong>Output</strong><span>How much CSS did this generate?</span></article>
+            <article><strong>Specificity</strong><span>Can the component be safely overridden?</span></article>
+            <article><strong>Scope</strong><span>Will this selector affect unrelated UI?</span></article>
+            <article><strong>Tooling</strong><span>Can every teammate build it?</span></article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Workshop - 35 minutes</p>
+          <h2>Style-System Workshop</h2>
+          <p class="slide-subtitle">Build a small module API, expose runtime tokens, and inspect the output</p>
+          <ol class="task-list compact">
+            <li>Open the style-system lab and install its local Sass dependency.</li>
+            <li>Create token, tools, and component modules using <code>@use</code>/<code>@forward</code>.</li>
+            <li>Build button, card, status, and form-control patterns.</li>
+            <li>Expose theme values as CSS custom properties.</li>
+            <li>Use one map and loop to generate only the required status variants.</li>
+            <li>Inspect the compiled CSS and remove one unnecessary abstraction.</li>
+          </ol>
+          <p><a href="../materials/lesson-12/style-system-lab/instructions.html" target="_blank" rel="noreferrer">Open style-system lab</a></p>
+        </section>
+
+        <section>
+          <h2>Decision Matrix</h2>
+          <p class="slide-subtitle">Choose the smallest architecture that fits the project</p>
+          <table class="comparison-table dense-table">
+            <thead><tr><th>Project</th><th>Likely starting point</th></tr></thead>
+            <tbody>
+              <tr><td>Small site, modern browsers, one developer</td><td>Native CSS with files, layers, and tokens</td></tr>
+              <tr><td>Established Sass codebase</td><td>Modernize to modules; move runtime concerns to CSS</td></tr>
+              <tr><td>Reusable design-system package</td><td>Sass generation plus exported CSS custom properties</td></tr>
+              <tr><td>Framework project</td><td>Follow its supported pipeline; avoid duplicate abstractions</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Key Takeaways</h2>
+          <ul class="takeaway-list">
+            <li>Modern CSS now covers variables, nesting, math, cascade organization, scoping, and more.</li>
+            <li>Sass remains valuable for modules, configuration, reusable generators, and build-time logic.</li>
+            <li>Use Dart Sass as a local project dependency with reproducible scripts.</li>
+            <li>Use <code>@use</code> and <code>@forward</code>; legacy Sass <code>@import</code> is deprecated.</li>
+            <li>The compiled CSS is the product. Read it, test it, and keep it understandable.</li>
+          </ul>
+        </section>
+
+        <section class="title-slide" data-background-gradient="linear-gradient(135deg, #151923 0%, #1f7a68 48%, #e86f51 100%)">
+          <p class="eyebrow">Done</p>
+          <h2>Intentional Abstractions</h2>
+          <p class="lede">Native CSS for runtime behavior. Sass for purposeful build-time work.</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
